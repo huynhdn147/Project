@@ -5487,11 +5487,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Data\\TLU.BusinessFee.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Data\\TLU.BusinessFee.Data.csproj",
       "projectName": "TLU.BusinessFee.Data",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Data\\TLU.BusinessFee.Data.csproj",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Data\\TLU.BusinessFee.Data.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Data\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

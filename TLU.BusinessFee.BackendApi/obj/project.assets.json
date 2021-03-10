@@ -10571,11 +10571,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.BackendApi\\TLU.BusinessFee.BackendApi.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.BackendApi\\TLU.BusinessFee.BackendApi.csproj",
       "projectName": "TLU.BusinessFee.BackendApi",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.BackendApi\\TLU.BusinessFee.BackendApi.csproj",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.BackendApi\\TLU.BusinessFee.BackendApi.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.BackendApi\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.BackendApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10592,14 +10592,14 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Application\\TLU.BusinessFee.Application.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Application\\TLU.BusinessFee.Application.csproj"
+            "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Application\\TLU.BusinessFee.Application.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Application\\TLU.BusinessFee.Application.csproj"
             },
-            "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Data\\TLU.BusinessFee.Data.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Data\\TLU.BusinessFee.Data.csproj"
+            "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Data\\TLU.BusinessFee.Data.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Data\\TLU.BusinessFee.Data.csproj"
             },
-            "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj"
+            "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj"
             }
           }
         }

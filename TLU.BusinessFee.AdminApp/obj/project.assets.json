@@ -9938,11 +9938,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.AdminApp\\TLU.BusinessFee.AdminApp.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.AdminApp\\TLU.BusinessFee.AdminApp.csproj",
       "projectName": "TLU.BusinessFee.AdminApp",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.AdminApp\\TLU.BusinessFee.AdminApp.csproj",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.AdminApp\\TLU.BusinessFee.AdminApp.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.AdminApp\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.AdminApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9959,8 +9959,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Application\\TLU.BusinessFee.Application.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Application\\TLU.BusinessFee.Application.csproj"
+            "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Application\\TLU.BusinessFee.Application.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Application\\TLU.BusinessFee.Application.csproj"
             }
           }
         }

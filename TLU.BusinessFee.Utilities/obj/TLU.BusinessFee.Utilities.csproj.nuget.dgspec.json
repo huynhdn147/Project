@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj": {}
+    "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj": {
+    "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj",
         "projectName": "TLU.BusinessFee.Utilities",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Utilities\\TLU.BusinessFee.Utilities.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\projectt\\projectt\\TLU.BusinessFee.Utilities\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\Project\\TLU.BusinessFee.Utilities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

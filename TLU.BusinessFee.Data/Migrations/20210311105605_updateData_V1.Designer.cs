@@ -10,7 +10,7 @@ using TLU.BusinessFee.Data.EF;
 namespace TLU.BusinessFee.Data.Migrations
 {
     [DbContext(typeof(TLUBusinessFeeDbContext))]
-    [Migration("20210311103605_updateData_V1")]
+    [Migration("20210311105605_updateData_V1")]
     partial class updateData_V1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,16 +118,19 @@ namespace TLU.BusinessFee.Data.Migrations
                         new
                         {
                             MaChiPhi = "CP2",
+                            MoTa = "Tien ở khách sạn",
                             TenChiPhi = "Ve may bay"
                         },
                         new
                         {
                             MaChiPhi = "CP3",
+                            MoTa = "Tien ở khách sạn",
                             TenChiPhi = "Luu tru "
                         },
                         new
                         {
                             MaChiPhi = "CP4",
+                            MoTa = "Tien ở khách sạn",
                             TenChiPhi = "Ve tau,xe"
                         });
                 });
@@ -408,9 +411,6 @@ namespace TLU.BusinessFee.Data.Migrations
                         .HasColumnType("varchar(5)")
                         .HasMaxLength(5)
                         .IsUnicode(false);
-
-                    b.Property<string>("TenDeXuat")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ThoiGianDeXuat")
                         .HasColumnType("datetime2");
@@ -742,7 +742,7 @@ namespace TLU.BusinessFee.Data.Migrations
                     b.Property<DateTime?>("NgayThanhLap")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 3, 11, 17, 36, 5, 251, DateTimeKind.Local).AddTicks(1395));
+                        .HasDefaultValue(new DateTime(2021, 3, 11, 17, 56, 5, 284, DateTimeKind.Local).AddTicks(3305));
 
                     b.Property<string>("TenPhongBan")
                         .IsRequired()
@@ -877,182 +877,182 @@ namespace TLU.BusinessFee.Data.Migrations
                         new
                         {
                             MaNhanVien = "IT001",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMVNfF3VrZMY1b/B8p7ZC18BVyni/qIvHVEpvjVtYs2W4NmWmi1O8rBBDDayYK51Rw=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEBRZ6dpavAIjO0z7ji/feHqcYLEABdBSRlD4QEBJhHiqAM+Mrln85rQP2IvcKQUDUg=="
                         },
                         new
                         {
                             MaNhanVien = "IT002",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKp9uuiweUu/tK138Wn8Lac1OPljjjnDhfofBplIXW66g0HXp++QWVjIH96ouVC03Q=="
+                            PasswordHash = "AQAAAAEAACcQAAAAECt1F7cVvL+ljNPB2bWKaOmxoiFSAWgEc2YnQKobk86QrsiyDLeZdc3Etn7LRAiGxg=="
                         },
                         new
                         {
                             MaNhanVien = "IT003",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJr8rB2FC+Cfh7wfukmu5dSZ4zjAd18H0ZfdmCBZyGN9GeMYCTnQdSDTzFoPJ0EhVA=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEAFvqh6Anrs0e5jr6dX8YqK55ENJuSxDCp9ftQxkmmN3BtarSL3HLqXDghf2SFJgAg=="
                         },
                         new
                         {
                             MaNhanVien = "IT004",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOJ0UVaITmWQPefrGPSJXQzbpI9Bae87LYPmphMOnegioliVcT8M1vTmuOFR2SWfNw=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEItpqugJSPH4gNa7x2fivYQr+Hom3kldZKCseYfQZKkwVgk5TDkqpq8f3PfCeS4heQ=="
                         },
                         new
                         {
                             MaNhanVien = "IT005",
-                            PasswordHash = "AQAAAAEAACcQAAAAEASfyNPAnISNY9tseCjtWRQkCawI0Z65oPZGsWYAaOjDVZ5NsiIcnYfFxj1aCJjQtg=="
+                            PasswordHash = "AQAAAAEAACcQAAAAECl/Ep3uH984PrKTeXqQf/FZbdVEIo/9E2O+sDYQDbZ3Kqyqv5yU2xpakQ3rgfk0gQ=="
                         },
                         new
                         {
                             MaNhanVien = "IT006",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB8ewdjZp7VZwbPWaW2PT/FqVrhIHgjs9d0BjQjQrnEUYjm5ZMoop1+QltNvvfNOWQ=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEJWV4nvm0WCdanm1uHg4EL09YLp/JD93AtufKaqozM+INTEF4Dsnm+VBXb7WaT56RA=="
                         },
                         new
                         {
                             MaNhanVien = "KT002",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM/7oLXGlEdLX7qbSeMwAeDhTrsenfLlpUyMbDsPUbVCmX/+h7j5n5idDOIq4ZROKw=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEK83H8I4Okv4kvdBS/P7Itz/f9q0bCOLeFOendAiAkKrZ9fyIbtRIc3A4Y6U+gFfvA=="
                         },
                         new
                         {
                             MaNhanVien = "KT001",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM7oRIM0ttPfee6T86WxQoqgCFmrasX8Wuqqu0d5qpfeNlx6W/a4cwmVxCwsOgneeQ=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEDOu7m5sg6NPEqXyjzNOoJeVMRESGNgiVipRty/Fo41PttYi09IjjnFWZ+l9O2wuSQ=="
                         },
                         new
                         {
                             MaNhanVien = "KT003",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPs8jXgiXJLHVksJu12g4/eM/ibpU1T91d3XbBrCE4Jk8hvhmyoIc/t1PXDd+3IIkQ=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEAFg+yi9zSwHyXnsGFv79zkqK4bRGfW8l4RMLJPDmF9SoTX0v//QeSTB5u6PlTz0ow=="
                         },
                         new
                         {
                             MaNhanVien = "KT004",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKLZeMQGgNMXYXd7Rb9+QRMGeN75XJ0xrMGnB6uig5APHrJjtYycoMfxpTnzmBXNRQ=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEALH+OYJLB0HZECHlhvYeg0i+GDqFCou71gZXtmirEZF5oUzw5bcrYz4bf1vmCKFRg=="
                         },
                         new
                         {
                             MaNhanVien = "KT006",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAEcTvaRM6goG6/qsYBhlijy/5FII9yFmF5US7dtpSUjUoyfnSCP11PZTPwLX8LK1Q=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEOZVfOArG/E0ZXfO2fPKEXVT4xku0IFyr+kElq4zH+WApixciTfw1vgSqFwo0ABcyA=="
                         },
                         new
                         {
                             MaNhanVien = "KT005",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKNNpmf7eoL0e9WKL68mpOG0x6qfjy/eWGgkA0LOaonXZr6NPRhUe+2vGKQn79F3xA=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEF653wC+Aav56KbcDwenSRCA5wVNGA20N63blBxYfTfADO6OuwsAJdkygYolFOxFtA=="
                         },
                         new
                         {
                             MaNhanVien = "DT001",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO70ht52liFUEI+BJrupt6czv8fpJbr9CgoUeEXLbUeAodY+BCozUElsDqyN8V/62Q=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEMyWBRP66mhruvA1QRKJCdPmcI7kHOQ0AKOnyC6FZfElEO67dMRUisHiVUZ6OEKCcQ=="
                         },
                         new
                         {
                             MaNhanVien = "DT002",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJE4LCHMYkMvEGW9yy11bHYI4w3QV3ulD3k7lUKzYkIGZlN1zkgr/YTpbRPAhxPwfQ=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEKyo/HmMQ/L4ywKbPI3Z6p4cwBjV93mqe+Ll2SMLLyJHA/k2XPYwx2gim1zHQOLs0w=="
                         },
                         new
                         {
                             MaNhanVien = "DT003",
-                            PasswordHash = "AQAAAAEAACcQAAAAEA/L2wZjsUAezKHFwdnZymz5nDhwO8hHpK+zxhVShql0x3MyJOgE4b2zlDo3cR5NyA=="
+                            PasswordHash = "AQAAAAEAACcQAAAAENOuX0ir3BcDZvKcPvLBm276yS2sy0H41FBQP2pKURPkmjGFDU6DrCap88L/WiYalg=="
                         },
                         new
                         {
                             MaNhanVien = "DT006",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDD/ZLbRkLl3tAzAvQYm4/HFY0IOiWQ6k/BKYDszgU/c0FvaOVBkTg2Ul7XTgfSlzg=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEN1iwUzRth5yJI5foKSn+KcwkBmwt+pTxX1CvirzuS1foZAGMzVyss+o4NQ8titGgQ=="
                         },
                         new
                         {
                             MaNhanVien = "DT005",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGIkDP7wKRhYeRx7rk6Z08t/q8gTLfcdsrDe/xRbLCENU79U5N5U6Gn8PqV3+2hc7w=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEA+Y91jJ+AHzu7/5cMxLC6ua7DsB4llcqhd8B6/a0bJrePAVRMO6/9k8x3a+aBoldQ=="
                         },
                         new
                         {
                             MaNhanVien = "DT004",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHqRhtoB/PBmAN9flDEv5Sv+LOCXdHCAfTmKUKX9FiS/wfAnP8MkmRh6mYBE4hraOA=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEBF6fZZpeEC/imwPFCvP7C/l2/XokEJq7KgWEAEqsNDB9LOHmuW10TSBjsDbt9du8Q=="
                         },
                         new
                         {
                             MaNhanVien = "TT001",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPJ/LBEKXF5flooJVPtPBp095Cw7KpSu1ybWDeqbgZxhAh68M9oerQiQ3LxC/61qVQ=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEEKZIsBsyCm8+SO51ExllMWEpuuYicrIhe4Da/OdppKaXWZzSlqNcortizfY6/wurA=="
                         },
                         new
                         {
                             MaNhanVien = "TT003",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDohoPsBCSRDfgoSmkqyLxpBFRAk140CNKTOwvkP2+rROnbRPlw9yEVsTeeFIYkSqA=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEEOMDSsTRY3/eL4IOaNd+ss0Frm0Pp+ZtT6ENS9pS0bOaW9Xbfzz8vE5O2H3NQEu/g=="
                         },
                         new
                         {
                             MaNhanVien = "TT004",
-                            PasswordHash = "AQAAAAEAACcQAAAAEExb24ygB74DPKSJAAeJCJFIkZeE2qa2rZW0gFz9zPNddT9MQtLW5NV83I3Zvq6o/w=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEFo+DrsW1VlQOE5fCdTGpTLUTHWJ8EEaYkMNfDne2kzJKYr/pDZf4rzkhG+Ud/BKMw=="
                         },
                         new
                         {
                             MaNhanVien = "TT006",
-                            PasswordHash = "AQAAAAEAACcQAAAAENr4O/ichRv/Nw4lG51qcyyZin6k++HUCvk3Fi7wEQIG3GxIKsJmtExdoaZG/C8ERA=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEFChzMVJPTD8NtVUddhB9i2B3yklW6RroOKxTiU/aQj6BtG5duDsP1HF+dNvC5U89Q=="
                         },
                         new
                         {
                             MaNhanVien = "TT002",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHWkYjmP2kS80WNXezO+VcFJdA5Uj6C20M1wlVYkUx1fJcUXpv2CFs85HiRMmgZDQ=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEBlAgQeJJyETkbr0H4ETL63MleSDrVMPHSTiD7D/iLpov4XFaf+Uw/IVA+GJMXc7Ag=="
                         },
                         new
                         {
                             MaNhanVien = "TT005",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMA+XmRLfCynWSn3Qqo5BsQc/nIytn2Oe0NbSlCUNPfBtpuDFIfH+HH8ZXBJzz3FPA=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEIffg02Yk/qABXfFQf9ydCeh3goj0UVJt3rIVBBBarPD5ttOAwgOhOCDTukJVm/fog=="
                         },
                         new
                         {
                             MaNhanVien = "NN001",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMS+xo4r55zExDcr05pMEXMrDxHR/iPZlSFCyb+E5Ra1bC+tuY0k1Gs+NFGJXwynrg=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEPQ7MLTfP5PWUOkdOKHg9wF83m2NGsOXvBnv9nx0eIHPi35J5PEurdppHbUOVXhpcg=="
                         },
                         new
                         {
                             MaNhanVien = "NN006",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBkqpH2fDkg9Mk6GjnnbgflKVdk/ZrzIQgMo3IHetX6MFOKFVawGM6LCNUqR16wF3Q=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEMzu9SfjP3GBsDLNPZC+gXNSS+YZW9lOZXolBb7Hw8Y6jYPvgBgOaDRQLUHzJmEhvA=="
                         },
                         new
                         {
                             MaNhanVien = "NN002",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAgk6M4bBTfo5/KY4Rp9rRmFfYZBZXrG3x4DWPpMuiIVLbbWyiGNVG3KFOrn9fyAWA=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEOx31+RoTVcGO3hRQEekPSGWXzyNR07VmxU9Wca2rD4JsqObCrcSgXr/s2NjxU7iOA=="
                         },
                         new
                         {
                             MaNhanVien = "NN004",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKRwIZ0NlX9F73nSqMnkFU4jskp2ioUxZuIexaOk2FVT3HZVHOWjEmuvt96uJnQmuA=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEPJRCXr2X5NrEOgPF8CM2IyXG8Fbp+VeDAkbv6cI2JzS5WhDUMuUKNW+Nf74HuciTQ=="
                         },
                         new
                         {
                             MaNhanVien = "NN003",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJY6sAbGuLH5diwYxGJQKDFUIFxsKU3Avj8dT0rvc/b8GQqA0iKVYEXmOlVTj24XLA=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEGl2NuuXMvZJdoIwYkDpMpZTIlNFBTYLDuDczK2T9ni7lgzBYgwA7hcKs6bKLF74dA=="
                         },
                         new
                         {
                             MaNhanVien = "NN005",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKnsaECbHt/M4JSLprwJFodm8AVUcpWPIhyrxsRGKrOV6gKd9xpvJsho1YMcyNQyGg=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEGG5VoHsQ0IyRmexOKJd1BTnY3+oxM0T15buHN2Emjawri2ZmkS0FD+sxHYZmFuRRA=="
                         },
                         new
                         {
                             MaNhanVien = "CT001",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJS8LWAc9qfDYIYnbusM7iNAh6lLBwxKLxW7/WtIUtfG2MgUih+12S5TjJHV5cr46w=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEK39bX4haJJTX1Icc2yngWn8RUql/ewc1aYOcFwnsOIHdc9fJGaNqdFzWCyAC3ladw=="
                         },
                         new
                         {
                             MaNhanVien = "CT003",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHZWZH5Ivi2q6W8Lc4NjaZULIPENGRMT4QzpOYI7+/8Q8Ilkne3Cs7zxmmmDlp3pdQ=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEC4Y6+0tVSf42cok3z0qiiduLS9EhdhKRxVfQmyIXy2ITvRHB/4MD7YxAs/VZ4+15w=="
                         },
                         new
                         {
                             MaNhanVien = "CT005",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFUOh9W7wyW4IKMXeYZgDaNZrfMOh8sKqmNvjFcKQmU/eCK9+hrR5evcXNvDgWGbFg=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEECacmHKe+y/GiHgagZMzwwFfS5W2cKTgaK0I5jy0UETyrq/B4t0wNJOvcZ3BJjKFA=="
                         },
                         new
                         {
                             MaNhanVien = "CT002",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP42Ej7H3QBH2Td4zszyV+TNCe8DL4vKLb08kKEaeKcurQVfVa9LE8HKc3+qKOFiFg=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEKizgtvSjz47YJcXgtIdOt67tjiwawBx8BXFCRIkYlUhWIy6LnFMBXRyc/s6EDi7ag=="
                         },
                         new
                         {
                             MaNhanVien = "CT004",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEVHy9Z3CnNxgiW97AjiJhLoqY60VOi1C5G6NBdFjzY2Gz002dRVIFh74j6GGaP+dw=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEGOHtQDXkCb6fPBFk+MQztNQudIOPTfyiFQMiXuKLr0gM2S9lcpo8VepPi41+4n4rQ=="
                         },
                         new
                         {
                             MaNhanVien = "CT006",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE4usZs4VMh6YCm/RYD5BrGwHbsRXFeM2ziFhHNU88S4rOoj9FCs9l5n3WBzmmRb8w=="
+                            PasswordHash = "AQAAAAEAACcQAAAAEFZYvTsP+TdhAQtLeD0TkCGq+YM84nU0xzPJOZuNmBwMGJO9xlnhzA9zKJZRYEXkkA=="
                         });
                 });
 

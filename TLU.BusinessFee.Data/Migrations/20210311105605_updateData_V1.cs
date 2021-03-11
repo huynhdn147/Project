@@ -68,7 +68,7 @@ namespace TLU.BusinessFee.Data.Migrations
                 {
                     MaPhongBan = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
                     TenPhongBan = table.Column<string>(unicode: false, maxLength: 25, nullable: false),
-                    NgayThanhLap = table.Column<DateTime>(nullable: true, defaultValue: new DateTime(2021, 3, 11, 17, 36, 5, 251, DateTimeKind.Local).AddTicks(1395))
+                    NgayThanhLap = table.Column<DateTime>(nullable: true, defaultValue: new DateTime(2021, 3, 11, 17, 56, 5, 284, DateTimeKind.Local).AddTicks(3305))
                 },
                 constraints: table =>
                 {
@@ -166,7 +166,6 @@ namespace TLU.BusinessFee.Data.Migrations
                 columns: table => new
                 {
                     MaDeXuat = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
-                    TenDeXuat = table.Column<string>(nullable: true),
                     Lydo = table.Column<string>(nullable: true),
                     TongTien = table.Column<int>(nullable: false),
                     ThoiGianDeXuat = table.Column<DateTime>(nullable: false),
@@ -356,9 +355,9 @@ namespace TLU.BusinessFee.Data.Migrations
                 values: new object[,]
                 {
                     { "CP1", "Tien ở khách sạn", "Khach San" },
-                    { "CP2", null, "Ve may bay" },
-                    { "CP3", null, "Luu tru " },
-                    { "CP4", null, "Ve tau,xe" }
+                    { "CP2", "Tien ở khách sạn", "Ve may bay" },
+                    { "CP3", "Tien ở khách sạn", "Luu tru " },
+                    { "CP4", "Tien ở khách sạn", "Ve tau,xe" }
                 });
 
             migrationBuilder.InsertData(
@@ -465,42 +464,42 @@ namespace TLU.BusinessFee.Data.Migrations
                 columns: new[] { "MaNhanVien", "PasswordHash" },
                 values: new object[,]
                 {
-                    { "KT002", "AQAAAAEAACcQAAAAEM/7oLXGlEdLX7qbSeMwAeDhTrsenfLlpUyMbDsPUbVCmX/+h7j5n5idDOIq4ZROKw==" },
-                    { "TT004", "AQAAAAEAACcQAAAAEExb24ygB74DPKSJAAeJCJFIkZeE2qa2rZW0gFz9zPNddT9MQtLW5NV83I3Zvq6o/w==" },
-                    { "TT006", "AQAAAAEAACcQAAAAENr4O/ichRv/Nw4lG51qcyyZin6k++HUCvk3Fi7wEQIG3GxIKsJmtExdoaZG/C8ERA==" },
-                    { "TT002", "AQAAAAEAACcQAAAAEFHWkYjmP2kS80WNXezO+VcFJdA5Uj6C20M1wlVYkUx1fJcUXpv2CFs85HiRMmgZDQ==" },
-                    { "TT005", "AQAAAAEAACcQAAAAEMA+XmRLfCynWSn3Qqo5BsQc/nIytn2Oe0NbSlCUNPfBtpuDFIfH+HH8ZXBJzz3FPA==" },
-                    { "NN001", "AQAAAAEAACcQAAAAEMS+xo4r55zExDcr05pMEXMrDxHR/iPZlSFCyb+E5Ra1bC+tuY0k1Gs+NFGJXwynrg==" },
-                    { "NN006", "AQAAAAEAACcQAAAAEBkqpH2fDkg9Mk6GjnnbgflKVdk/ZrzIQgMo3IHetX6MFOKFVawGM6LCNUqR16wF3Q==" },
-                    { "TT003", "AQAAAAEAACcQAAAAEDohoPsBCSRDfgoSmkqyLxpBFRAk140CNKTOwvkP2+rROnbRPlw9yEVsTeeFIYkSqA==" },
-                    { "NN002", "AQAAAAEAACcQAAAAEAgk6M4bBTfo5/KY4Rp9rRmFfYZBZXrG3x4DWPpMuiIVLbbWyiGNVG3KFOrn9fyAWA==" },
-                    { "NN003", "AQAAAAEAACcQAAAAEJY6sAbGuLH5diwYxGJQKDFUIFxsKU3Avj8dT0rvc/b8GQqA0iKVYEXmOlVTj24XLA==" },
-                    { "NN005", "AQAAAAEAACcQAAAAEKnsaECbHt/M4JSLprwJFodm8AVUcpWPIhyrxsRGKrOV6gKd9xpvJsho1YMcyNQyGg==" },
-                    { "CT001", "AQAAAAEAACcQAAAAEJS8LWAc9qfDYIYnbusM7iNAh6lLBwxKLxW7/WtIUtfG2MgUih+12S5TjJHV5cr46w==" },
-                    { "CT003", "AQAAAAEAACcQAAAAEHZWZH5Ivi2q6W8Lc4NjaZULIPENGRMT4QzpOYI7+/8Q8Ilkne3Cs7zxmmmDlp3pdQ==" },
-                    { "CT005", "AQAAAAEAACcQAAAAEFUOh9W7wyW4IKMXeYZgDaNZrfMOh8sKqmNvjFcKQmU/eCK9+hrR5evcXNvDgWGbFg==" },
-                    { "CT002", "AQAAAAEAACcQAAAAEP42Ej7H3QBH2Td4zszyV+TNCe8DL4vKLb08kKEaeKcurQVfVa9LE8HKc3+qKOFiFg==" },
-                    { "NN004", "AQAAAAEAACcQAAAAEKRwIZ0NlX9F73nSqMnkFU4jskp2ioUxZuIexaOk2FVT3HZVHOWjEmuvt96uJnQmuA==" },
-                    { "TT001", "AQAAAAEAACcQAAAAEPJ/LBEKXF5flooJVPtPBp095Cw7KpSu1ybWDeqbgZxhAh68M9oerQiQ3LxC/61qVQ==" },
-                    { "DT004", "AQAAAAEAACcQAAAAEHqRhtoB/PBmAN9flDEv5Sv+LOCXdHCAfTmKUKX9FiS/wfAnP8MkmRh6mYBE4hraOA==" },
-                    { "DT005", "AQAAAAEAACcQAAAAEGIkDP7wKRhYeRx7rk6Z08t/q8gTLfcdsrDe/xRbLCENU79U5N5U6Gn8PqV3+2hc7w==" },
-                    { "KT001", "AQAAAAEAACcQAAAAEM7oRIM0ttPfee6T86WxQoqgCFmrasX8Wuqqu0d5qpfeNlx6W/a4cwmVxCwsOgneeQ==" },
-                    { "KT003", "AQAAAAEAACcQAAAAEPs8jXgiXJLHVksJu12g4/eM/ibpU1T91d3XbBrCE4Jk8hvhmyoIc/t1PXDd+3IIkQ==" },
-                    { "KT004", "AQAAAAEAACcQAAAAEKLZeMQGgNMXYXd7Rb9+QRMGeN75XJ0xrMGnB6uig5APHrJjtYycoMfxpTnzmBXNRQ==" },
-                    { "KT006", "AQAAAAEAACcQAAAAEAEcTvaRM6goG6/qsYBhlijy/5FII9yFmF5US7dtpSUjUoyfnSCP11PZTPwLX8LK1Q==" },
-                    { "KT005", "AQAAAAEAACcQAAAAEKNNpmf7eoL0e9WKL68mpOG0x6qfjy/eWGgkA0LOaonXZr6NPRhUe+2vGKQn79F3xA==" },
-                    { "IT002", "AQAAAAEAACcQAAAAEKp9uuiweUu/tK138Wn8Lac1OPljjjnDhfofBplIXW66g0HXp++QWVjIH96ouVC03Q==" },
-                    { "IT003", "AQAAAAEAACcQAAAAEJr8rB2FC+Cfh7wfukmu5dSZ4zjAd18H0ZfdmCBZyGN9GeMYCTnQdSDTzFoPJ0EhVA==" },
-                    { "IT001", "AQAAAAEAACcQAAAAEMVNfF3VrZMY1b/B8p7ZC18BVyni/qIvHVEpvjVtYs2W4NmWmi1O8rBBDDayYK51Rw==" },
-                    { "IT004", "AQAAAAEAACcQAAAAEOJ0UVaITmWQPefrGPSJXQzbpI9Bae87LYPmphMOnegioliVcT8M1vTmuOFR2SWfNw==" },
-                    { "IT006", "AQAAAAEAACcQAAAAEB8ewdjZp7VZwbPWaW2PT/FqVrhIHgjs9d0BjQjQrnEUYjm5ZMoop1+QltNvvfNOWQ==" },
-                    { "IT005", "AQAAAAEAACcQAAAAEASfyNPAnISNY9tseCjtWRQkCawI0Z65oPZGsWYAaOjDVZ5NsiIcnYfFxj1aCJjQtg==" },
-                    { "DT001", "AQAAAAEAACcQAAAAEO70ht52liFUEI+BJrupt6czv8fpJbr9CgoUeEXLbUeAodY+BCozUElsDqyN8V/62Q==" },
-                    { "DT002", "AQAAAAEAACcQAAAAEJE4LCHMYkMvEGW9yy11bHYI4w3QV3ulD3k7lUKzYkIGZlN1zkgr/YTpbRPAhxPwfQ==" },
-                    { "DT003", "AQAAAAEAACcQAAAAEA/L2wZjsUAezKHFwdnZymz5nDhwO8hHpK+zxhVShql0x3MyJOgE4b2zlDo3cR5NyA==" },
-                    { "DT006", "AQAAAAEAACcQAAAAEDD/ZLbRkLl3tAzAvQYm4/HFY0IOiWQ6k/BKYDszgU/c0FvaOVBkTg2Ul7XTgfSlzg==" },
-                    { "CT004", "AQAAAAEAACcQAAAAEEVHy9Z3CnNxgiW97AjiJhLoqY60VOi1C5G6NBdFjzY2Gz002dRVIFh74j6GGaP+dw==" },
-                    { "CT006", "AQAAAAEAACcQAAAAEE4usZs4VMh6YCm/RYD5BrGwHbsRXFeM2ziFhHNU88S4rOoj9FCs9l5n3WBzmmRb8w==" }
+                    { "KT002", "AQAAAAEAACcQAAAAEK83H8I4Okv4kvdBS/P7Itz/f9q0bCOLeFOendAiAkKrZ9fyIbtRIc3A4Y6U+gFfvA==" },
+                    { "TT004", "AQAAAAEAACcQAAAAEFo+DrsW1VlQOE5fCdTGpTLUTHWJ8EEaYkMNfDne2kzJKYr/pDZf4rzkhG+Ud/BKMw==" },
+                    { "TT006", "AQAAAAEAACcQAAAAEFChzMVJPTD8NtVUddhB9i2B3yklW6RroOKxTiU/aQj6BtG5duDsP1HF+dNvC5U89Q==" },
+                    { "TT002", "AQAAAAEAACcQAAAAEBlAgQeJJyETkbr0H4ETL63MleSDrVMPHSTiD7D/iLpov4XFaf+Uw/IVA+GJMXc7Ag==" },
+                    { "TT005", "AQAAAAEAACcQAAAAEIffg02Yk/qABXfFQf9ydCeh3goj0UVJt3rIVBBBarPD5ttOAwgOhOCDTukJVm/fog==" },
+                    { "NN001", "AQAAAAEAACcQAAAAEPQ7MLTfP5PWUOkdOKHg9wF83m2NGsOXvBnv9nx0eIHPi35J5PEurdppHbUOVXhpcg==" },
+                    { "NN006", "AQAAAAEAACcQAAAAEMzu9SfjP3GBsDLNPZC+gXNSS+YZW9lOZXolBb7Hw8Y6jYPvgBgOaDRQLUHzJmEhvA==" },
+                    { "TT003", "AQAAAAEAACcQAAAAEEOMDSsTRY3/eL4IOaNd+ss0Frm0Pp+ZtT6ENS9pS0bOaW9Xbfzz8vE5O2H3NQEu/g==" },
+                    { "NN002", "AQAAAAEAACcQAAAAEOx31+RoTVcGO3hRQEekPSGWXzyNR07VmxU9Wca2rD4JsqObCrcSgXr/s2NjxU7iOA==" },
+                    { "NN003", "AQAAAAEAACcQAAAAEGl2NuuXMvZJdoIwYkDpMpZTIlNFBTYLDuDczK2T9ni7lgzBYgwA7hcKs6bKLF74dA==" },
+                    { "NN005", "AQAAAAEAACcQAAAAEGG5VoHsQ0IyRmexOKJd1BTnY3+oxM0T15buHN2Emjawri2ZmkS0FD+sxHYZmFuRRA==" },
+                    { "CT001", "AQAAAAEAACcQAAAAEK39bX4haJJTX1Icc2yngWn8RUql/ewc1aYOcFwnsOIHdc9fJGaNqdFzWCyAC3ladw==" },
+                    { "CT003", "AQAAAAEAACcQAAAAEC4Y6+0tVSf42cok3z0qiiduLS9EhdhKRxVfQmyIXy2ITvRHB/4MD7YxAs/VZ4+15w==" },
+                    { "CT005", "AQAAAAEAACcQAAAAEECacmHKe+y/GiHgagZMzwwFfS5W2cKTgaK0I5jy0UETyrq/B4t0wNJOvcZ3BJjKFA==" },
+                    { "CT002", "AQAAAAEAACcQAAAAEKizgtvSjz47YJcXgtIdOt67tjiwawBx8BXFCRIkYlUhWIy6LnFMBXRyc/s6EDi7ag==" },
+                    { "NN004", "AQAAAAEAACcQAAAAEPJRCXr2X5NrEOgPF8CM2IyXG8Fbp+VeDAkbv6cI2JzS5WhDUMuUKNW+Nf74HuciTQ==" },
+                    { "TT001", "AQAAAAEAACcQAAAAEEKZIsBsyCm8+SO51ExllMWEpuuYicrIhe4Da/OdppKaXWZzSlqNcortizfY6/wurA==" },
+                    { "DT004", "AQAAAAEAACcQAAAAEBF6fZZpeEC/imwPFCvP7C/l2/XokEJq7KgWEAEqsNDB9LOHmuW10TSBjsDbt9du8Q==" },
+                    { "DT005", "AQAAAAEAACcQAAAAEA+Y91jJ+AHzu7/5cMxLC6ua7DsB4llcqhd8B6/a0bJrePAVRMO6/9k8x3a+aBoldQ==" },
+                    { "KT001", "AQAAAAEAACcQAAAAEDOu7m5sg6NPEqXyjzNOoJeVMRESGNgiVipRty/Fo41PttYi09IjjnFWZ+l9O2wuSQ==" },
+                    { "KT003", "AQAAAAEAACcQAAAAEAFg+yi9zSwHyXnsGFv79zkqK4bRGfW8l4RMLJPDmF9SoTX0v//QeSTB5u6PlTz0ow==" },
+                    { "KT004", "AQAAAAEAACcQAAAAEALH+OYJLB0HZECHlhvYeg0i+GDqFCou71gZXtmirEZF5oUzw5bcrYz4bf1vmCKFRg==" },
+                    { "KT006", "AQAAAAEAACcQAAAAEOZVfOArG/E0ZXfO2fPKEXVT4xku0IFyr+kElq4zH+WApixciTfw1vgSqFwo0ABcyA==" },
+                    { "KT005", "AQAAAAEAACcQAAAAEF653wC+Aav56KbcDwenSRCA5wVNGA20N63blBxYfTfADO6OuwsAJdkygYolFOxFtA==" },
+                    { "IT002", "AQAAAAEAACcQAAAAECt1F7cVvL+ljNPB2bWKaOmxoiFSAWgEc2YnQKobk86QrsiyDLeZdc3Etn7LRAiGxg==" },
+                    { "IT003", "AQAAAAEAACcQAAAAEAFvqh6Anrs0e5jr6dX8YqK55ENJuSxDCp9ftQxkmmN3BtarSL3HLqXDghf2SFJgAg==" },
+                    { "IT001", "AQAAAAEAACcQAAAAEBRZ6dpavAIjO0z7ji/feHqcYLEABdBSRlD4QEBJhHiqAM+Mrln85rQP2IvcKQUDUg==" },
+                    { "IT004", "AQAAAAEAACcQAAAAEItpqugJSPH4gNa7x2fivYQr+Hom3kldZKCseYfQZKkwVgk5TDkqpq8f3PfCeS4heQ==" },
+                    { "IT006", "AQAAAAEAACcQAAAAEJWV4nvm0WCdanm1uHg4EL09YLp/JD93AtufKaqozM+INTEF4Dsnm+VBXb7WaT56RA==" },
+                    { "IT005", "AQAAAAEAACcQAAAAECl/Ep3uH984PrKTeXqQf/FZbdVEIo/9E2O+sDYQDbZ3Kqyqv5yU2xpakQ3rgfk0gQ==" },
+                    { "DT001", "AQAAAAEAACcQAAAAEMyWBRP66mhruvA1QRKJCdPmcI7kHOQ0AKOnyC6FZfElEO67dMRUisHiVUZ6OEKCcQ==" },
+                    { "DT002", "AQAAAAEAACcQAAAAEKyo/HmMQ/L4ywKbPI3Z6p4cwBjV93mqe+Ll2SMLLyJHA/k2XPYwx2gim1zHQOLs0w==" },
+                    { "DT003", "AQAAAAEAACcQAAAAENOuX0ir3BcDZvKcPvLBm276yS2sy0H41FBQP2pKURPkmjGFDU6DrCap88L/WiYalg==" },
+                    { "DT006", "AQAAAAEAACcQAAAAEN1iwUzRth5yJI5foKSn+KcwkBmwt+pTxX1CvirzuS1foZAGMzVyss+o4NQ8titGgQ==" },
+                    { "CT004", "AQAAAAEAACcQAAAAEGOHtQDXkCb6fPBFk+MQztNQudIOPTfyiFQMiXuKLr0gM2S9lcpo8VepPi41+4n4rQ==" },
+                    { "CT006", "AQAAAAEAACcQAAAAEFZYvTsP+TdhAQtLeD0TkCGq+YM84nU0xzPJOZuNmBwMGJO9xlnhzA9zKJZRYEXkkA==" }
                 });
 
             migrationBuilder.InsertData(

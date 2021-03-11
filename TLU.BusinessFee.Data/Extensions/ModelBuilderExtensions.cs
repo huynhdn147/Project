@@ -11,6 +11,7 @@ namespace TLU.BusinessFee.Data.Extensions
     public static class ModelBuilderExtensions
     {
         public static void seed(this ModelBuilder modelBuilder)
+
         {
             //modelBuilder.Entity<AppConfig>().HasData(
             //    new AppConfig() { Key = "home titleee", Value = "this is home page" }
@@ -70,7 +71,7 @@ namespace TLU.BusinessFee.Data.Extensions
                 new NhanVienPhongBan() { MaNhanVien = "CT006", TenNhanVien = "Dang canh Khanh", MaCapBac = "c4", MaPhongBan = "a0006" }
                 );
             modelBuilder.Entity<ChiPhi>().HasData(
-                new ChiPhi() { MaChiPhi = "CP1", TenChiPhi = "Khach San",MoTa="Tien ở khách sạn" },
+                new ChiPhi() { MaChiPhi = "CP1", TenChiPhi = "Khach San", MoTa = "Tien ở khách sạn" },
                 new ChiPhi() { MaChiPhi = "CP2", TenChiPhi = "Ve may bay", MoTa = "Tien ở khách sạn" },
                 new ChiPhi() { MaChiPhi = "CP3", TenChiPhi = "Luu tru ", MoTa = "Tien ở khách sạn" },
                 new ChiPhi() { MaChiPhi = "CP4", TenChiPhi = "Ve tau,xe", MoTa = "Tien ở khách sạn" }
@@ -104,8 +105,8 @@ namespace TLU.BusinessFee.Data.Extensions
 
             modelBuilder.Entity<Role>().HasData(
                 new Role { Id = "RL01", Name = "admin", Description = "Quản trị hệ thống" },
-                new Role {Id="RL02", Name="Nhân viên",Description="nhân viên trong một phòng ban" },
-                new Role {Id = "RL03", Name = "Trưởng bộ phận", Description = "trưởng bộ phận của một phòng ban" },
+                new Role { Id = "RL02", Name = "Nhân viên", Description = "nhân viên trong một phòng ban" },
+                new Role { Id = "RL03", Name = "Trưởng bộ phận", Description = "trưởng bộ phận của một phòng ban" },
                 new Role { Id = "RL04", Name = "Phòng kế toán", Description = "nhân viên phòng kế toán" },
                 new Role { Id = "RL05", Name = "Lãnh đạo nhà trường", Description = "lãnh đạo nhà trường" }
 
@@ -113,7 +114,7 @@ namespace TLU.BusinessFee.Data.Extensions
 
             var hasher = new PasswordHasher<User>();
             modelBuilder.Entity<User>().HasData(
-                new User { MaNhanVien = "IT001", PasswordHash = hasher.HashPassword(null,"123") },
+                new User { MaNhanVien = "IT001", PasswordHash = hasher.HashPassword(null, "123") },
                 new User { MaNhanVien = "IT002", PasswordHash = hasher.HashPassword(null, "123") },
                 new User { MaNhanVien = "IT003", PasswordHash = hasher.HashPassword(null, "123") },
                 new User { MaNhanVien = "IT004", PasswordHash = hasher.HashPassword(null, "123") },
@@ -161,9 +162,12 @@ namespace TLU.BusinessFee.Data.Extensions
                 //new User { MaNhanVien = "IT001", PasswordHash = hasher.HashPassword(null, "123") }
                 );
             modelBuilder.Entity<UserRole>().HasData(
-                new UserRole{ 
-                 RoleId= "RL01"
-                ,MaNhanVien= "IT001" },
+                new UserRole
+                {
+                    RoleId = "RL01"
+                ,
+                    MaNhanVien = "IT001"
+                },
                 new UserRole
                 {
                     RoleId = "RL01",
@@ -190,9 +194,9 @@ namespace TLU.BusinessFee.Data.Extensions
                     MaNhanVien = "CT001"
                 }
                 );
-               
-        
-        
+
+
+
         }
     }
 }

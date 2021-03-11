@@ -96,3 +96,17 @@ C:\Users\Admin\Desktop\projectt\projectt\TLU.BusinessFee.Application\obj\Debug\n
 C:\Users\Admin\Desktop\projectt\projectt\TLU.BusinessFee.Application\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Application.csproj.CopyComplete
 C:\Users\Admin\Desktop\projectt\projectt\TLU.BusinessFee.Application\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Application.dll
 C:\Users\Admin\Desktop\projectt\projectt\TLU.BusinessFee.Application\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Application.pdb
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Application.deps.json
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Application.dll
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Application.pdb
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Data.dll
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.dll
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Data.pdb
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.pdb
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Application.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Application.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Application.AssemblyInfo.cs
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Application.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Application.csproj.CopyComplete
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Application.dll
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Application\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Application.pdb

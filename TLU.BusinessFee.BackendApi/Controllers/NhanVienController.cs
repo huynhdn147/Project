@@ -51,10 +51,10 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                 return BadRequest("khong the tim thay nhan vien");
             return Ok(nhanvien);
         }
-        [HttpGet("getbycvid /{MaChucVu}")]
-        public async Task<IActionResult> getbyChucVuID(string MaChucVu)
+        [HttpGet("getbycvid /{MaCapBac}")]
+        public async Task<IActionResult> getbyChucVuID(string MaCapBac)
         {
-            var nhanvien = await _managarNhanVienService.GetAllByChucVuID(MaChucVu);
+            var nhanvien = await _managarNhanVienService.GetAllByChucVuID(MaCapBac);
             if (nhanvien == null)
                 return BadRequest("khong the tim thay nhan vien");
             return Ok(nhanvien);

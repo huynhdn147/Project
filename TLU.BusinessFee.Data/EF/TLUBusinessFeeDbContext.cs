@@ -58,7 +58,7 @@ namespace TLU.BusinessFee.Data.EF
         public DbSet<ChiPhi> ChiPhis { set; get; }
         public DbSet<ChiPhiChucVu> ChiPhiChucVus { set; get; }
         public DbSet<User> User { set; get; }
-        public DbSet<Role> Role { set; get; }
+        public DbSet<Role> Roles { set; get; }
         //public DbSet<RoleClaims> RoleClaims { set; get; }
         //public DbSet<UserClaim> UserClaim { set; get; }
         //public DbSet<UserLogin> UserLogin { set; get; }

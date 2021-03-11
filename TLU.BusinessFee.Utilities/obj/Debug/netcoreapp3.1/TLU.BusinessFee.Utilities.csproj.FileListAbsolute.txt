@@ -61,3 +61,12 @@ C:\Users\Admin\Desktop\projectt\projectt\TLU.BusinessFee.Utilities\obj\Debug\net
 C:\Users\Admin\Desktop\projectt\projectt\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\projectt\projectt\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.dll
 C:\Users\Admin\Desktop\projectt\projectt\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.pdb
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.deps.json
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.dll
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.pdb
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.AssemblyInfo.cs
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.dll
+C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.pdb

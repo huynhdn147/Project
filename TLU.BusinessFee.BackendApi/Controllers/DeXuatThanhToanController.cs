@@ -34,7 +34,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             IList<Claim> claims = identity.Claims.ToList();
             var RoleId = claims[1].Value;
-            var roleName = from Rn in _context.Role
+            var roleName = from Rn in _context.Roles
                            where Rn.Id == RoleId
                            select Rn.Name;
 

@@ -9,6 +9,7 @@ using System.Linq;
 using TLU.BusinessFee.Data.Entities;
 using TLU.BusinessFee.Utilities.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace TLU.BusinessFee.Application.Catalog.NhanViens
 {
@@ -31,6 +32,21 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
 
             };
             _context.NhanVienPhongs.Add(nhanvien);
+
+            //await _context.SaveChangesAsync();
+            var hasher = new PasswordHasher<User>();
+            var User = new User()
+            {
+                MaNhanVien = request.MaNhanVien,
+                PasswordHash = hasher.HashPassword(null, request.PassWord)
+            };
+            _context.User.Add(User);
+            var UserRole = new UserRole()
+            {
+                MaNhanVien = request.MaNhanVien,
+                RoleId = request.Roleid
+            };
+            _context.UserRole.Add(UserRole);
             await _context.SaveChangesAsync();
             return nhanvien.MaNhanVien;
         }
@@ -49,40 +65,50 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
 
         public async Task<List<NhanVienViewModel>> GetAll()
         {
-            var query = from p in _context.NhanVienPhongs
+            var query = from p in _context.NhanVienPhongs 
                         join cp in _context.PhongBans on p.MaPhongBan equals cp.MaPhongBan 
                         join cpp in _context.CapBacs on p.MaCapBac equals cpp.MaCapBac
-                        select new { p, cp, cpp };
-                        
+                        join us in _context.User on p.MaNhanVien equals us.MaNhanVien
+                        join roleus in _context.UserRole on us.MaNhanVien equals roleus.MaNhanVien
+                        join role in _context.Roles on roleus.RoleId equals role.Id
+                        select new { p, cp, cpp,role };
+            //var query2= from US in _context.User join 
             var data = await query.Select(x => new NhanVienViewModel()
             {
                 MaNhanVien=x.p.MaNhanVien,
                 TenNhanVien=x.p.TenNhanVien,
-                TenCapBac=x.cpp.TenCapBac
-               ,TenPhongBan=x.cp.TenPhongBan
+                TenCapBac=x.cpp.TenCapBac,
+                TenChucVu=x.role.Name
+               ,
+                TenPhongBan=x.cp.TenPhongBan
             }).ToListAsync();
             return data;
-        }
+         }
 
         public async Task<PageResult<NhanVienViewModel>> GetAllPaging(GetNhanVienPagingRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<NhanVienViewModel>> GetAllByChucVuID(string MaChucVu)
+        public async Task<List<NhanVienViewModel>> GetAllByChucVuID(string MaCapBac)
         {
 
             var query = from p in _context.NhanVienPhongs
                         join cp in _context.PhongBans on p.MaPhongBan equals cp.MaPhongBan
                         join cpp in _context.CapBacs on p.MaCapBac equals cpp.MaCapBac
+                        join us in _context.User on p.MaNhanVien equals us.MaNhanVien
+                        join roleus in _context.UserRole on us.MaNhanVien equals roleus.MaNhanVien
+                        join role in _context.Roles on roleus.RoleId equals role.Id
 
-                        where MaChucVu == MaChucVu
-                        select new { p, cp, cpp };
+                        where p.MaCapBac == MaCapBac
+                        select new { p, cp, cpp, role };
             var data = await query.Select(x => new NhanVienViewModel()
             {
                 MaNhanVien = x.p.MaNhanVien,
                 TenNhanVien = x.p.TenNhanVien,
                 TenCapBac = x.cpp.TenCapBac,
+                TenChucVu = x.role.Name
+               ,
                 TenPhongBan = x.cp.TenPhongBan
             }).ToListAsync();
             return data;
@@ -93,14 +119,19 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
             var query = from p in _context.NhanVienPhongs
                         join cp in _context.PhongBans on p.MaPhongBan equals cp.MaPhongBan
                         join cpp in _context.CapBacs on p.MaCapBac equals cpp.MaCapBac
+                        join us in _context.User on p.MaNhanVien equals us.MaNhanVien
+                        join roleus in _context.UserRole on us.MaNhanVien equals roleus.MaNhanVien
+                        join role in _context.Roles on roleus.RoleId equals role.Id
                         where p.MaPhongBan == MaPhongBan
-                        select new { p, cp, cpp };
+                        select new { p, cp, cpp,role };
             ;
             var data = await query.Select(x => new NhanVienViewModel()
             {
                 MaNhanVien = x.p.MaNhanVien,
                 TenNhanVien = x.p.TenNhanVien,
                 TenCapBac = x.cpp.TenCapBac,
+                TenChucVu = x.role.Name
+               ,
                 TenPhongBan = x.cp.TenPhongBan
             }).ToListAsync();
             return data;

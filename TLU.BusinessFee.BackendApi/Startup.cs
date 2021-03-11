@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using TLU.BusinessFee.Application.Catalog.ChiPhiChucVus;
 using TLU.BusinessFee.Application.Catalog.ChiPhis;
+using TLU.BusinessFee.Application.Catalog.ChucVu;
 using TLU.BusinessFee.Application.Catalog.ChucVus;
 using TLU.BusinessFee.Application.Catalog.ChuyenCongTacs;
 using TLU.BusinessFee.Application.Catalog.DeXuatThanhToans;
@@ -63,6 +64,7 @@ namespace TLU.BusinessFee.BackendApi
             services.AddTransient<RoleManager<Role>, RoleManager<Role>>();
             services.AddTransient<IValidator<LoginRequest>,LoginRequestValidator>();
             services.AddTransient<IManagerDeXuatThanhToanService, ManagerDeXuatThanhToanService>();
+            services.AddTransient<IManagerChucvuService, ManagerChucvuService>();
             //services.AddTransient<RoleManager<Role>, RoleManager<UserRole>>();
             services.AddControllers().
                 AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>()

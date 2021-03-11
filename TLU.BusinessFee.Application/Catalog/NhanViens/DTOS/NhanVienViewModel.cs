@@ -10,7 +10,7 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens.DTOS
         public string TenNhanVien
         { set; get; }
         public string TenCapBac { set; get; }
-
+        public string TenChucVu { set; get; }
         public string TenPhongBan { set; get; }
     }
 }

@@ -8,5 +8,6 @@ namespace TLU.BusinessFee.Application.Catalog.ChiPhis.DTOS
     {
         public string MaChiPhi { set; get; }
         public string TenChiPhi { set; get; }
+        public string MoTa { set; get; }
     }
 }

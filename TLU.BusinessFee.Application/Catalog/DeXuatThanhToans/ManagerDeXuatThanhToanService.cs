@@ -39,7 +39,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var DeXuat = await query.Select(x => new DeXuatThanhToanViewModel()
             {
                 MaDeXuat = x.p.MaDeXuat,
-                TenDeXuat = x.p.TenDeXuat,
+                
                 TenNhanVien = x.NV.TenNhanVien,
                 TenChuyenCongTac = x.CCT.TenChuyenCongTac,
                 ThoiGianDeXuat = x.p.ThoiGianDeXuat,

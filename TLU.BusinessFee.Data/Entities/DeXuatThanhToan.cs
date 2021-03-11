@@ -8,7 +8,7 @@ namespace TLU.BusinessFee.Data.Entities
     {
         
         public string MaDeXuat { set; get; }
-        public string TenDeXuat { set; get; }
+        
         public string Lydo { set; get; }
         //public enum TinhTrang { set; get; }
         public int TongTien { set; get; }

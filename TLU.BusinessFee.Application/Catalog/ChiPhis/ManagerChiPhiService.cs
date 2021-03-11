@@ -22,7 +22,8 @@ namespace TLU.BusinessFee.Application.Catalog.ChiPhis
             var chiphi = new ChiPhi()
             {
                 MaChiPhi = request.MaChiPhi,
-                TenChiPhi = request.TenChiPhi
+                TenChiPhi = request.TenChiPhi,
+                MoTa=request.MoTa
             };
             _context.ChiPhis.Add(chiphi);
             await _context.SaveChangesAsync();
@@ -43,7 +44,8 @@ namespace TLU.BusinessFee.Application.Catalog.ChiPhis
             var data = await query.Select(x => new ChiPhiViewModel()
             {
                 MaChiPhi=x.MaChiPhi,
-                TenChiPhi=x.TenChiPhi
+                TenChiPhi=x.TenChiPhi,
+                MoTa = x.MoTa
             }).ToListAsync();
             return data;
         }
@@ -55,7 +57,8 @@ namespace TLU.BusinessFee.Application.Catalog.ChiPhis
             {
 
                 MaChiPhi = chiphi.MaChiPhi,
-                TenChiPhi = chiphi.TenChiPhi
+                TenChiPhi = chiphi.TenChiPhi,
+                MoTa=chiphi.MoTa
             };
             return chiphiviewmodel;
         }
@@ -65,9 +68,9 @@ namespace TLU.BusinessFee.Application.Catalog.ChiPhis
             var chiphi = await _context.ChiPhis.FindAsync(request.MaChiPhi);
             var chiphidf = await _context.ChiPhis.FirstOrDefaultAsync(x => x.MaChiPhi == request.MaChiPhi);
             if (chiphi == null) throw new TLUException("Khong co loai chi phi");
-            chiphi.MaChiPhi = request.MaChiPhi;
-            chiphi.TenChiPhi = request.TenChiPhi;
-
+            chiphidf.MaChiPhi = request.MaChiPhi;
+            chiphidf.TenChiPhi = request.TenChiPhi;
+            chiphidf.MoTa = request.MoTa;
             return await _context.SaveChangesAsync();
         }
     }

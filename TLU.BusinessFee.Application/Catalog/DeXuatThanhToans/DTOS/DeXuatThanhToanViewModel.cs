@@ -7,7 +7,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans.DTOS
     public class DeXuatThanhToanViewModel
     {
         public string MaDeXuat { set; get; }
-        public string TenDeXuat { set; get; }
+       
         public string Lydo { set; get; }
         //public enum TinhTrang { set; get; }
         public int TongTien { set; get; }

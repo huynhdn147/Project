@@ -24,6 +24,29 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             _userService = userService;
             _context = context;
         }
+        [HttpGet]
+        [Authorize]
+        public async Task<string> getUserName()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IList<Claim> claims = identity.Claims.ToList();
+            var RoleId = claims[1].Value;
+            var roleName = from Rn in _context.Roles
+                           where Rn.Id == RoleId
+                           select Rn.Name;
+
+            var data = new UserLoginViewModel
+            {
+                MaNhanVien = claims[0].Value,
+                RoleName = roleName.ToList()[0]
+            };
+            //var query = from NV in _context.NhanVienPhongs
+            //            where NV.MaNhanVien == data.MaNhanVien
+            //            select NV.TenNhanVien.ToString();
+            //return query.FirstOrDefault().ToString();
+            return data.MaNhanVien;
+        }
+
 
         [HttpPost("authenticate")]
         [AllowAnonymous]

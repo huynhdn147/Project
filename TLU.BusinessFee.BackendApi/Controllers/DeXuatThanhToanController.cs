@@ -12,6 +12,8 @@ using TLU.BusinessFee.Data.EF;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using TLU.BusinessFee.Application.Catalog.ChuyenCongTacs;
 using TLU.BusinessFee.Application.Catalog.ChuyenCongTacs.DTOS;
+using TLU.BusinessFee.Application.Catalog.DeXuatThanhToans.DTOS;
+
 namespace TLU.BusinessFee.BackendApi.Controllers
 {
     [Route("api/[controller]")]
@@ -51,6 +53,16 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             string MaNhanVien = post().MaNhanVien.ToString();
             var DeXuat = await _managerDeXuatThanhToanService.GetallDeXuat(MaNhanVien);
             return Ok(DeXuat);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateDeXuat(CreateDeXuatRequest request)
+        {
+            string MaNhanVien = post().MaNhanVien.ToString();
+            request.NhanVienDeXuat = MaNhanVien;
+            var result = await _managerDeXuatThanhToanService.CreateDeXuat(request);
+            if (result == null)
+                return BadRequest();
+            return Created("ok",MaNhanVien);
         }
     }
 }

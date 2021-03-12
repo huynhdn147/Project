@@ -8,7 +8,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
 {
     public interface IManagerDeXuatThanhToanService
     {
-        Task<string> CreateDeXuat();
+        Task<string> CreateDeXuat(CreateDeXuatRequest request);
         Task<int> UpdateDeXuat();
         Task<List<DeXuatThanhToanViewModel>> GetallDeXuat(string MaNhanVien);
     }

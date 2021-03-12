@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TLU.BusinessFee.Application.Catalog.DeXuatThanhToans.DTOS;
 using TLU.BusinessFee.Data.EF;
+using TLU.BusinessFee.Data.Entities;
 
 namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
 {
@@ -21,9 +22,24 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             
         //}
 
-        public Task<string> CreateDeXuat()
+        public async Task<string> CreateDeXuat(CreateDeXuatRequest request)
         {
-            throw new NotImplementedException();
+            var SoLuongNhanVien = from NV in _context.nhanVienCongTacs
+                                  where NV.MaChuyenCongTac == request.MaChuyenCongTac
+                                  select NV.MaNhanVien;
+            var DeXuat = new DeXuatThanhToan()
+            {
+                MaDeXuat = request.MaDeXuat,
+                MaChuyenCongTac = request.MaChuyenCongTac,
+                SoNhanVien = SoLuongNhanVien.Count(),
+                TinhTrang = 0,
+                MaNhanVien=request.NhanVienDeXuat,
+                ThoiGianDeXuat=request.ThoiGianDeXuat
+            };
+            await _context.deXuatThanhToans.AddAsync(DeXuat);
+
+            await _context.SaveChangesAsync();
+            return DeXuat.MaDeXuat;
         }
 
         public async Task<List<DeXuatThanhToanViewModel>> GetallDeXuat(string MaNhanVien)
@@ -32,19 +48,22 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                              on p.MaNhanVien equals NV.MaNhanVien
                              join CCT in _context.chuyenCongTacs on p.MaChuyenCongTac equals CCT.MaChuyenCongTac
                              where p.MaNhanVien==MaNhanVien
-                             
-                        select new { p, NV, CCT };
-            //var queryTongTien= from 
-               
+                             select new { p, NV, CCT };
+
+            //var SoLuongNhanVien = from NV in _context.nhanVienCongTacs
+            //                      where NV.MaChuyenCongTac == request.MaChuyenCongTac
+            //                      select NV.MaNhanVien;
             var DeXuat = await query.Select(x => new DeXuatThanhToanViewModel()
             {
                 MaDeXuat = x.p.MaDeXuat,
                 
                 TenNhanVien = x.NV.TenNhanVien,
                 TenChuyenCongTac = x.CCT.TenChuyenCongTac,
+                SoNhanVien=x.p.SoNhanVien,   
                 ThoiGianDeXuat = x.p.ThoiGianDeXuat,
                 TongTien = x.p.TongTien,
-                TinhTrang = x.p.TinhTrang
+                TinhTrang = x.p.TinhTrang,
+                Lydo=x.p.Lydo
             }).ToListAsync();
 
             return DeXuat;

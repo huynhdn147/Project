@@ -11,11 +11,10 @@ namespace TLU.BusinessFee.Data.Extensions
     public static class ModelBuilderExtensions
     {
         public static void seed(this ModelBuilder modelBuilder)
-
         {
-            //modelBuilder.Entity<AppConfig>().HasData(
-            //    new AppConfig() { Key = "home titleee", Value = "this is home page" }
-            //);
+            modelBuilder.Entity<AppConfig>().HasData(
+                new AppConfig() { Key = "home titleee", Value = "this is home page" }
+            );
             modelBuilder.Entity<PhongBan>().HasData(
                 new PhongBan() { MaPhongBan = "a0001", TenPhongBan = "Phong kinh te" },
                 new PhongBan() { MaPhongBan = "a0002", TenPhongBan = "Phong CNTT" },

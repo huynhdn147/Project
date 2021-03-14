@@ -18,6 +18,7 @@ namespace TLU.BusinessFee.Data.Entities
         public bool TrangThai { set; get; }//true là đã đi, false là chưa đi
         //public virtual DeXuatThanhToan DeXuat { set; get; }
         public List<NhanVienCongTac> nhanVienCongTacs { set; get; }
+        public List<ChiPhiCongTac> chiPhiCongTacs { set; get; }
 
     }
 }

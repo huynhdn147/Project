@@ -13,12 +13,11 @@ namespace TLU.BusinessFee.Data.Configuration
         {
 
             builder.ToTable("ChiPhiCongTac");
-            builder.Property(x => x.MaNhanVien).HasMaxLength(5).IsUnicode(false);
             builder.Property(x => x.MaChiPhi).HasMaxLength(5).IsUnicode(false);
             builder.Property(x => x.MaChuyenCongTac).HasMaxLength(5).IsUnicode(false);
-            builder.HasKey(x => new { x.MaChiPhi, x.MaChuyenCongTac, x.MaNhanVien });
+            builder.HasKey(x => new { x.MaChiPhi, x.MaChuyenCongTac });
             builder.HasOne(x => x.chiPhis).WithMany(pc => pc.chiPhiCongTac).HasForeignKey(x => x.MaChiPhi);
-            builder.HasOne(x => x.nhanVienCongTacs).WithMany(pc => pc.chiPhiCongTac).HasForeignKey(pc =>  new { pc.MaChuyenCongTac, pc.MaNhanVien } );
+            builder.HasOne(x => x.ChuyenCongTac).WithMany(pc => pc.chiPhiCongTacs).HasForeignKey(pc => pc.MaChuyenCongTac );
             //builder.HasOne(x => x.nhanVienCongTacs).WithMany(pc => pc.chiPhiCongTac).HasForeignKey(pc =>  pc.MaNhanVien);
 
 

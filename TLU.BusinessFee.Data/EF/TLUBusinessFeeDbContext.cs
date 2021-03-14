@@ -47,9 +47,9 @@ namespace TLU.BusinessFee.Data.EF
             //modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaim");
             //modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserToken").HasKey(x => x.UserId);
             // data seeding
-            modelBuilder.seed();
+           modelBuilder.seed();
 
-            //  base.OnModelCreating(modelBuilder);
+         //  base.OnModelCreating(modelBuilder);
         }
         public DbSet<PhongBan> PhongBans { set; get; }
         public DbSet<NhanVienPhongBan> NhanVienPhongs { set; get; }
@@ -67,6 +67,7 @@ namespace TLU.BusinessFee.Data.EF
         public DbSet<NhanVienCongTac> nhanVienCongTacs { set; get; }
         public DbSet<ChuyenCongTac> chuyenCongTacs { set; get; }
         public DbSet<DeXuatThanhToan> deXuatThanhToans { set; get; }
+        public DbSet<ChiPhiCongTac> chiPhiCongTacs { set; get; }
 
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TLU.BusinessFee.Application.Catalog.ChiPhis.DTOS;
 using TLU.BusinessFee.Application.Catalog.DeXuatThanhToans.DTOS;
 using TLU.BusinessFee.Data.EF;
 using TLU.BusinessFee.Data.Entities;
@@ -34,6 +35,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                 SoNhanVien = SoLuongNhanVien.Count(),
                 TinhTrang = 0,
                 MaNhanVien=request.NhanVienDeXuat,
+                TongTien=request.TongTien,
                 ThoiGianDeXuat=request.ThoiGianDeXuat
             };
             await _context.deXuatThanhToans.AddAsync(DeXuat);
@@ -69,9 +71,61 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             return DeXuat;
         }
 
+        public async Task<List<ChiPhiThanhToanViewModel>> GetChiTieu(string MaChuyenCongTac)
+        {
+            var query = from CPCT in _context.chiPhiCongTacs
+                        join CP in _context.ChiPhis
+                        on CPCT.MaChiPhi equals CP.MaChiPhi
+                        
+                        select new { CPCT, CP };
+            var chiPhiThanhToan = await query.Select(x => new ChiPhiThanhToanViewModel()
+            {
+                MaChiPhi = x.CPCT.MaChiPhi,
+                SosTienChiTieu = x.CPCT.SoTienChiTieu,
+               
+                //thuat toans de tinh
+            }).ToListAsync() ;
+            return chiPhiThanhToan;
+
+        }
+        public async Task<string> postChiPhiThanhToan(createChiPhiThanhToanRequest request)
+        {
+            //var ChuyenCongTac = from CTT in _context.chuyenCongTacs
+            //                    join
+            //                DX in _context.deXuatThanhToans on CTT.MaChuyenCongTac equals
+            //                DX.MaChuyenCongTac
+            //                    select CTT;
+            var chiPhiThanhToan = new ChiPhiCongTac()
+            {
+                MaChiPhi = request.MaChiPhi,
+                MaChuyenCongTac = request.MaChuyenCongTac,
+                SoTienChiTieu = request.SoTienChiTieu,
+                TongThanhToan = request.TongThanhToan
+            };
+            await _context.chiPhiCongTacs.AddAsync(chiPhiThanhToan);
+            await _context.SaveChangesAsync();
+            return chiPhiThanhToan.MaChiPhi + " " + chiPhiThanhToan.MaChuyenCongTac;
+
+
+           
+        }
         public Task<int> UpdateDeXuat()
         {
             throw new NotImplementedException();
+        }
+        public async Task<DonViViewModel> GetDonViByMaChiPhi(string MaChiPhi)
+        {
+            var query =  from DM in _context.ChiPhiChucVus
+                        where DM.MaChiPhi == MaChiPhi
+                        select DM;
+            var chiphi = await query.Select(x => new DonViViewModel()
+            {
+               DonVi=x.DonVi
+
+            }).ToListAsync();
+           
+            return chiphi.FirstOrDefault();
+
         }
     }
 }

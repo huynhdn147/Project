@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TLU.BusinessFee.Data.Migrations
 {
-    public partial class updateData_V1 : Migration
+    public partial class update : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,7 +51,7 @@ namespace TLU.BusinessFee.Data.Migrations
                 {
                     MaChuyenCongTac = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
                     TenChuyenCongTac = table.Column<string>(nullable: true),
-                    NgayBatDau = table.Column<DateTime>(type: "Date", nullable: false, defaultValue: new DateTime(2021, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)),
+                    NgayBatDau = table.Column<DateTime>(type: "Date", nullable: false, defaultValue: new DateTime(2021, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified)),
                     NgayKetThuc = table.Column<DateTime>(nullable: false),
                     MoTa = table.Column<string>(nullable: true),
                     DiaDiem = table.Column<string>(nullable: true),
@@ -68,7 +68,7 @@ namespace TLU.BusinessFee.Data.Migrations
                 {
                     MaPhongBan = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
                     TenPhongBan = table.Column<string>(unicode: false, maxLength: 25, nullable: false),
-                    NgayThanhLap = table.Column<DateTime>(nullable: true, defaultValue: new DateTime(2021, 3, 11, 17, 56, 5, 284, DateTimeKind.Local).AddTicks(3305))
+                    NgayThanhLap = table.Column<DateTime>(nullable: true, defaultValue: new DateTime(2021, 3, 13, 10, 28, 57, 906, DateTimeKind.Local).AddTicks(1454))
                 },
                 constraints: table =>
                 {
@@ -111,6 +111,32 @@ namespace TLU.BusinessFee.Data.Migrations
                         column: x => x.MaChiPhi,
                         principalTable: "ChiPhi",
                         principalColumn: "MaChiPhi",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChiPhiCongTac",
+                columns: table => new
+                {
+                    MaChiPhi = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
+                    MaChuyenCongTac = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
+                    SoTienChiTieu = table.Column<int>(nullable: false),
+                    TongThanhToan = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChiPhiCongTac", x => new { x.MaChiPhi, x.MaChuyenCongTac });
+                    table.ForeignKey(
+                        name: "FK_ChiPhiCongTac_ChiPhi_MaChiPhi",
+                        column: x => x.MaChiPhi,
+                        principalTable: "ChiPhi",
+                        principalColumn: "MaChiPhi",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChiPhiCongTac_ChuyenCongTac_MaChuyenCongTac",
+                        column: x => x.MaChuyenCongTac,
+                        principalTable: "ChuyenCongTac",
+                        principalColumn: "MaChuyenCongTac",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -169,6 +195,7 @@ namespace TLU.BusinessFee.Data.Migrations
                     Lydo = table.Column<string>(nullable: true),
                     TongTien = table.Column<int>(nullable: false),
                     ThoiGianDeXuat = table.Column<DateTime>(nullable: false),
+                    SoNhanVien = table.Column<int>(nullable: false),
                     TinhTrang = table.Column<int>(nullable: false),
                     MaChuyenCongTac = table.Column<string>(unicode: false, maxLength: 5, nullable: true),
                     MaNhanVien = table.Column<string>(unicode: false, maxLength: 5, nullable: true)
@@ -223,32 +250,6 @@ namespace TLU.BusinessFee.Data.Migrations
                         column: x => x.MaNhanVien,
                         principalTable: "NhanViens",
                         principalColumn: "MaNhanVien",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ChiPhiCongTac",
-                columns: table => new
-                {
-                    MaChiPhi = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
-                    MaNhanVien = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
-                    MaChuyenCongTac = table.Column<string>(unicode: false, maxLength: 5, nullable: false),
-                    SoTienChiTieu = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChiPhiCongTac", x => new { x.MaChiPhi, x.MaChuyenCongTac, x.MaNhanVien });
-                    table.ForeignKey(
-                        name: "FK_ChiPhiCongTac_ChiPhi_MaChiPhi",
-                        column: x => x.MaChiPhi,
-                        principalTable: "ChiPhi",
-                        principalColumn: "MaChiPhi",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ChiPhiCongTac_NhanVienCongTac_MaChuyenCongTac_MaNhanVien",
-                        columns: x => new { x.MaChuyenCongTac, x.MaNhanVien },
-                        principalTable: "NhanVienCongTac",
-                        principalColumns: new[] { "MaChuyenCongTac", "MaNhanVien" },
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -337,6 +338,11 @@ namespace TLU.BusinessFee.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AppConfigs",
+                columns: new[] { "Key", "Value" },
+                values: new object[] { "home titleee", "this is home page" });
+
+            migrationBuilder.InsertData(
                 table: "CapBac",
                 columns: new[] { "MaCapBac", "MoTa", "TenCapBac" },
                 values: new object[,]
@@ -354,10 +360,10 @@ namespace TLU.BusinessFee.Data.Migrations
                 columns: new[] { "MaChiPhi", "MoTa", "TenChiPhi" },
                 values: new object[,]
                 {
-                    { "CP1", "Tien ở khách sạn", "Khach San" },
-                    { "CP2", "Tien ở khách sạn", "Ve may bay" },
                     { "CP3", "Tien ở khách sạn", "Luu tru " },
-                    { "CP4", "Tien ở khách sạn", "Ve tau,xe" }
+                    { "CP4", "Tien ở khách sạn", "Ve tau,xe" },
+                    { "CP1", "Tien ở khách sạn", "Khach San" },
+                    { "CP2", "Tien ở khách sạn", "Ve may bay" }
                 });
 
             migrationBuilder.InsertData(
@@ -365,12 +371,12 @@ namespace TLU.BusinessFee.Data.Migrations
                 columns: new[] { "MaPhongBan", "TenPhongBan" },
                 values: new object[,]
                 {
-                    { "a0006", "Phong ctsv" },
-                    { "a0005", "Phong Ngon Ngu" },
-                    { "a0004", "Phong truyen thong" },
                     { "a0001", "Phong kinh te" },
                     { "a0002", "Phong CNTT" },
-                    { "a0003", "Phong dao tao" }
+                    { "a0003", "Phong dao tao" },
+                    { "a0004", "Phong truyen thong" },
+                    { "a0005", "Phong Ngon Ngu" },
+                    { "a0006", "Phong ctsv" }
                 });
 
             migrationBuilder.InsertData(
@@ -464,42 +470,42 @@ namespace TLU.BusinessFee.Data.Migrations
                 columns: new[] { "MaNhanVien", "PasswordHash" },
                 values: new object[,]
                 {
-                    { "KT002", "AQAAAAEAACcQAAAAEK83H8I4Okv4kvdBS/P7Itz/f9q0bCOLeFOendAiAkKrZ9fyIbtRIc3A4Y6U+gFfvA==" },
-                    { "TT004", "AQAAAAEAACcQAAAAEFo+DrsW1VlQOE5fCdTGpTLUTHWJ8EEaYkMNfDne2kzJKYr/pDZf4rzkhG+Ud/BKMw==" },
-                    { "TT006", "AQAAAAEAACcQAAAAEFChzMVJPTD8NtVUddhB9i2B3yklW6RroOKxTiU/aQj6BtG5duDsP1HF+dNvC5U89Q==" },
-                    { "TT002", "AQAAAAEAACcQAAAAEBlAgQeJJyETkbr0H4ETL63MleSDrVMPHSTiD7D/iLpov4XFaf+Uw/IVA+GJMXc7Ag==" },
-                    { "TT005", "AQAAAAEAACcQAAAAEIffg02Yk/qABXfFQf9ydCeh3goj0UVJt3rIVBBBarPD5ttOAwgOhOCDTukJVm/fog==" },
-                    { "NN001", "AQAAAAEAACcQAAAAEPQ7MLTfP5PWUOkdOKHg9wF83m2NGsOXvBnv9nx0eIHPi35J5PEurdppHbUOVXhpcg==" },
-                    { "NN006", "AQAAAAEAACcQAAAAEMzu9SfjP3GBsDLNPZC+gXNSS+YZW9lOZXolBb7Hw8Y6jYPvgBgOaDRQLUHzJmEhvA==" },
-                    { "TT003", "AQAAAAEAACcQAAAAEEOMDSsTRY3/eL4IOaNd+ss0Frm0Pp+ZtT6ENS9pS0bOaW9Xbfzz8vE5O2H3NQEu/g==" },
-                    { "NN002", "AQAAAAEAACcQAAAAEOx31+RoTVcGO3hRQEekPSGWXzyNR07VmxU9Wca2rD4JsqObCrcSgXr/s2NjxU7iOA==" },
-                    { "NN003", "AQAAAAEAACcQAAAAEGl2NuuXMvZJdoIwYkDpMpZTIlNFBTYLDuDczK2T9ni7lgzBYgwA7hcKs6bKLF74dA==" },
-                    { "NN005", "AQAAAAEAACcQAAAAEGG5VoHsQ0IyRmexOKJd1BTnY3+oxM0T15buHN2Emjawri2ZmkS0FD+sxHYZmFuRRA==" },
-                    { "CT001", "AQAAAAEAACcQAAAAEK39bX4haJJTX1Icc2yngWn8RUql/ewc1aYOcFwnsOIHdc9fJGaNqdFzWCyAC3ladw==" },
-                    { "CT003", "AQAAAAEAACcQAAAAEC4Y6+0tVSf42cok3z0qiiduLS9EhdhKRxVfQmyIXy2ITvRHB/4MD7YxAs/VZ4+15w==" },
-                    { "CT005", "AQAAAAEAACcQAAAAEECacmHKe+y/GiHgagZMzwwFfS5W2cKTgaK0I5jy0UETyrq/B4t0wNJOvcZ3BJjKFA==" },
-                    { "CT002", "AQAAAAEAACcQAAAAEKizgtvSjz47YJcXgtIdOt67tjiwawBx8BXFCRIkYlUhWIy6LnFMBXRyc/s6EDi7ag==" },
-                    { "NN004", "AQAAAAEAACcQAAAAEPJRCXr2X5NrEOgPF8CM2IyXG8Fbp+VeDAkbv6cI2JzS5WhDUMuUKNW+Nf74HuciTQ==" },
-                    { "TT001", "AQAAAAEAACcQAAAAEEKZIsBsyCm8+SO51ExllMWEpuuYicrIhe4Da/OdppKaXWZzSlqNcortizfY6/wurA==" },
-                    { "DT004", "AQAAAAEAACcQAAAAEBF6fZZpeEC/imwPFCvP7C/l2/XokEJq7KgWEAEqsNDB9LOHmuW10TSBjsDbt9du8Q==" },
-                    { "DT005", "AQAAAAEAACcQAAAAEA+Y91jJ+AHzu7/5cMxLC6ua7DsB4llcqhd8B6/a0bJrePAVRMO6/9k8x3a+aBoldQ==" },
-                    { "KT001", "AQAAAAEAACcQAAAAEDOu7m5sg6NPEqXyjzNOoJeVMRESGNgiVipRty/Fo41PttYi09IjjnFWZ+l9O2wuSQ==" },
-                    { "KT003", "AQAAAAEAACcQAAAAEAFg+yi9zSwHyXnsGFv79zkqK4bRGfW8l4RMLJPDmF9SoTX0v//QeSTB5u6PlTz0ow==" },
-                    { "KT004", "AQAAAAEAACcQAAAAEALH+OYJLB0HZECHlhvYeg0i+GDqFCou71gZXtmirEZF5oUzw5bcrYz4bf1vmCKFRg==" },
-                    { "KT006", "AQAAAAEAACcQAAAAEOZVfOArG/E0ZXfO2fPKEXVT4xku0IFyr+kElq4zH+WApixciTfw1vgSqFwo0ABcyA==" },
-                    { "KT005", "AQAAAAEAACcQAAAAEF653wC+Aav56KbcDwenSRCA5wVNGA20N63blBxYfTfADO6OuwsAJdkygYolFOxFtA==" },
-                    { "IT002", "AQAAAAEAACcQAAAAECt1F7cVvL+ljNPB2bWKaOmxoiFSAWgEc2YnQKobk86QrsiyDLeZdc3Etn7LRAiGxg==" },
-                    { "IT003", "AQAAAAEAACcQAAAAEAFvqh6Anrs0e5jr6dX8YqK55ENJuSxDCp9ftQxkmmN3BtarSL3HLqXDghf2SFJgAg==" },
-                    { "IT001", "AQAAAAEAACcQAAAAEBRZ6dpavAIjO0z7ji/feHqcYLEABdBSRlD4QEBJhHiqAM+Mrln85rQP2IvcKQUDUg==" },
-                    { "IT004", "AQAAAAEAACcQAAAAEItpqugJSPH4gNa7x2fivYQr+Hom3kldZKCseYfQZKkwVgk5TDkqpq8f3PfCeS4heQ==" },
-                    { "IT006", "AQAAAAEAACcQAAAAEJWV4nvm0WCdanm1uHg4EL09YLp/JD93AtufKaqozM+INTEF4Dsnm+VBXb7WaT56RA==" },
-                    { "IT005", "AQAAAAEAACcQAAAAECl/Ep3uH984PrKTeXqQf/FZbdVEIo/9E2O+sDYQDbZ3Kqyqv5yU2xpakQ3rgfk0gQ==" },
-                    { "DT001", "AQAAAAEAACcQAAAAEMyWBRP66mhruvA1QRKJCdPmcI7kHOQ0AKOnyC6FZfElEO67dMRUisHiVUZ6OEKCcQ==" },
-                    { "DT002", "AQAAAAEAACcQAAAAEKyo/HmMQ/L4ywKbPI3Z6p4cwBjV93mqe+Ll2SMLLyJHA/k2XPYwx2gim1zHQOLs0w==" },
-                    { "DT003", "AQAAAAEAACcQAAAAENOuX0ir3BcDZvKcPvLBm276yS2sy0H41FBQP2pKURPkmjGFDU6DrCap88L/WiYalg==" },
-                    { "DT006", "AQAAAAEAACcQAAAAEN1iwUzRth5yJI5foKSn+KcwkBmwt+pTxX1CvirzuS1foZAGMzVyss+o4NQ8titGgQ==" },
-                    { "CT004", "AQAAAAEAACcQAAAAEGOHtQDXkCb6fPBFk+MQztNQudIOPTfyiFQMiXuKLr0gM2S9lcpo8VepPi41+4n4rQ==" },
-                    { "CT006", "AQAAAAEAACcQAAAAEFZYvTsP+TdhAQtLeD0TkCGq+YM84nU0xzPJOZuNmBwMGJO9xlnhzA9zKJZRYEXkkA==" }
+                    { "KT002", "AQAAAAEAACcQAAAAEHkkcx87/w3clEZBn7nLPVWAiIkUNYFkubJM16Hf5SRd91loBRvrMFlBDWfXWmOXUA==" },
+                    { "TT004", "AQAAAAEAACcQAAAAEIzbCrm5oDUdiT5/bDbzvNe3nx9Fh5dBvzjC8AcAcnPUqnYHxRmylZItw57e6IfyKA==" },
+                    { "TT006", "AQAAAAEAACcQAAAAEATBzcqqlpCIPBJz/jbGF1OynJ5dsk64ptyCkLkGk6g8Z6K9sUq9zShP33w4Faqi9g==" },
+                    { "TT002", "AQAAAAEAACcQAAAAEAu0p+IKvRhUGIpqq509wlq15b3Qki4whVjbSjCpJVgwyUdEQo63ctRUDH6RqgyPsg==" },
+                    { "TT005", "AQAAAAEAACcQAAAAEAm76nbM6OazZ+Kh2VutpL2mZwjdqF47/PJp9bh0bvwc+mMAnwFqsNePRvv9YqBrWA==" },
+                    { "NN001", "AQAAAAEAACcQAAAAEO94hD6xn1hjm7vudJxDMaV/+bwmxu755KD9j79QSZ+4b6xrr+Y4FJNG//rSCwao/g==" },
+                    { "NN006", "AQAAAAEAACcQAAAAENj8Lwaa1KMwUfwnK+0BKDKz836LML8Ae+HyGR/Kd4rBS/1aDPfPUXc5GQKvpN1Ovg==" },
+                    { "TT003", "AQAAAAEAACcQAAAAEN2bLvk1uYYkGkRM4W0h8jjaMpxZvrgJRPRSCaVjSOwvNWE2TNmvOtn0oL+dFJBOFw==" },
+                    { "NN002", "AQAAAAEAACcQAAAAEG/qGC+6nLNf+mkE2YGHTsoAhfLTfLZXVFI9ee68yFlzE6yWzNXjEicDjrsU1mlnXA==" },
+                    { "NN003", "AQAAAAEAACcQAAAAEFD1kOGlpp6jEpyPzTJJhjMfz04cxdjdH/3BfaUCuqn8bUIsWaSqXcpzxOyUZRtNgw==" },
+                    { "NN005", "AQAAAAEAACcQAAAAEHG2ZYUALOheHfER8gmg2HhSvvcwzys3Bk1L+XrjpCoItftQCm7LnHO3hlc8xN2nbA==" },
+                    { "CT001", "AQAAAAEAACcQAAAAEO7ChhCETxzKGHt36fAo/OCNosaST9tO4DX5vN1KsAyPKs7HJkw2fzQp98U9QcFm2Q==" },
+                    { "CT003", "AQAAAAEAACcQAAAAEHIcvM2RgAygu4ZVlQELB/nCVDoVH4kRpoBdSvDWKusakXWZyVsztUgdortSg/uqZw==" },
+                    { "CT005", "AQAAAAEAACcQAAAAEMeiQIBTMPrUagXCUZHhr36oguY9Ck4Mf7KyChawl3Ic955EjC0R++EM7+7/5yYEGQ==" },
+                    { "CT002", "AQAAAAEAACcQAAAAEBNojrox29scWE5OPYvhA2r+p+a5omFlp6060VeeAFfxS2K19hz7UYX1gRWFeFjOZA==" },
+                    { "NN004", "AQAAAAEAACcQAAAAEPbuxkylxGRHu3V0sIP36HiVD56RNahQBUrY5jS2DVlmmyVcGUVu7VNkv+1H64kcXA==" },
+                    { "TT001", "AQAAAAEAACcQAAAAEBFr9wY4yBIj5nR3c/V9LN5nEdfA5z4bYOHhUZLixA/Hl8/LhwF0FgayQIH5hOucog==" },
+                    { "DT004", "AQAAAAEAACcQAAAAEMhWk7nuk9jzNtRMI90WZRa7RTcWVl29Ex4KcHPCB6FgzwWJr1YMEW24ltvIuB3rMA==" },
+                    { "DT005", "AQAAAAEAACcQAAAAECddIw09tzZGH+ectXCTMXQkwVvOSo5NrJCNrzZ1keAsEWkxs1dYu2PVHMZL+Welfw==" },
+                    { "KT001", "AQAAAAEAACcQAAAAEAf9zQvNz8wJ9NlVvUBoACsBW9dHmo33e2043pfSMqPDQI2fObG2vPckHbDUCZvSRQ==" },
+                    { "KT003", "AQAAAAEAACcQAAAAEKunT6W/RLYRX6HRSktr+6RmOzlUW9oCI7f7ySTWQZKqm+a64g4cd9E9BYuIOrpcUw==" },
+                    { "KT004", "AQAAAAEAACcQAAAAEIlvNaa0/w/Muhtv/aRZ+AzJT95eenjOF496AZtgHcDN6l7Pts/CqmsllLNdtTESrg==" },
+                    { "KT006", "AQAAAAEAACcQAAAAEFMk+8tVB7egMHHpYZKSOGRaNtYorMnmhmnFqoJeHfQhcXcY7clicKCRUVRdMt/PZA==" },
+                    { "KT005", "AQAAAAEAACcQAAAAEIBNdE30i3JX0f9tPa/c90zvSPsds8DLBem/MMP5JrmrfE+MmJU/6OYGNnW8pYwL3g==" },
+                    { "IT002", "AQAAAAEAACcQAAAAEM++4+zHetnJaWCSAAqG6kGBRDgTxsNXit+N4B0MjS8oMTz+IeVbh3muAQ/beOBaLA==" },
+                    { "IT003", "AQAAAAEAACcQAAAAEGTOh93N7PBAtRSPBxnE0/DMI5vLnLkKvs8vT24GWbqDq7vYNVQTIv8XlH3dM02Qfw==" },
+                    { "IT001", "AQAAAAEAACcQAAAAEJRUpHOOGHnuI+FtLqWUxxsQn1pcKBHykGAQ87YOylb5R1sMVgd0PS3Kk5Ph0QnDog==" },
+                    { "IT004", "AQAAAAEAACcQAAAAEMr4onVq8Zm/T7qy1kbUsmeDqF42VKRQXswqnZDsTPuP72rzmP3xzLfbqXm8rzF2pg==" },
+                    { "IT006", "AQAAAAEAACcQAAAAEKKwOQxM4305EKfiB6hgszzDMJKa3gi8ZjhN44oFQBuxMBim/SoZcMxc7a85zfrAGw==" },
+                    { "IT005", "AQAAAAEAACcQAAAAEN7Vmbg1n7iuGlH0cyxnkAPm3xNCBKT6M1Frrpexe+PihAHLIFkavYjI7n2jydF4PQ==" },
+                    { "DT001", "AQAAAAEAACcQAAAAEGOEhSkdsNHcopSHAGtL1NAefbnLdK9YmnHWimI7d4OvT5VSgN/ru+KlNggWfvtmiw==" },
+                    { "DT002", "AQAAAAEAACcQAAAAEOYUYVI/Pr4gMfEPmtM9n0GtuTX/iBhjIB7dCs1A0FOht0g8iiWlxr4lgLA13BOvPA==" },
+                    { "DT003", "AQAAAAEAACcQAAAAEKO8s6kRhApEofXbslDUF61H/2GO3eDx5/4s0l3LXgOCQx5Tj2YmcJkE0q1MrIBBcA==" },
+                    { "DT006", "AQAAAAEAACcQAAAAEEEmkmrVY7lEGMDqIUoetpn7Mj+ypfmbngkMM3um00BwW0oQ5e6jwpG3+P0kca7YKg==" },
+                    { "CT004", "AQAAAAEAACcQAAAAECcxAy9JVB3EJ+ePghC8E+E2NFvEEBJcV+TC/+99QZOPrCF0z+0SVAcf4SCviF9Dxg==" },
+                    { "CT006", "AQAAAAEAACcQAAAAEGWd/QJwT3ynR0ZaySiEU93enuPVLdcKrTJvxkNHCLxv6/9+MPP6wc/sxUtspz478w==" }
                 });
 
             migrationBuilder.InsertData(
@@ -516,9 +522,9 @@ namespace TLU.BusinessFee.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChiPhiCongTac_MaChuyenCongTac_MaNhanVien",
+                name: "IX_ChiPhiCongTac_MaChuyenCongTac",
                 table: "ChiPhiCongTac",
-                columns: new[] { "MaChuyenCongTac", "MaNhanVien" });
+                column: "MaChuyenCongTac");
 
             migrationBuilder.CreateIndex(
                 name: "IX_deXuatThanhToans_MaNhanVien",
@@ -571,6 +577,9 @@ namespace TLU.BusinessFee.Data.Migrations
                 name: "DinhMuc");
 
             migrationBuilder.DropTable(
+                name: "NhanVienCongTac");
+
+            migrationBuilder.DropTable(
                 name: "RoleClaims");
 
             migrationBuilder.DropTable(
@@ -586,19 +595,16 @@ namespace TLU.BusinessFee.Data.Migrations
                 name: "UserTokens");
 
             migrationBuilder.DropTable(
-                name: "NhanVienCongTac");
+                name: "ChiPhi");
 
             migrationBuilder.DropTable(
-                name: "ChiPhi");
+                name: "ChuyenCongTac");
 
             migrationBuilder.DropTable(
                 name: "Role");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "ChuyenCongTac");
 
             migrationBuilder.DropTable(
                 name: "NhanViens");

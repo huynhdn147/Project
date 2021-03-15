@@ -7,7 +7,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans.DTOS
     public class ChiPhiThanhToanViewModel
     {
         public string MaChiPhi { set; get; }
-        public int SosTienChiTieu { set; get; }
+        public int SoTienChiTieu { set; get; }
        
         public int TongThanhToan { set; get; }
         

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TLU.BusinessFee.Application.Catalog.ChucVus;
 using TLU.BusinessFee.Application.Catalog.ChucVus.DTOS;
+using TLU.BusinessFee.Application.System;
+using TLU.BusinessFee.Data.EF;
 using TLU.BusinessFee.Data.Entities;
 
 
@@ -18,14 +21,35 @@ namespace TLU.BusinessFee.BackendApi.Controllers
     public class CapBacController : ControllerBase
     {
         private readonly IManagerCapBacSerVice _ManagerCapBacSerVice;
-        public CapBacController(IManagerCapBacSerVice ManagerCapBacSerVice)
+        private readonly TLUBusinessFeeDbContext _context;
+        public CapBacController(IManagerCapBacSerVice ManagerCapBacSerVice, TLUBusinessFeeDbContext context)
         {
             _ManagerCapBacSerVice = ManagerCapBacSerVice;
+            _context = context;
+        }
+        [HttpHead]
+        public UserLoginViewModel post()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IList<Claim> claims = identity.Claims.ToList();
+            var RoleId = claims[1].Value;
+            var roleName = from Rn in _context.Roles
+                           where Rn.Id == RoleId
+                           select Rn.Name;
+
+            var data = new UserLoginViewModel
+            {
+                MaNhanVien = claims[0].Value,
+                RoleName = roleName.ToList()[0]
+            };
+            return data;
         }
         [HttpGet]
         public async Task<IActionResult> getall()
         {
-            
+            var role = post().RoleName;
+            if (role != "admin")
+                return BadRequest();
             var chucvu = await _ManagerCapBacSerVice.GetAll();
             return Ok(chucvu);
         }
@@ -40,6 +64,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatedCapBacRequest request)
         {
+            var role = post().RoleName;
+            if (role != "admin")
+                return BadRequest();
             var result = await _ManagerCapBacSerVice.Create(request);
             if (result == null)
                 return BadRequest();
@@ -49,6 +76,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateCapBacRequest request)
         {
+            var role = post().RoleName;
+            if (role != "admin")
+                return BadRequest();
             var affecedResult = await _ManagerCapBacSerVice.Update(request);
             if (affecedResult == 0)
                 return BadRequest();
@@ -58,6 +88,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpDelete("{maCapBac}")]
         public async Task<IActionResult> Delete(string maCapBac)
         {
+            var role = post().RoleName;
+            if (role != "admin")
+                return BadRequest();
             var affecedResult = await _ManagerCapBacSerVice.Delete(maCapBac);
             if (affecedResult == 0)
                 return BadRequest();

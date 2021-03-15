@@ -88,5 +88,21 @@ namespace TLU.BusinessFee.BackendApi.Controllers
 
             return Ok(chiPhi);
         }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteDeXuat(string MaDeXuat)
+        {
+            var affecedResult = await _managerDeXuatThanhToanService.DeleteDeXuat(MaDeXuat);
+            if (affecedResult == 0)
+                return BadRequest();
+            return Ok();
+        }
+        [HttpDelete("ChiPhiCongTac")]
+        public async Task<IActionResult> DeleteChiPhiCongTac(string MaChuyenCongTac, string MaChiPhi)
+        {
+            var affecedResult = await _managerDeXuatThanhToanService.DeleteChiPhiCongTac(MaChuyenCongTac, MaChiPhi);
+            if (affecedResult == 0)
+                return BadRequest();
+            return Ok();
+        }
     }
 }

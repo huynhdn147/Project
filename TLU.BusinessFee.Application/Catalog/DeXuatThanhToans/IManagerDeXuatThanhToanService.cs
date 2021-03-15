@@ -15,6 +15,8 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
         Task<List<ChiPhiThanhToanViewModel>> GetChiTieu(string MaChuyenCongTac);
         Task<string> postChiPhiThanhToan(createChiPhiThanhToanRequest request);
         Task<DonViViewModel> GetDonViByMaChiPhi(string MaChiPhi);
+        Task<int> DeleteChiPhiCongTac(string MaChuyenCongTac, string MaChiPhi);
+            Task<int> DeleteDeXuat(string MaDeXuat);
       //  Task<List<>
     }
 }

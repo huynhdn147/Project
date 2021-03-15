@@ -11,11 +11,13 @@ using ExcelDataReader;
 using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using TLU.BusinessFee.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TLU.BusinessFee.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class NhanVienController : ControllerBase
     {
 

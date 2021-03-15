@@ -7,6 +7,7 @@ using TLU.BusinessFee.Application.Catalog.ChiPhis.DTOS;
 using TLU.BusinessFee.Application.Catalog.DeXuatThanhToans.DTOS;
 using TLU.BusinessFee.Data.EF;
 using TLU.BusinessFee.Data.Entities;
+using TLU.BusinessFee.Utilities.Exceptions;
 
 namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
 {
@@ -67,7 +68,6 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                 TinhTrang = x.p.TinhTrang,
                 Lydo=x.p.Lydo
             }).ToListAsync();
-
             return DeXuat;
         }
 
@@ -76,13 +76,13 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var query = from CPCT in _context.chiPhiCongTacs
                         join CP in _context.ChiPhis
                         on CPCT.MaChiPhi equals CP.MaChiPhi
-                        
+                        where CPCT.MaChuyenCongTac ==MaChuyenCongTac
                         select new { CPCT, CP };
             var chiPhiThanhToan = await query.Select(x => new ChiPhiThanhToanViewModel()
             {
                 MaChiPhi = x.CPCT.MaChiPhi,
-                SosTienChiTieu = x.CPCT.SoTienChiTieu,
-               
+                SoTienChiTieu = x.CPCT.SoTienChiTieu,
+                TongThanhToan=x.CPCT.TongThanhToan
                 //thuat toans de tinh
             }).ToListAsync() ;
             return chiPhiThanhToan;
@@ -126,6 +126,25 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
            
             return chiphi.FirstOrDefault();
 
+        }
+        public async Task<int> DeleteDeXuat(string MaDeXuat)
+        {
+            var deXuat = await _context.deXuatThanhToans.FindAsync(MaDeXuat);
+            if(deXuat==null)
+            {
+                throw new  TLUException("Khong co de xuat nay nay");
+            }
+            _context.deXuatThanhToans.Remove(deXuat);
+            return await _context.SaveChangesAsync();
+
+        }
+        public async Task<int> DeleteChiPhiCongTac(string MaChuyenCongTac,string MaChiPhi)
+        {
+            var ChiPhiDeXuat = await _context.chiPhiCongTacs.FindAsync(MaChiPhi, MaChuyenCongTac);
+            // var chucvu = await _context.ChiPhiChucVus.FindAsync(MaChucVu);
+            if (ChiPhiDeXuat == null) throw new TLUException("Khong co loai chi phi trong de xuat nay nay");
+            _context.chiPhiCongTacs.RemoveRange(ChiPhiDeXuat);
+            return await _context.SaveChangesAsync();
         }
     }
 }

@@ -10,8 +10,9 @@ namespace TLU.BusinessFee.Data.Entities
     {
         public string MaChuyenCongTac { set; get; }
         public string TenChuyenCongTac { set; get; }
-        [Column(TypeName = "Date"), DisplayFormat(DataFormatString = "dd/MM/yyyy")]
+        [DataType(DataType.Date)]
         public DateTime NgayBatDau { set; get; }
+        [DataType(DataType.Date)]
         public DateTime NgayKetThuc { set; get; }
         public string MoTa { set; get; }
         public string DiaDiem { set; get; }

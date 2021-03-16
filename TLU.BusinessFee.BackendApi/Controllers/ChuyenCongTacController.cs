@@ -12,7 +12,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+  //  [Authorize]
     public class ChuyenCongTacController : ControllerBase
     {
         private readonly IChuyenCongTacSerVice _service;

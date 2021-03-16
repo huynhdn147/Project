@@ -7,6 +7,9 @@ using TLU.BusinessFee.Data.Entities;
 using TLU.BusinessFee.Utilities.Exceptions;
 using System.Linq;
 using System.Data;
+using System.ComponentModel.DataAnnotations;
+
+
 namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
 {
     public class ChuyenCongTacSerVice : IChuyenCongTacSerVice
@@ -76,8 +79,9 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
             {
                 MaChuyenCongTac = x.MaChuyenCongTac,
                 TenChuyenCongTac = x.TenChuyenCongTac,
-                NgayBatDau = x.NgayBatDau.Date,
-                NgayKetThuc = x.NgayKetThuc
+                
+                NgayBatDau = x.NgayBatDau.Date.ToShortDateString(),
+                NgayKetThuc = x.NgayKetThuc.Date.ToShortDateString()
                 ,
                 DiaDiem=x.DiaDiem,
                 MoTa = x.MoTa,
@@ -96,8 +100,8 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
 
                 MaChuyenCongTac = ChuyenCongTac.MaChuyenCongTac,
                 TenChuyenCongTac = ChuyenCongTac.TenChuyenCongTac,
-                NgayBatDau = ChuyenCongTac.NgayBatDau,
-                NgayKetThuc = ChuyenCongTac.NgayKetThuc
+                NgayBatDau = ChuyenCongTac.NgayBatDau.Date.ToShortDateString(),
+                NgayKetThuc = ChuyenCongTac.NgayKetThuc.Date.ToShortDateString()
                 ,
                 DiaDiem=ChuyenCongTac.DiaDiem,
                 MoTa = ChuyenCongTac.MoTa,

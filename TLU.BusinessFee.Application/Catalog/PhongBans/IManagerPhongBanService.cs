@@ -14,7 +14,7 @@ namespace TLU.BusinessFee.Application.Catalog.PhongBans
         Task<int> Delete(string MaPhongBan);
         Task<PhongBanViewModel> GetByID(string MaPhongBan);
 
-        Task<PageResult<PhongBanViewModel>> GetAllPaging(GetPhongBanPagingRequest request);
+       // Task<PageResult<PhongBanViewModel>> GetAllPaging(GetPhongBanPagingRequest request);
 
 
     }

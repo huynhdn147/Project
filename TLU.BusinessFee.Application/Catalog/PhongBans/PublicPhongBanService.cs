@@ -27,7 +27,7 @@ namespace TLU.BusinessFee.Application.Catalog.PhongBans
             {
                 MaPhongBan = x.MaPhongBan,
                 TenPhongBan = x.TenPhongBan,
-                NgayThanhLap= (DateTime)x.NgayThanhLap
+                NgayThanhLap = x.NgayThanhLap.ToString().Remove(10),
             }).ToListAsync();
             return data;
         }

@@ -80,8 +80,8 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
                 MaChuyenCongTac = x.MaChuyenCongTac,
                 TenChuyenCongTac = x.TenChuyenCongTac,
                 
-                NgayBatDau = x.NgayBatDau.Date.ToShortDateString(),
-                NgayKetThuc = x.NgayKetThuc.Date.ToShortDateString()
+                NgayBatDau = x.NgayBatDau.Date.ToString(),
+                NgayKetThuc = x.NgayKetThuc.Date.ToString()
                 ,
                 DiaDiem=x.DiaDiem,
                 MoTa = x.MoTa,

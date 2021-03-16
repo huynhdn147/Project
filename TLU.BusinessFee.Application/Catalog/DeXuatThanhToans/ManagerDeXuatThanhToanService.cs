@@ -63,7 +63,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                 TenNhanVien = x.NV.TenNhanVien,
                 TenChuyenCongTac = x.CCT.TenChuyenCongTac,
                 SoNhanVien=x.p.SoNhanVien,   
-                ThoiGianDeXuat = x.p.ThoiGianDeXuat,
+                ThoiGianDeXuat = x.p.ThoiGianDeXuat.ToString().Remove(10),
                 TongTien = x.p.TongTien,
                 TinhTrang = x.p.TinhTrang,
                 Lydo=x.p.Lydo

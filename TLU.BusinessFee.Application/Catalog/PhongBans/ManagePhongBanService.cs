@@ -33,12 +33,12 @@ namespace TLU.BusinessFee.Application.Catalog.PhongBans
         public async Task<PhongBanViewModel> GetByID(string MaPhongBan)
         {
             var PhongBan = await _context.PhongBans.FindAsync(MaPhongBan);
-            var phongbanViewModel = new PhongBanViewModel()
+            var phongbanViewModel = new PhongBanViewModel() 
             {
 
                 MaPhongBan = PhongBan.MaPhongBan,
                 TenPhongBan = PhongBan.TenPhongBan,
-                NgayThanhLap= (DateTime)PhongBan.NgayThanhLap
+                NgayThanhLap = PhongBan.NgayThanhLap.ToString()
             };
             return phongbanViewModel;
         }
@@ -51,31 +51,31 @@ namespace TLU.BusinessFee.Application.Catalog.PhongBans
         }
 
         
-            public async Task<PageResult<PhongBanViewModel>> GetAllPaging(GetPhongBanPagingRequest request)
-            {
-            var query = from p in _context.PhongBans select p;
-            if (!string.IsNullOrEmpty(request.MaPhongBan))
-                query = query.Where(x => x.MaPhongBan.Contains(request.MaPhongBan));
+            //public async Task<PageResult<PhongBanViewModel>> GetAllPaging(GetPhongBanPagingRequest request)
+            //{
+            //var query = from p in _context.PhongBans select p;
+            //if (!string.IsNullOrEmpty(request.MaPhongBan))
+            //    query = query.Where(x => x.MaPhongBan.Contains(request.MaPhongBan));
 
-            if (request.MaPhongBan.Count() > 0)
-            {
-                query = query.Where(x => request.MaPhongBan.Contains(x.MaPhongBan));
-            }
-            int toTalRow = await query.CountAsync();
-            var data = await query.Skip((request.pageIndex - 1) * request.pageSize).Take(request.pageSize).Select(x=>new PhongBanViewModel()
-            { 
-            MaPhongBan=x.MaPhongBan,TenPhongBan=x.TenPhongBan,NgayThanhLap= (DateTime)x.NgayThanhLap
-            }).ToListAsync();
+            //if (request.MaPhongBan.Count() > 0)
+            //{
+            //    query = query.Where(x => request.MaPhongBan.Contains(x.MaPhongBan));
+            //}
+            //int toTalRow = await query.CountAsync();
+            //var data = await query.Skip((request.pageIndex - 1) * request.pageSize).Take(request.pageSize).Select(x=>new PhongBanViewModel()
+            //{ 
+            //MaPhongBan=x.MaPhongBan,TenPhongBan=x.TenPhongBan,NgayThanhLap= x.NgayThanhLap
+            //}).ToListAsync();
 
-            var pageResult = new PageResult<PhongBanViewModel>()
-            {
-                TotalRecord = toTalRow,
-                Items = data
+            //var pageResult = new PageResult<PhongBanViewModel>()
+            //{
+            //    TotalRecord = toTalRow,
+            //    Items = data
 
 
-            };
-            return pageResult;
-             }
+            //};
+            //return pageResult;
+            // }
 
         
 

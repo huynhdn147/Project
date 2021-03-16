@@ -46,7 +46,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         public async Task<IActionResult> getall()
         {
             var role = post().RoleName;
-            if (role != "admin" || role != "Phòng kế toán")
+            if (role != "admin")
                 return BadRequest();
             var chiPhis = await _managerChiPhiService.GetAll();
             return Ok(chiPhis);

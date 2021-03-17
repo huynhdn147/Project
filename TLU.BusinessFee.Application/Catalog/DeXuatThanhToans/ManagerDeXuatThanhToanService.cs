@@ -1,10 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using TLU.BusinessFee.Application.Catalog.ChiPhis.DTOS;
 using TLU.BusinessFee.Application.Catalog.DeXuatThanhToans.DTOS;
+using TLU.BusinessFee.Application.Common;
 using TLU.BusinessFee.Data.EF;
 using TLU.BusinessFee.Data.Entities;
 using TLU.BusinessFee.Utilities.Exceptions;
@@ -14,9 +18,11 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
     public  class ManagerDeXuatThanhToanService : IManagerDeXuatThanhToanService
     {
         private readonly TLUBusinessFeeDbContext _context;
-        public ManagerDeXuatThanhToanService(TLUBusinessFeeDbContext context)
+        private readonly IStorageService _storageService;
+        public ManagerDeXuatThanhToanService(TLUBusinessFeeDbContext context, IStorageService storageService)
         {
             _context = context;
+            _storageService = storageService;
         }
         
         //public Task<string> CreateDeXuat(CreateDeXuatRequest request)
@@ -29,17 +35,37 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var SoLuongNhanVien = from NV in _context.nhanVienCongTacs
                                   where NV.MaChuyenCongTac == request.MaChuyenCongTac
                                   select NV.MaNhanVien;
+            var chuyenCongTac = await _context.chuyenCongTacs.FindAsync(request.MaChuyenCongTac);
+            if (chuyenCongTac.TrangThai != "chua thuc hien")
+            {
+                throw new TLUException("Chuyến Công tác đã diễn ra, không thể sửa thông tin chuyến công tác");
+            }
             var DeXuat = new DeXuatThanhToan()
             {
                 MaDeXuat = request.MaDeXuat,
                 MaChuyenCongTac = request.MaChuyenCongTac,
                 SoNhanVien = SoLuongNhanVien.Count(),
-                TinhTrang = 0,
+                TinhTrang = "chua xet duyet",
                 MaNhanVien=request.NhanVienDeXuat,
                 TongTien=request.TongTien,
                 ThoiGianDeXuat=request.ThoiGianDeXuat
+               
             };
-            await _context.deXuatThanhToans.AddAsync(DeXuat);
+            var ChuyenCongTacdf = await _context.chuyenCongTacs.FirstOrDefaultAsync
+                (x => x.MaChuyenCongTac == request.MaChuyenCongTac);
+            ChuyenCongTacdf.TrangThai = "Da thuc hien";
+            if(request.FileHoaDon!=null)
+            {
+                DeXuat.deXuatFiles = new List<DeXuatFile>()
+                {
+                    new DeXuatFile()
+                    {
+                        FilePath=await this.SaveFile(request.FileHoaDon)
+                        
+                    }
+                };
+            }    
+            _context.deXuatThanhToans.AddAsync(DeXuat);
 
             await _context.SaveChangesAsync();
             return DeXuat.MaDeXuat;
@@ -47,27 +73,28 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
 
         public async Task<List<DeXuatThanhToanViewModel>> GetallDeXuat(string MaNhanVien)
         {
-            var query = from p in _context.deXuatThanhToans join  NV in _context.NhanVienPhongs
-                             on p.MaNhanVien equals NV.MaNhanVien
-                             join CCT in _context.chuyenCongTacs on p.MaChuyenCongTac equals CCT.MaChuyenCongTac
-                             where p.MaNhanVien==MaNhanVien
-                             select new { p, NV, CCT };
+            var  query = from p in _context.deXuatThanhToans
+                        join NV in _context.NhanVienPhongs
+                        on p.MaNhanVien equals NV.MaNhanVien
+                        join CCT in _context.chuyenCongTacs on p.MaChuyenCongTac equals CCT.MaChuyenCongTac
+                        where p.MaNhanVien == MaNhanVien
+                        select new { p, NV, CCT };
 
             //var SoLuongNhanVien = from NV in _context.nhanVienCongTacs
             //                      where NV.MaChuyenCongTac == request.MaChuyenCongTac
             //                      select NV.MaNhanVien;
-            var DeXuat = await query.Select(x => new DeXuatThanhToanViewModel()
+            var DeXuat = await query.Select( x => new DeXuatThanhToanViewModel()
             {
-                MaDeXuat = x.p.MaDeXuat,
-                
+                MaDeXuat =  x.p.MaDeXuat,
                 TenNhanVien = x.NV.TenNhanVien,
                 TenChuyenCongTac = x.CCT.TenChuyenCongTac,
                 SoNhanVien=x.p.SoNhanVien,   
-                ThoiGianDeXuat = x.p.ThoiGianDeXuat.ToString().Remove(10),
+                ThoiGianDeXuat =  x.p.ThoiGianDeXuat.ToString().Remove(10),
                 TongTien = x.p.TongTien,
-                TinhTrang = x.p.TinhTrang,
+               // TinhTrang = x.p.TinhTrang,
                 Lydo=x.p.Lydo
             }).ToListAsync();
+
             return DeXuat;
         }
 
@@ -83,6 +110,9 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                 MaChiPhi = x.CPCT.MaChiPhi,
                 SoTienChiTieu = x.CPCT.SoTienChiTieu,
                 TongThanhToan=x.CPCT.TongThanhToan
+                ,TenChiPhi=x.CP.TenChiPhi,
+                MaChuyenCongTac= x.CPCT.MaChuyenCongTac
+
                 //thuat toans de tinh
             }).ToListAsync() ;
             return chiPhiThanhToan;
@@ -145,6 +175,13 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             if (ChiPhiDeXuat == null) throw new TLUException("Khong co loai chi phi trong de xuat nay nay");
             _context.chiPhiCongTacs.RemoveRange(ChiPhiDeXuat);
             return await _context.SaveChangesAsync();
+        }
+        private async Task<string> SaveFile(IFormFile file)
+        {
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            var fileName = $"{Path.GetExtension(originalFileName)}";
+            await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
+            return fileName;
         }
     }
 }

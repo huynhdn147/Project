@@ -16,7 +16,7 @@ namespace TLU.BusinessFee.Data.Entities
         public DateTime NgayKetThuc { set; get; }
         public string MoTa { set; get; }
         public string DiaDiem { set; get; }
-        public bool TrangThai { set; get; }//true là đã đi, false là chưa đi
+        public string TrangThai { set; get; }//true là đã đi, false là chưa đi
         //public virtual DeXuatThanhToan DeXuat { set; get; }
         public List<NhanVienCongTac> nhanVienCongTacs { set; get; }
         public List<ChiPhiCongTac> chiPhiCongTacs { set; get; }

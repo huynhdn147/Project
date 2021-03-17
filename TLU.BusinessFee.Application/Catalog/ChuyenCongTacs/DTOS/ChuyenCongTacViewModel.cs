@@ -19,6 +19,6 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs.DTOS
         public string NgayKetThuc { set; get; }
         public string MoTa { set; get; }
         public string DiaDiem { set; get; }
-        public bool TrangThai { set; get; }// true là chưa đi, false là đã đi. trạng thái false sẽ không thể sửa hoặc xóa được
+        public string TrangThai { set; get; }// true là chưa đi, false là đã đi. trạng thái false sẽ không thể sửa hoặc xóa được
     }
 }

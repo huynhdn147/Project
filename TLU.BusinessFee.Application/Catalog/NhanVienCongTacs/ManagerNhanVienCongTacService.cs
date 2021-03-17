@@ -62,7 +62,7 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs
                                    CTT.MaChuyenCongTac equals NV.MaChuyenCongTac
                                    where CTT.MaChuyenCongTac == nhanVienCongTac.MaChuyenCongTac
                                    select CTT.TrangThai;
-            if(await sttChuyenCongTac.FirstOrDefaultAsync())
+            if (await sttChuyenCongTac.FirstOrDefaultAsync() =="chua thuc hien")
             {
                 throw new TLUException("Chuyến công tác đã diễn ra, không thể xóa nhân viên");
             }
@@ -82,7 +82,7 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs
                                    CTT.MaChuyenCongTac equals NV.MaChuyenCongTac
                                    where CTT.MaChuyenCongTac == NhanVienCongTac.MaChuyenCongTac
                                    select CTT.TrangThai;
-            if (await sttChuyenCongTac.FirstOrDefaultAsync())
+            if (await sttChuyenCongTac.FirstOrDefaultAsync()== "chua thuc hien")
             {
                 throw new TLUException("Chuyến công tác đã diễn ra, không thể xóa nhân viên");
             }

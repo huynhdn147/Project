@@ -91,8 +91,9 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                 SoNhanVien=x.p.SoNhanVien,   
                 ThoiGianDeXuat =  x.p.ThoiGianDeXuat.ToString().Remove(10),
                 TongTien = x.p.TongTien,
-               // TinhTrang = x.p.TinhTrang,
-                Lydo=x.p.Lydo
+                TinhTrang = x.p.TinhTrang,
+                Lydo = x.p.Lydo,
+                MaChuyenCongTac=x.CCT.MaChuyenCongTac
             }).ToListAsync();
 
             return DeXuat;

@@ -70,3 +70,12 @@ C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1
 C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.dll
 C:\Users\Admin\Desktop\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.pdb
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.deps.json
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.dll
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\bin\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.pdb
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.csprojAssemblyReference.cache
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.AssemblyInfoInputs.cache
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.AssemblyInfo.cs
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.csproj.CoreCompileInputs.cache
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.dll
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\obj\Debug\netcoreapp3.1\TLU.BusinessFee.Utilities.pdb

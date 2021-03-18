@@ -55,7 +55,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             return Ok(DeXuat);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateDeXuat([FromForm]CreateDeXuatRequest request)
+        public async Task<IActionResult> CreateDeXuat(CreateDeXuatRequest request)
         {
             string MaNhanVien = post().MaNhanVien.ToString();
             request.NhanVienDeXuat = MaNhanVien;
@@ -65,7 +65,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             return Created("ok", MaNhanVien);
         }
         [HttpGet("SoTienChiTieu")]
-        public async Task<IActionResult> GetChiPhiThanhToan([FromBody] string MaChuyenCongTac)
+        public async Task<IActionResult> GetChiPhiThanhToan(string MaChuyenCongTac)
         {
 
             string MaNhanVien = post().MaNhanVien.ToString();
@@ -82,14 +82,14 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             return Created("ok", request.MaChuyenCongTac);
         }
         [HttpGet("DonVi")]
-        public async Task<IActionResult> GetDonVi([FromBody] string MaChiPhi)
+        public async Task<IActionResult> GetDonVi(string MaChiPhi)
         {
             var chiPhi = await _managerDeXuatThanhToanService.GetDonViByMaChiPhi(MaChiPhi);
 
             return Ok(chiPhi);
         }
         [HttpDelete]
-        public async Task<IActionResult> DeleteDeXuat([FromBody] string MaDeXuat)
+        public async Task<IActionResult> DeleteDeXuat( string MaDeXuat)
         {
             var affecedResult = await _managerDeXuatThanhToanService.DeleteDeXuat(MaDeXuat);
             if (affecedResult == 0)
@@ -97,7 +97,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             return Ok();
         }
         [HttpDelete("ChiPhiCongTac")]
-        public async Task<IActionResult> DeleteChiPhiCongTac([FromBody] string MaChuyenCongTac, string MaChiPhi)
+        public async Task<IActionResult> DeleteChiPhiCongTac(string MaChuyenCongTac, string MaChiPhi)
         {
             var affecedResult = await _managerDeXuatThanhToanService.DeleteChiPhiCongTac(MaChuyenCongTac, MaChiPhi);
             if (affecedResult == 0)

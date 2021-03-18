@@ -60,7 +60,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                 {
                     new DeXuatFile()
                     {
-                        FilePath=await this.SaveFile(request.FileHoaDon)
+                        FilePath="link"  //await this.SaveFile(request.FileHoaDon)
                         
                     }
                 };

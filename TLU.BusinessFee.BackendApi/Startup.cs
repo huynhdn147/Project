@@ -21,6 +21,7 @@ using TLU.BusinessFee.Application.Catalog.ChucVu;
 using TLU.BusinessFee.Application.Catalog.ChucVus;
 using TLU.BusinessFee.Application.Catalog.ChuyenCongTacs;
 using TLU.BusinessFee.Application.Catalog.DeXuatThanhToans;
+using TLU.BusinessFee.Application.Catalog.DuyetDeXuat;
 using TLU.BusinessFee.Application.Catalog.NhanVienCongTacs;
 using TLU.BusinessFee.Application.Catalog.NhanViens;
 using TLU.BusinessFee.Application.Catalog.PhongBans;
@@ -67,6 +68,7 @@ namespace TLU.BusinessFee.BackendApi
             services.AddTransient<IManagerDeXuatThanhToanService, ManagerDeXuatThanhToanService>();
             services.AddTransient<IManagerChucvuService, ManagerChucvuService>();
             services.AddTransient<IStorageService, StorageService>();
+            services.AddTransient<IDuyetDeXuatService,DuyetDeXuatService>();
             //services.AddTransient<RoleManager<Role>, RoleManager<UserRole>>();
             services.AddControllers().
                 AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>()

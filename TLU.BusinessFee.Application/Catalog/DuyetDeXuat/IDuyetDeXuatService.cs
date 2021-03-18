@@ -8,9 +8,10 @@ namespace TLU.BusinessFee.Application.Catalog.DuyetDeXuat
 {
     public interface IDuyetDeXuatService
     {
-        Task<int> TruongBoPhanManager(UpdateDeXuatManagerRequest request);
+        Task<int> TruongBoPhanManagerXetDuyet(string MaDeXuat);
 
-        Task<int> PhongKeToanManager(UpdateDeXuatManagerRequest request);
-        Task<int> LanhDaoManager(UpdateDeXuatManagerRequest request);
+        Task<int> PhongKeToanManager(TuChoiDeXuatManagerRequest request);
+        Task<int> LanhDaoManager(TuChoiDeXuatManagerRequest request);
+        Task<int> TruongBoPhanManagerTuChoi(TuChoiDeXuatManagerRequest request);
     }
 }

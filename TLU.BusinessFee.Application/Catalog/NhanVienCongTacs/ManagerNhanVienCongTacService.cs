@@ -49,7 +49,6 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs
                 await _context.SaveChangesAsync();
                 result.Add(item);
             }
-           
              return result;
         }
         public async Task<int> Delete(string MaChuyenCongTac,string MaNhanVien)
@@ -62,7 +61,7 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs
                                    CTT.MaChuyenCongTac equals NV.MaChuyenCongTac
                                    where CTT.MaChuyenCongTac == nhanVienCongTac.MaChuyenCongTac
                                    select CTT.TrangThai;
-            if (await sttChuyenCongTac.FirstOrDefaultAsync() =="chua thuc hien")
+            if (await sttChuyenCongTac.FirstOrDefaultAsync() !="chua thuc hien")
             {
                 throw new TLUException("Chuyến công tác đã diễn ra, không thể xóa nhân viên");
             }

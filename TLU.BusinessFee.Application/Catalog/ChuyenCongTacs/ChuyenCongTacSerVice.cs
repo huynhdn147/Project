@@ -30,7 +30,7 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
                 NgayKetThuc=Request.NgayKetThuc,
                 MoTa=Request.MoTa,
                 DiaDiem=Request.DiaDiem,
-                TrangThai=Request.TrangThai
+                TrangThai="chua thuc hien"
             };
             _context.chuyenCongTacs.Add(ChuyenCongTac);
             await _context.SaveChangesAsync();

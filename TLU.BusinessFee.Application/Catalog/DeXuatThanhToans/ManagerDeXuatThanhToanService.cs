@@ -54,17 +54,17 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var ChuyenCongTacdf = await _context.chuyenCongTacs.FirstOrDefaultAsync
                 (x => x.MaChuyenCongTac == request.MaChuyenCongTac);
             ChuyenCongTacdf.TrangThai = "Da thuc hien";
-            if(request.FileHoaDon!=null)
-            {
-                DeXuat.deXuatFiles = new List<DeXuatFile>()
-                {
-                    new DeXuatFile()
-                    {
-                        FilePath="link"  //await this.SaveFile(request.FileHoaDon)
-                        
-                    }
-                };
-            }    
+            //if (FileHoaDon != null)
+            //{
+            //    DeXuat.deXuatFiles = new List<DeXuatFile>()
+            //    {
+            //        new DeXuatFile()
+            //        {
+            //            FilePath= await this.SaveFile(FileHoaDon)
+
+            //        }
+            //    };
+            //}
             _context.deXuatThanhToans.AddAsync(DeXuat);
 
             await _context.SaveChangesAsync();

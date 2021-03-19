@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TLU.BusinessFee.Application.Catalog.DuyetDeXuat;
+using TLU.BusinessFee.Application.Catalog.DuyetDeXuat.DTOS;
 using TLU.BusinessFee.Application.System;
 using TLU.BusinessFee.Data.EF;
 
@@ -50,17 +51,53 @@ namespace TLU.BusinessFee.BackendApi.Controllers
 
                 return BadRequest();
             else
-            {     
+            {
                 var nhanVienPhongBan = await  _context.NhanVienPhongs.FindAsync(maNhanVien);
                 var maPhongBan =  nhanVienPhongBan.MaPhongBan;
                 var deXuatThanhToan =  from DX in _context.deXuatThanhToans
                                       join NV in _context.NhanVienPhongs on DX.MaNhanVien equals NV.MaNhanVien
                                       where NV.MaPhongBan == maPhongBan
                                       select DX;
-                var dexuatlist = deXuatThanhToan.ToList();
+
+                var dexuatlist =  deXuatThanhToan.Select(x => new DuyetDeXuatViewmodel()
+                {
+                    MaDeXuat = x.MaDeXuat,
+                    TenChuyenCongTac = x.MaChuyenCongTac,
+                    SoNhanVien = x.SoNhanVien,
+                    ThoiGianDeXuat = x.ThoiGianDeXuat.ToShortDateString(),
+                    TongChiPhi = x.TongTien,
+                    LyDo = x.Lydo,
+                    TinhTrang = x.TinhTrang
+
+                }).ToList();
                 return  Ok(dexuatlist);
+            }  
+        }
+        [HttpPost("TruongBoPhan/XetDuyet")]
+        public async Task<IActionResult> XetDuyet(string MaDeXuat)
+        {
+            var maNhanVien = post().MaNhanVien;
+            var role = post().RoleName;
+            if (role != "Trưởng bộ phận")
+                return BadRequest();
+            else
+            {
+                var duyet =  await _DuyetDeXuat.TruongBoPhanManagerXetDuyet(MaDeXuat);
+                return Ok(duyet);
             }
-            
+        }
+        [HttpPost("TruongBoPhan/TuChoi")]
+        public async Task<IActionResult> TuChoi(TuChoiDeXuatManagerRequest request)
+        {
+            var maNhanVien = post().MaNhanVien;
+            var role = post().RoleName;
+            if (role != "Trưởng bộ phận")
+                return BadRequest();
+            else
+            {
+                var duyet = await _DuyetDeXuat.TruongBoPhanManagerTuChoi(request);
+                return Ok(duyet);
+            }
         }
     }
 }

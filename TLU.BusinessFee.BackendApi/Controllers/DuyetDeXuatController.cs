@@ -43,7 +43,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             };
             return data;
         }
-        [HttpGet("TruongBoPhan")]
+        [HttpGet]
         public async Task<IActionResult> GetDeXuat()
         {
             var maNhanVien = post().MaNhanVien;
@@ -122,7 +122,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                 return BadRequest();
             }  
         }
-        [HttpPost("TruongBoPhan/XetDuyet")]
+        [HttpPost("XetDuyet")]
         public async Task<IActionResult> XetDuyet(string MaDeXuat)
         {
             var maNhanVien = post().MaNhanVien;
@@ -142,7 +142,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             }
 
         }
-        [HttpPost("TruongBoPhan/TuChoi")]
+        [HttpPost("TuChoi")]
         public async Task<IActionResult> TuChoi(TuChoiDeXuatManagerRequest request)
         {
             var maNhanVien = post().MaNhanVien;

@@ -38,7 +38,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             var data = new UserLoginViewModel
             {
                 MaNhanVien = claims[0].Value,
-                RoleName = roleName.ToList()[0]
+                RoleName = roleName.ToList()[0],
+                RoleID= claims[1].Value
             };
             return data;
         }
@@ -46,45 +47,100 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         public async Task<IActionResult> GetDeXuat()
         {
             var maNhanVien = post().MaNhanVien;
-            var role = post().RoleName;
-            if (role != "Trưởng bộ phận")
+            var role = post().RoleID;
+            if (role == "RL03")
+            { 
+                var nhanVienPhongBan = await _context.NhanVienPhongs.FindAsync(maNhanVien);
+                var maPhongBan = nhanVienPhongBan.MaPhongBan;
+                var deXuatThanhToan = from DX in _context.deXuatThanhToans
+                                  join NV in _context.NhanVienPhongs on DX.MaNhanVien equals NV.MaNhanVien
+                                  where NV.MaPhongBan == maPhongBan
+                                  join CTT in _context.chuyenCongTacs on DX.MaChuyenCongTac equals CTT.MaChuyenCongTac
+                                  orderby DX.ThoiGianDeXuat descending
+                                  select new { DX, CTT };
 
-                return BadRequest();
-            else
-            {
-                var nhanVienPhongBan = await  _context.NhanVienPhongs.FindAsync(maNhanVien);
-                var maPhongBan =  nhanVienPhongBan.MaPhongBan;
-                var deXuatThanhToan =  from DX in _context.deXuatThanhToans
-                                      join NV in _context.NhanVienPhongs on DX.MaNhanVien equals NV.MaNhanVien
-                                      where NV.MaPhongBan == maPhongBan
-                                      select DX;
-
-                var dexuatlist =  deXuatThanhToan.Select(x => new DuyetDeXuatViewmodel()
+                var dexuatlist = deXuatThanhToan.Select(x => new DuyetDeXuatViewmodel()
                 {
-                    MaDeXuat = x.MaDeXuat,
-                    TenChuyenCongTac = x.MaChuyenCongTac,
-                    SoNhanVien = x.SoNhanVien,
-                    ThoiGianDeXuat = x.ThoiGianDeXuat.ToShortDateString(),
-                    TongChiPhi = x.TongTien,
-                    LyDo = x.Lydo,
-                    TinhTrang = x.TinhTrang
+                    MaDeXuat = x.DX.MaDeXuat,
+                    TenChuyenCongTac = x.CTT.TenChuyenCongTac,
+                    MaChuyenCongTac=x.DX.MaChuyenCongTac,
+                    SoNhanVien = x.DX.SoNhanVien,
+                    ThoiGianDeXuat = x.DX.ThoiGianDeXuat.ToShortDateString(),
+                    TongChiPhi = x.DX.TongTien,
+                    LyDo = x.DX.Lydo,
+                    TinhTrang = x.DX.TinhTrang
 
                 }).ToList();
-                return  Ok(dexuatlist);
+            return Ok(dexuatlist);
+            }
+            if(role == "RL04")
+            {
+                var deXuatThanhToan = from DX in _context.deXuatThanhToans
+                                      join NV in _context.NhanVienPhongs on DX.MaNhanVien equals NV.MaNhanVien
+                                     // where NV.MaPhongBan == maPhongBan
+                                      join CTT in _context.chuyenCongTacs on DX.MaChuyenCongTac equals CTT.MaChuyenCongTac
+                                      orderby DX.ThoiGianDeXuat descending
+                                      select new { DX, CTT };
+                var dexuatlist = deXuatThanhToan.Select(x => new DuyetDeXuatViewmodel()
+                {
+                    MaDeXuat = x.DX.MaDeXuat,
+                    TenChuyenCongTac = x.CTT.TenChuyenCongTac,
+                    MaChuyenCongTac = x.DX.MaChuyenCongTac,
+                    SoNhanVien = x.DX.SoNhanVien,
+                    ThoiGianDeXuat = x.DX.ThoiGianDeXuat.ToShortDateString(),
+                    TongChiPhi = x.DX.TongTien,
+                    LyDo = x.DX.Lydo,
+                    TinhTrang = x.DX.TinhTrang
+
+                }).ToList();
+                return Ok(dexuatlist);
+            }
+            if (role == "RL05")
+            {
+                var deXuatThanhToan = from DX in _context.deXuatThanhToans
+                                      join NV in _context.NhanVienPhongs on DX.MaNhanVien equals NV.MaNhanVien
+                                      // where NV.MaPhongBan == maPhongBan
+                                      join CTT in _context.chuyenCongTacs on DX.MaChuyenCongTac equals CTT.MaChuyenCongTac
+                                      orderby DX.ThoiGianDeXuat descending
+                                      select new { DX, CTT };
+                var dexuatlist = deXuatThanhToan.Select(x => new DuyetDeXuatViewmodel()
+                {
+                    MaDeXuat = x.DX.MaDeXuat,
+                    TenChuyenCongTac = x.CTT.TenChuyenCongTac,
+                    MaChuyenCongTac = x.DX.MaChuyenCongTac,
+                    SoNhanVien = x.DX.SoNhanVien,
+                    ThoiGianDeXuat = x.DX.ThoiGianDeXuat.ToShortDateString(),
+                    TongChiPhi = x.DX.TongTien,
+                    LyDo = x.DX.Lydo,
+                    TinhTrang = x.DX.TinhTrang
+
+                }).ToList();
+                return Ok(dexuatlist);
+            }
+            else
+            {
+                return BadRequest();
             }  
         }
         [HttpPost("TruongBoPhan/XetDuyet")]
         public async Task<IActionResult> XetDuyet(string MaDeXuat)
         {
             var maNhanVien = post().MaNhanVien;
-            var role = post().RoleName;
-            if (role != "Trưởng bộ phận")
-                return BadRequest();
-            else
-            {
-                var duyet =  await _DuyetDeXuat.TruongBoPhanManagerXetDuyet(MaDeXuat);
+            var role = post().RoleID;
+            if (role == "RL03") { 
+                var duyet = await _DuyetDeXuat.TruongBoPhanManagerXetDuyet(MaDeXuat);
                 return Ok(duyet);
             }
+            if(role=="RL04")
+            {
+                var duyet = await _DuyetDeXuat.PhongKeToanXetDuyetManager(MaDeXuat);
+                return Ok(duyet);
+            }
+            else
+            {
+                return BadRequest();
+            }
+
         }
         [HttpPost("TruongBoPhan/TuChoi")]
         public async Task<IActionResult> TuChoi(TuChoiDeXuatManagerRequest request)
@@ -99,5 +155,6 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                 return Ok(duyet);
             }
         }
+        //[HttpGet("")]
     }
 }

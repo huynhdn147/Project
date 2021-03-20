@@ -69,9 +69,23 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         {
 
             string MaNhanVien = post().MaNhanVien.ToString();
+
             var chiPhi = await _managerDeXuatThanhToanService.GetChiTieu(MaChuyenCongTac);
 
             return Ok(chiPhi);
+        }
+        [HttpGet("DuyetDeXuat/SoTienChiTieu")]
+        public async Task<IActionResult> GetChiPhiThanhToan2(string MaChuyenCongTac)
+        {
+
+            var maNhanVien = post().MaNhanVien;
+            var role = post().RoleName;
+            if (role == "Trưởng bộ phận")
+            {
+                var chiPhi = await _managerDeXuatThanhToanService.GetChiTieu(MaChuyenCongTac);
+                return Ok(chiPhi);
+            }
+            else return BadRequest();
         }
         [HttpPost("ChiPhiThanhToan")]
         public async Task<IActionResult> PostChiPhiThanhToan([FromBody] createChiPhiThanhToanRequest request)

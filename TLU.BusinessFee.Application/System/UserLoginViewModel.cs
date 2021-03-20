@@ -8,5 +8,6 @@ namespace TLU.BusinessFee.Application.System
     {
         public string MaNhanVien { set; get; }
         public string RoleName { set; get; }
+        public string RoleID { set; get; }
     }
 }

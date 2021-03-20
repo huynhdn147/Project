@@ -7,6 +7,7 @@ namespace TLU.BusinessFee.Application.Catalog.DuyetDeXuat.DTOS
     public class DuyetDeXuatViewmodel
     {
         public string MaDeXuat { set; get; }
+        public string MaChuyenCongTac { set; get; }
         public string TenChuyenCongTac { set; get; }
         public int SoNhanVien { set; get; }
         public string ThoiGianDeXuat { set; get; }

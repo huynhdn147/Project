@@ -35,8 +35,10 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var SoLuongNhanVien = from NV in _context.nhanVienCongTacs
                                   where NV.MaChuyenCongTac == request.MaChuyenCongTac
                                   select NV.MaNhanVien;
+            var SoluongHoaDon = from HD in _context.thanhToans
+                                select HD.MaHoaDon;
             var chuyenCongTac = await _context.chuyenCongTacs.FindAsync(request.MaChuyenCongTac);
-            if (chuyenCongTac.TrangThai != "chua thuc hien")
+            if (chuyenCongTac.TrangThai != "Chua thuc hien")
             {
                 throw new TLUException("Chuyến Công tác đã diễn ra, không thể sửa thông tin chuyến công tác");
             }
@@ -45,7 +47,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                 MaDeXuat = request.MaDeXuat,
                 MaChuyenCongTac = request.MaChuyenCongTac,
                 SoNhanVien = SoLuongNhanVien.Count(),
-                TinhTrang = "chua xet duyet",
+                TinhTrang = "Chua xet duyet",
                 MaNhanVien=request.NhanVienDeXuat,
                 TongTien=request.TongTien,
                 ThoiGianDeXuat=request.ThoiGianDeXuat
@@ -54,6 +56,14 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var ChuyenCongTacdf = await _context.chuyenCongTacs.FirstOrDefaultAsync
                 (x => x.MaChuyenCongTac == request.MaChuyenCongTac);
             ChuyenCongTacdf.TrangThai = "Da thuc hien";
+            var ThanhToan = new ThanhToan()
+            {
+                MaHoaDon = "HDTT" + SoluongHoaDon.Count().ToString(),
+                MaDeXuat=request.MaDeXuat,
+                ThoiGianDeXuat=request.ThoiGianDeXuat,
+                TinhTrang= "Chua xet duyet",
+                TongChiPhi=request.TongTien
+            };
             //if (FileHoaDon != null)
             //{
             //    DeXuat.deXuatFiles = new List<DeXuatFile>()
@@ -66,7 +76,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             //    };
             //}
             _context.deXuatThanhToans.AddAsync(DeXuat);
-
+            _context.thanhToans.AddAsync(ThanhToan);
             await _context.SaveChangesAsync();
             return DeXuat.MaDeXuat;
         }
@@ -165,7 +175,13 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             {
                 throw new  TLUException("Khong co de xuat nay nay");
             }
+            if(deXuat.TinhTrang == "Chua xet duyet") { 
             _context.deXuatThanhToans.Remove(deXuat);
+            }
+            else
+            {
+                throw new TLUException("De xuat da xet duyet, khong duoc xoa");
+            }
             return await _context.SaveChangesAsync();
 
         }

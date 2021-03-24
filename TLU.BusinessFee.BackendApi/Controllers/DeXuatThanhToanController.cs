@@ -55,6 +55,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             return Ok(DeXuat);
         }
         [HttpPost]
+        //[Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateDeXuat([FromBody]CreateDeXuatRequest request)
         {
             string MaNhanVien = post().MaNhanVien.ToString();

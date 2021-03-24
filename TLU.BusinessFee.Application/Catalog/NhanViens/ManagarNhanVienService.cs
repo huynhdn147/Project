@@ -84,6 +84,15 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
             }).ToListAsync();
             return data;
          }
+        //public async Task<ChucVuViewModel> GetChucVu()
+        //{
+        //    var query = from R in _context.Roles
+        //                select R;
+        //    var chucvu = await query.Select(x => ChucVuViewModel(){
+
+        //    });
+
+        //}
 
         public async Task<PageResult<NhanVienViewModel>> GetAllPaging(GetNhanVienPagingRequest request)
         {

@@ -136,6 +136,11 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                 var duyet = await _DuyetDeXuat.PhongKeToanXetDuyetManager(MaDeXuat);
                 return Ok(duyet);
             }
+            if(role=="RL05")
+            {
+                var duyet = await _DuyetDeXuat.LanhDaoXetDuyetManager(MaDeXuat);
+                return Ok(duyet);
+            }
             else
             {
                 return BadRequest();

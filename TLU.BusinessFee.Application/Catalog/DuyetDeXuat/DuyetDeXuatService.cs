@@ -20,7 +20,7 @@ namespace TLU.BusinessFee.Application.Catalog.DuyetDeXuat
         public async Task<int> LanhDaoXetDuyetManager(string MaDeXuat)
         {
             var DeXuat  = await _context.deXuatThanhToans.FindAsync(MaDeXuat);
-            if (DeXuat.TinhTrang == "Phong ke toan xet duyet")
+            if (DeXuat.TinhTrang == "Phong ke toan da xet duyet")
             {
                 var DeXuatdf = await _context.deXuatThanhToans.FirstOrDefaultAsync(x => x.MaDeXuat == MaDeXuat);
                 DeXuatdf.TinhTrang = "Ban lanh dao da xet duyet";
@@ -85,7 +85,7 @@ namespace TLU.BusinessFee.Application.Catalog.DuyetDeXuat
         public async Task<int> TruongBoPhanManagerXetDuyet(string MaDeXuat)
         {
             var DeXuat = await _context.deXuatThanhToans.FindAsync(MaDeXuat);
-            if(DeXuat.TinhTrang =="chua xet duyet")
+            if(DeXuat.TinhTrang =="Chua xet duyet")
             {
                 var DeXuatdf= await _context.deXuatThanhToans.FirstOrDefaultAsync(x => x.MaDeXuat == MaDeXuat);
                 DeXuatdf.TinhTrang = "Truong bo phan da duyet";

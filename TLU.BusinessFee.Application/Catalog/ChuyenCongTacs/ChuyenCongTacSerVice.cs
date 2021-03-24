@@ -30,7 +30,7 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
                 NgayKetThuc=Request.NgayKetThuc,
                 MoTa=Request.MoTa,
                 DiaDiem=Request.DiaDiem,
-                TrangThai="chua thuc hien"
+                TrangThai="Chua thuc hien"
             };
             _context.chuyenCongTacs.Add(ChuyenCongTac);
             await _context.SaveChangesAsync();
@@ -40,7 +40,7 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
         public async Task<int> Update(UpdateChuyenCongTacRequest request)
         {
             var ChuyenCongTac = await _context.chuyenCongTacs.FindAsync(request.MaChuyenCongTac);
-            if(ChuyenCongTac.TrangThai != "chua thuc hien")
+            if(ChuyenCongTac.TrangThai != "Chua thuc hien")
             {
                 throw new TLUException("Chuyến Công tác đã diễn ra, không thể sửa thông tin chuyến công tác");
             }
@@ -61,7 +61,7 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
             var ChuyenCongTac = await _context.chuyenCongTacs.FindAsync(MaChuyenCongTac);
             if (ChuyenCongTac == null)
                 throw new TLUException("Khong co chuyen cong tac nay");
-            if (ChuyenCongTac.TrangThai != "chua thuc hien")
+            if (ChuyenCongTac.TrangThai != "Chua thuc hien")
             {
                 throw new TLUException("Chuyến Công tác đã diễn ra, không thể xóa thông tin chuyến công tác");
             }

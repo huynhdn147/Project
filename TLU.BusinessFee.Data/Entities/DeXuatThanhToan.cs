@@ -22,5 +22,6 @@ namespace TLU.BusinessFee.Data.Entities
         public  NhanVienPhongBan NhanVienDeXuat { set; get; }
         // public string fileDinhKem { set; get; }
         public List<DeXuatFile> deXuatFiles { set; get; }
+        public ThanhToan ThanhToan { set; get; }
     }
 }

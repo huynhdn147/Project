@@ -39,7 +39,7 @@ namespace TLU.BusinessFee.Data.EF
             modelBuilder.ApplyConfiguration(new ChiPhiCongTacConfiguration());
             modelBuilder.ApplyConfiguration(new DeXuatThanhToanConfiguration());
             modelBuilder.ApplyConfiguration(new DeXuatFileConfiguration());
-
+            modelBuilder.ApplyConfiguration(new ThanhToanConfiguration());
             //modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaim");
             //modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRole").HasKey(x=>new {x.UserId,x.RoleId });
             //modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogin").HasKey(x=>x.UserId);
@@ -69,6 +69,7 @@ namespace TLU.BusinessFee.Data.EF
         public DbSet<DeXuatThanhToan> deXuatThanhToans { set; get; }
         public DbSet<ChiPhiCongTac> chiPhiCongTacs { set; get; }
         public DbSet<DeXuatFile> deXuatFiles { set; get; }
+        public DbSet<ThanhToan> thanhToans { set; get; }
 
     }
 }

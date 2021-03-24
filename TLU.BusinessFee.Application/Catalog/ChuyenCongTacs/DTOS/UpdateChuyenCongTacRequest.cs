@@ -12,6 +12,6 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs.DTOS
         public DateTime NgayKetThuc { set; get; }
         public string MoTa { set; get; }
         public string DiaDiem { set; get; }
-        public string TrangThai { set; get; }//true là đã đi, false là chưa đi
+       // public string TrangThai { set; get; }//true là đã đi, false là chưa đi
     }
 }

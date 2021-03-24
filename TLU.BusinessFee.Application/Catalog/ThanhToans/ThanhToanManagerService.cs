@@ -25,13 +25,15 @@ namespace TLU.BusinessFee.Application.Catalog.ThanhToans
                             on TT.MaDeXuat equals DX.MaDeXuat
                             join CTT in _context.chuyenCongTacs
                             on DX.MaChuyenCongTac equals CTT.MaChuyenCongTac
-                            select new { TT, DX, CTT };
+                            join NV in _context.NhanVienPhongs on DX.MaNhanVien equals NV.MaNhanVien
+                            select new { TT, DX, CTT,NV };
                             
              var thanhtoan= await query.Select(x=>new ThanhToanViewModel()
             {
                 MaHoaDon=x.TT.MaHoaDon,
                 MaDeXuat=x.DX.MaDeXuat,
                 TenChuyenCongTac=x.CTT.TenChuyenCongTac,
+                TenNhanVienDeXuat=x.NV.TenNhanVien,
                 SoNhanVien=x.DX.SoNhanVien,
                 ThoiGianDeXuat=x.DX.ThoiGianDeXuat,
                 TongChiPhi=x.DX.TongTien,

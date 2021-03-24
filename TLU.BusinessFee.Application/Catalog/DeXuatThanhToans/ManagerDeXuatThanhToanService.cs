@@ -88,6 +88,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                         on p.MaNhanVien equals NV.MaNhanVien
                         join CCT in _context.chuyenCongTacs on p.MaChuyenCongTac equals CCT.MaChuyenCongTac
                         where p.MaNhanVien == MaNhanVien
+                        orderby p.TinhTrang 
                         select new { p, NV, CCT };
 
             //var SoLuongNhanVien = from NV in _context.nhanVienCongTacs
@@ -187,11 +188,23 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
         }
         public async Task<int> DeleteChiPhiCongTac(string MaChuyenCongTac,string MaChiPhi)
         {
-            var ChiPhiDeXuat = await _context.chiPhiCongTacs.FindAsync(MaChiPhi, MaChuyenCongTac);
-            // var chucvu = await _context.ChiPhiChucVus.FindAsync(MaChucVu);
-            if (ChiPhiDeXuat == null) throw new TLUException("Khong co loai chi phi trong de xuat nay nay");
-            _context.chiPhiCongTacs.RemoveRange(ChiPhiDeXuat);
-            return await _context.SaveChangesAsync();
+            var chuyenCongTac = from CTT in _context.chuyenCongTacs
+                                join CPCT in _context.chiPhiCongTacs
+on CTT.MaChuyenCongTac equals CPCT.MaChuyenCongTac
+                                where CPCT.MaChuyenCongTac == MaChuyenCongTac
+                                select CTT.TrangThai;
+            if (chuyenCongTac.FirstOrDefault().ToString() != "Da thuc hien")
+            {
+                var ChiPhiDeXuat = await _context.chiPhiCongTacs.FindAsync(MaChiPhi, MaChuyenCongTac);
+                // var chucvu = await _context.ChiPhiChucVus.FindAsync(MaChucVu);
+                if (ChiPhiDeXuat == null) throw new TLUException("Khong co loai chi phi trong de xuat nay nay");
+                _context.chiPhiCongTacs.RemoveRange(ChiPhiDeXuat);
+                return await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new TLUException("khong duoc xoa");
+            }
         }
         private async Task<string> SaveFile(IFormFile file)
         {

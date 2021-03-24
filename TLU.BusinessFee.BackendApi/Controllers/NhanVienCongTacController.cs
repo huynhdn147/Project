@@ -24,7 +24,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         public async Task<IActionResult> Create([FromBody] CreateNhanVienCongTacRequest Request)
         {
             var result = _Service.Create(Request);
-            if (result == null)
+            if (result.Result == null)
                 return BadRequest();
             // var chuyenCongTac = await _Service.(result);
             return Ok(result.Result);

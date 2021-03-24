@@ -44,7 +44,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             //            where NV.MaNhanVien == data.MaNhanVien
             //            select NV.TenNhanVien.ToString();
             //return query.FirstOrDefault().ToString();
-            return data.MaNhanVien;
+            return data.MaNhanVien.ToString();
         }
 
 

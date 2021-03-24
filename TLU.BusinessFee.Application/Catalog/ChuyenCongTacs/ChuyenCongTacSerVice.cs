@@ -50,7 +50,7 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
             ChuyenCongTacdf.TenChuyenCongTac =request.TenChuyenCongTac;
             ChuyenCongTacdf.NgayBatDau = request.NgayBatDau;
             ChuyenCongTacdf.NgayKetThuc = request.NgayKetThuc;
-            ChuyenCongTacdf.TrangThai = request.TrangThai;
+            ChuyenCongTacdf.TrangThai = "Chua thuc hien";
             ChuyenCongTacdf.DiaDiem = request.DiaDiem;
             ChuyenCongTacdf.MoTa = request.MoTa;
             return await _context.SaveChangesAsync();
@@ -72,8 +72,7 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
         public async Task<List<ChuyenCongTacViewModel>> GetAll()
         {
             var query = from CCT in _context.chuyenCongTacs
-                        select CCT
-            ;
+                        select CCT;
             
             var data = await query.Select(x => new ChuyenCongTacViewModel()
             {

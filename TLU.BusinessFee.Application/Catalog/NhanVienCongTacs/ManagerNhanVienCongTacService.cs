@@ -22,16 +22,25 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs
         }
         public async Task<string> Create(CreateNhanVienCongTacRequest Request)
         {
+            var ChuyenCongTac = from CTT in _context.chuyenCongTacs
+                                where CTT.MaChuyenCongTac == Request.MaChuyenCongTac
+                                select CTT.TrangThai;
+            if (await ChuyenCongTac.FirstOrDefaultAsync() != "Chua thuc hien")
+            {
+                return null;
+            }
+            else { 
             var NhanVienCongTac = new NhanVienCongTac()
             {
                 MaChuyenCongTac = Request.MaChuyenCongTac,
                 MaNhanVien = Request.MaNhanVien
                 
             };
+            
             _context.nhanVienCongTacs.AddAsync(NhanVienCongTac);
             await _context.SaveChangesAsync();
             return NhanVienCongTac.MaChuyenCongTac +" " +NhanVienCongTac.MaNhanVien;
-
+            }
         }
         public async Task<List<CreateNhanVienCongTacRequest>> createListAsync(List<CreateNhanVienCongTacRequest> requests)
         {
@@ -61,7 +70,7 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs
                                    CTT.MaChuyenCongTac equals NV.MaChuyenCongTac
                                    where CTT.MaChuyenCongTac == nhanVienCongTac.MaChuyenCongTac
                                    select CTT.TrangThai;
-            if (await sttChuyenCongTac.FirstOrDefaultAsync() !="chua thuc hien")
+            if (await sttChuyenCongTac.FirstOrDefaultAsync() != "Chua thuc hien")
             {
                 throw new TLUException("Chuyến công tác đã diễn ra, không thể xóa nhân viên");
             }
@@ -81,7 +90,7 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs
                                    CTT.MaChuyenCongTac equals NV.MaChuyenCongTac
                                    where CTT.MaChuyenCongTac == NhanVienCongTac.MaChuyenCongTac
                                    select CTT.TrangThai;
-            if (await sttChuyenCongTac.FirstOrDefaultAsync()== "chua thuc hien")
+            if (await sttChuyenCongTac.FirstOrDefaultAsync()== "Chua thuc hien")
             {
                 throw new TLUException("Chuyến công tác đã diễn ra, không thể xóa nhân viên");
             }

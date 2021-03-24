@@ -56,14 +56,16 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                                   join NV in _context.NhanVienPhongs on DX.MaNhanVien equals NV.MaNhanVien
                                   where NV.MaPhongBan == maPhongBan
                                   join CTT in _context.chuyenCongTacs on DX.MaChuyenCongTac equals CTT.MaChuyenCongTac
+                                  
                                   orderby DX.ThoiGianDeXuat descending
-                                  select new { DX, CTT };
+                                  select new { DX, CTT,NV };
 
                 var dexuatlist = deXuatThanhToan.Select(x => new DuyetDeXuatViewmodel()
                 {
                     MaDeXuat = x.DX.MaDeXuat,
                     TenChuyenCongTac = x.CTT.TenChuyenCongTac,
                     MaChuyenCongTac=x.DX.MaChuyenCongTac,
+                    TenNhanVien=x.NV.TenNhanVien,
                     SoNhanVien = x.DX.SoNhanVien,
                     ThoiGianDeXuat = x.DX.ThoiGianDeXuat.ToShortDateString(),
                     TongChiPhi = x.DX.TongTien,
@@ -80,13 +82,14 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                                      // where NV.MaPhongBan == maPhongBan
                                       join CTT in _context.chuyenCongTacs on DX.MaChuyenCongTac equals CTT.MaChuyenCongTac
                                       orderby DX.ThoiGianDeXuat descending
-                                      select new { DX, CTT };
+                                      select new { DX, CTT,NV };
                 var dexuatlist = deXuatThanhToan.Select(x => new DuyetDeXuatViewmodel()
                 {
                     MaDeXuat = x.DX.MaDeXuat,
                     TenChuyenCongTac = x.CTT.TenChuyenCongTac,
                     MaChuyenCongTac = x.DX.MaChuyenCongTac,
                     SoNhanVien = x.DX.SoNhanVien,
+                    TenNhanVien = x.NV.TenNhanVien,
                     ThoiGianDeXuat = x.DX.ThoiGianDeXuat.ToShortDateString(),
                     TongChiPhi = x.DX.TongTien,
                     LyDo = x.DX.Lydo,
@@ -102,13 +105,14 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                                       // where NV.MaPhongBan == maPhongBan
                                       join CTT in _context.chuyenCongTacs on DX.MaChuyenCongTac equals CTT.MaChuyenCongTac
                                       orderby DX.ThoiGianDeXuat descending
-                                      select new { DX, CTT };
+                                      select new { DX, CTT,NV };
                 var dexuatlist = deXuatThanhToan.Select(x => new DuyetDeXuatViewmodel()
                 {
                     MaDeXuat = x.DX.MaDeXuat,
                     TenChuyenCongTac = x.CTT.TenChuyenCongTac,
                     MaChuyenCongTac = x.DX.MaChuyenCongTac,
                     SoNhanVien = x.DX.SoNhanVien,
+                    TenNhanVien = x.NV.TenNhanVien,
                     ThoiGianDeXuat = x.DX.ThoiGianDeXuat.ToShortDateString(),
                     TongChiPhi = x.DX.TongTien,
                     LyDo = x.DX.Lydo,

@@ -14,5 +14,6 @@ namespace TLU.BusinessFee.Application.Catalog.DuyetDeXuat.DTOS
         public int TongChiPhi { set; get; }
         public string TinhTrang { set; get; }
         public string LyDo { set; get; }
+        public string TenNhanVien { set; get; }
     }
 }

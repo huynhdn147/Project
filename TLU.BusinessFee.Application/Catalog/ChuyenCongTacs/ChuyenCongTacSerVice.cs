@@ -108,8 +108,15 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
             };
             return ChuyenCongTacViewModel;
         }
-        
 
-        
+        public Task<List<ChuyenCongTacViewModel>> GetAllByTruongBoPhan()
+        {
+            throw new global::System.NotImplementedException();
+        }
+
+        public Task<List<ChuyenCongTacViewModel>> GetAllByNhanVien()
+        {
+            throw new global::System.NotImplementedException();
+        }
     }
 }

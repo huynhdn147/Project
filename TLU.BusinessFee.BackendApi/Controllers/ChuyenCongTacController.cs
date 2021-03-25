@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TLU.BusinessFee.Application.Catalog.ChuyenCongTacs;
 using TLU.BusinessFee.Application.Catalog.ChuyenCongTacs.DTOS;
+using TLU.BusinessFee.Application.System;
+using TLU.BusinessFee.Data.EF;
 
 namespace TLU.BusinessFee.BackendApi.Controllers
 {
@@ -16,42 +19,100 @@ namespace TLU.BusinessFee.BackendApi.Controllers
     public class ChuyenCongTacController : ControllerBase
     {
         private readonly IChuyenCongTacSerVice _service;
-        public ChuyenCongTacController(IChuyenCongTacSerVice serVice)
+        private readonly TLUBusinessFeeDbContext _context;
+        public ChuyenCongTacController(IChuyenCongTacSerVice serVice, TLUBusinessFeeDbContext context)
         {
             _service = serVice;
+            _context = context;
         }
+        [HttpHead]
+        public UserLoginViewModel post()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IList<Claim> claims = identity.Claims.ToList();
+            var RoleId = claims[1].Value;
+            var roleName = from Rn in _context.Roles
+                           where Rn.Id == RoleId
+                           select Rn.Name;
+
+            var data = new UserLoginViewModel
+            {
+                MaNhanVien = claims[0].Value,
+                RoleName = roleName.ToList()[0],
+                RoleID = claims[1].Value
+            };
+            return data;
+        }
+
         [HttpGet]
         public async Task<IActionResult> getall()
         {
-            var chuyenCongTac = await _service.GetAll();
-            return Ok(chuyenCongTac);
+            var role = post().RoleID;
+            if (role == "RL01" ||role=="RL04"||role=="RL05") 
+            { 
+                var chuyenCongTac = await _service.GetAll();
+                return Ok(chuyenCongTac);
+            }
+            if(role=="RL03")
+            {
+                var chuyenCongTac = await _service.GetAllByTruongBoPhan();
+                return Ok(chuyenCongTac);
+            }
+            if (role == "RL02")
+            {
+                var chuyenCongTac = await _service.GetAllByNhanVien();
+                return Ok(chuyenCongTac);
+            }
+            else
+                return BadRequest();
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateChuyenCongTacRequest request)
         {
-            var result = await _service.Create(request);
-            if (result == null)
+            var role = post().RoleID;
+            if (role == "RL01" || role == "RL04" || role == "RL05")
+            {
+
+                var result = await _service.Create(request);
+                if (result == null)
+                    return BadRequest();
+                var chuyenCongTac = await _service.GetByChuyenCongTacID(result);
+                return Created(nameof(chuyenCongTac), chuyenCongTac);
+            }
+            else
                 return BadRequest();
-            var chuyenCongTac = await _service.GetByChuyenCongTacID(result);
-            return Created(nameof(chuyenCongTac), chuyenCongTac);
         }
         [HttpPut]
         public async Task<IActionResult> Update(UpdateChuyenCongTacRequest request)
         {
-            var result = await _service.Update(request);
-            if (result == null)
-                return BadRequest();
+            var role = post().RoleID;
+            if (role == "RL01" || role == "RL04" || role == "RL05")
+            {
+
+                var result = await _service.Update(request);
+                if (result == null)
+                    return BadRequest();
+                else
+                    return Ok();
+            }
             else
-                return Ok();
+                return BadRequest();
         }
         [HttpDelete]
         public async Task<IActionResult> delete(string MaChuyenCongTac)
         {
-            var affecedResult = await _service.Delete(MaChuyenCongTac);
-            if (affecedResult == 0)
-                return BadRequest();
+            var role = post().RoleID;
+            if (role == "RL01" || role == "RL04" || role == "RL05")
+            {
 
-            return Ok();
+                var affecedResult = await _service.Delete(MaChuyenCongTac);
+                if (affecedResult == 0)
+                    return BadRequest();
+
+                return Ok();
+            }
+            else
+                return Ok();
         }
     }
 }

@@ -40,16 +40,15 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             var data = new UserLoginViewModel
             {
                 MaNhanVien = claims[0].Value,
-                RoleName = roleName.ToList()[0]
+                RoleName = roleName.ToList()[0],
+                RoleID = claims[1].Value
             };
             return data;
         }
         [HttpGet]
         public async Task<IActionResult> getall()
         {
-            var role = post().RoleName;
-            if (role != "admin")
-                return BadRequest();
+            
             var chucvu = await _ManagerCapBacSerVice.GetAll();
             return Ok(chucvu);
         }
@@ -64,8 +63,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatedCapBacRequest request)
         {
-            var role = post().RoleName;
-            if (role != "admin")
+            var role = post().RoleID;
+            if (role != "RL01")
                 return BadRequest();
             var result = await _ManagerCapBacSerVice.Create(request);
             if (result == null)
@@ -76,8 +75,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateCapBacRequest request)
         {
-            var role = post().RoleName;
-            if (role != "admin")
+            var role = post().RoleID;
+            if (role != "RL01")
                 return BadRequest();
             var affecedResult = await _ManagerCapBacSerVice.Update(request);
             if (affecedResult == 0)
@@ -88,8 +87,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpDelete("{maCapBac}")]
         public async Task<IActionResult> Delete(string maCapBac)
         {
-            var role = post().RoleName;
-            if (role != "admin")
+            var role = post().RoleID;
+            if (role != "RL01")
                 return BadRequest();
             var affecedResult = await _ManagerCapBacSerVice.Delete(maCapBac);
             if (affecedResult == 0)

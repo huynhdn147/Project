@@ -38,16 +38,15 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             var data = new UserLoginViewModel
             {
                 MaNhanVien = claims[0].Value,
-                RoleName = roleName.ToList()[0]
+                RoleName = roleName.ToList()[0],
+                RoleID = claims[1].Value
             };
             return data;
         }
         [HttpGet]
         public async Task<IActionResult> getall()
         {
-            var role = post().RoleName;
-            if (role != "admin")
-                return BadRequest();
+            
             var chiPhis = await _managerChiPhiService.GetAll();
             return Ok(chiPhis);
         }
@@ -62,6 +61,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatedChiPhiRequest request)
         {
+            var role = post().RoleID;
+            if (role != "RL01")
+                return BadRequest();
             var result = await _managerChiPhiService.Create(request);
             if (result == null)
                 return BadRequest();
@@ -72,6 +74,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateChiPhiRequest request)
         {
+            var role = post().RoleID;
+            if (role != "RL01")
+                return BadRequest();
             var affecedResult = await _managerChiPhiService.Update(request);
             if (affecedResult == 0)
                 return BadRequest();
@@ -81,6 +86,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpDelete("{maChiPhi}")]
         public async Task<IActionResult> Delete(string maChiPhi)
         {
+            var role = post().RoleID;
+            if (role != "RL01")
+                return BadRequest();
             var affecedResult = await _managerChiPhiService.Delete(maChiPhi);
             if (affecedResult == 0)
                 return BadRequest();

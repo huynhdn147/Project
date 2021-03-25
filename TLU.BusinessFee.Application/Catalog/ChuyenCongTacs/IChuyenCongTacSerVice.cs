@@ -13,6 +13,7 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
         Task<int> Delete(string MaChuyenCongTac);
         Task<ChuyenCongTacViewModel> GetByChuyenCongTacID(string MaChuyenCongTac);
         Task<List<ChuyenCongTacViewModel>> GetAll();
-
+        Task<List<ChuyenCongTacViewModel>> GetAllByTruongBoPhan();
+        Task<List<ChuyenCongTacViewModel>> GetAllByNhanVien();
     }
 }

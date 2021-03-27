@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using TLU.BusinessFee.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
+using TLU.BusinessFee.Application.System;
+using System.Security.Claims;
+using TLU.BusinessFee.Data.EF;
 
 namespace TLU.BusinessFee.BackendApi.Controllers
 {
@@ -22,18 +25,50 @@ namespace TLU.BusinessFee.BackendApi.Controllers
     {
 
         private readonly IHostingEnvironment _appEnvironment;
-
+        private readonly TLUBusinessFeeDbContext _context;
         private readonly IManagerNhanVienService _managarNhanVienService;
-        public NhanVienController(IManagerNhanVienService managarNhanVienService, IHostingEnvironment appEnvironment)
+        public NhanVienController(IManagerNhanVienService managarNhanVienService, IHostingEnvironment appEnvironment, TLUBusinessFeeDbContext context)
         {
             _managarNhanVienService = managarNhanVienService;
             _appEnvironment = appEnvironment;
+            _context = context;
+        }
+
+        [HttpHead]
+        public UserLoginViewModel post()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IList<Claim> claims = identity.Claims.ToList();
+            var RoleId = claims[1].Value;
+            var roleName = from Rn in _context.Roles
+                           where Rn.Id == RoleId
+                           select Rn.Name;
+
+            var data = new UserLoginViewModel
+            {
+                MaNhanVien = claims[0].Value,
+                RoleName = roleName.ToList()[0],
+                RoleID = claims[1].Value
+            };
+            return data;
         }
         [HttpGet]
         public async Task<IActionResult> get()
         {
-            var nhanvien = await _managarNhanVienService.GetAll();
-            return Ok(nhanvien);
+            var role = post().RoleID;
+            if (role == "RL01" || role == "RL04" || role == "RL05") {
+                var nhanvien = await _managarNhanVienService.GetAll();
+                return Ok(nhanvien);
+            }
+            if (role == "RL02"||role=="RL03")
+            {
+                var nhanvien = await _managarNhanVienService.GetAllByPhongBan();
+                return Ok(nhanvien);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
 
@@ -64,30 +99,52 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateNhanVienRequest request)
         {
-            var result = await _managarNhanVienService.Create(request);
-            if (result == null)
+            var role = post().RoleID;
+            if (role == "RL01" || role == "RL04" || role == "RL05")
+            {
+                var result = await _managarNhanVienService.Create(request);
+                if (result == null)
+                    return BadRequest();
+                var PhongBan = await _managarNhanVienService.GetByID(result);
+                return Created(nameof(getbyID), PhongBan);
+            }
+            else
                 return BadRequest();
-            var PhongBan = await _managarNhanVienService.GetByID(result);
-            return Created(nameof(getbyID), PhongBan);
         }
 
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateNhanVienRequest request)
         {
-            var affecedResult = await _managarNhanVienService.Update(request);
-            if (affecedResult == 0)
+            var role = post().RoleID;
+            if (role == "RL01" || role == "RL04" || role == "RL05")
+            {
+                var affecedResult = await _managarNhanVienService.Update(request);
+                if (affecedResult == 0)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            else
+            {
                 return BadRequest();
-
-            return Ok();
+            }
         }
         [HttpDelete("{maNhanVien}")]
         public async Task<IActionResult> Delete(string maNhanVien)
         {
-            var affecedResult = await _managarNhanVienService.Delete(maNhanVien);
-            if (affecedResult == 0)
+            var role = post().RoleID;
+            if (role == "RL01" || role == "RL04" || role == "RL05")
+            {
+                var affecedResult = await _managarNhanVienService.Delete(maNhanVien);
+                if (affecedResult == 0)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            else
                 return BadRequest();
-
-            return Ok();
         }
         //[HttpPost("createdByExcel")]
         //public async Task<IActionResult> CreatedByExcel(IFormCollection collection)

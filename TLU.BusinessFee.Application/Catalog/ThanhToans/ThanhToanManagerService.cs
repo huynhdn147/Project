@@ -37,7 +37,8 @@ namespace TLU.BusinessFee.Application.Catalog.ThanhToans
                 SoNhanVien=x.DX.SoNhanVien,
                 ThoiGianDeXuat=x.DX.ThoiGianDeXuat,
                 TongChiPhi=x.DX.TongTien,
-                TinhTrang=x.DX.TinhTrang
+                TinhTrang=x.DX.TinhTrang,
+                MaChuyenCongTac=x.CTT.MaChuyenCongTac
             }).ToListAsync();
 
             return thanhtoan;
@@ -46,14 +47,14 @@ namespace TLU.BusinessFee.Application.Catalog.ThanhToans
         
         public async Task<string> ThanhToan(string MaHoaDon,string MaDeXuat)
         {
-            
-            var ThanhToan =  _context.thanhToans.Find(MaHoaDon, MaDeXuat);
+
+            var ThanhToan = await _context.thanhToans.FindAsync(MaHoaDon, MaDeXuat);
             var dexuat = from TT in _context.thanhToans
                          join DX in _context.deXuatThanhToans on TT.MaDeXuat equals DX.MaDeXuat
-                         where MaHoaDon == ThanhToan.MaHoaDon
+                         where MaHoaDon == TT.MaHoaDon
                          select DX;
             var dexuatDF = dexuat.FirstOrDefault();
-            if(dexuatDF.TinhTrang != "Ban lanh dao da xet duyet")
+            if (dexuatDF.TinhTrang != "Ban lanh dao da xet duyet")
             {
                 return null;
             }
@@ -64,7 +65,7 @@ namespace TLU.BusinessFee.Application.Catalog.ThanhToans
                 await _context.SaveChangesAsync();
                 return ThanhToan.MaDeXuat;
             }
-            
+
 
         }
     }

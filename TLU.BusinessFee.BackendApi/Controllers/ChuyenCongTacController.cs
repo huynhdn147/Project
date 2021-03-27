@@ -53,14 +53,11 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                 var chuyenCongTac = await _service.GetAll();
                 return Ok(chuyenCongTac);
             }
-            if(role=="RL03")
-            {
-                var chuyenCongTac = await _service.GetAllByTruongBoPhan();
-                return Ok(chuyenCongTac);
-            }
+            
             if (role == "RL02")
             {
-                var chuyenCongTac = await _service.GetAllByNhanVien();
+                var nhanvien = post().MaNhanVien;
+                var chuyenCongTac = await _service.GetAllByNhanVien(nhanvien);
                 return Ok(chuyenCongTac);
             }
             else

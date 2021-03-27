@@ -14,5 +14,6 @@ namespace TLU.BusinessFee.Application.Catalog.ThanhToans.DTOS
         public int TongChiPhi { set; get; }
         public string TinhTrang { set; get; }
         public string TenNhanVienDeXuat { set; get; }
+        public string MaChuyenCongTac { set; get; }
     }
 }

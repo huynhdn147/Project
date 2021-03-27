@@ -69,30 +69,48 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateDinhMucRequest request)
         {
-            var affecedResult = await _managerChiPhiChucVuService.Update(request);
-            if (affecedResult == 0)
-                return BadRequest();
+            var role = post().RoleID;
+            if (role == "RL01" || role == "RL04" || role == "RL05")
+            {
+                var affecedResult = await _managerChiPhiChucVuService.Update(request);
+                if (affecedResult == 0)
+                    return BadRequest();
 
-            return Ok();
+                return Ok();
+            }
+            else
+                return BadRequest();
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatedDinhMucRequest request)
         {
-            var result = await _managerChiPhiChucVuService.Create(request);
-            if (result == null)
+            var role = post().RoleID;
+            if (role == "RL01" || role == "RL04" || role == "RL05")
+            {
+                var result = await _managerChiPhiChucVuService.Create(request);
+                if (result == null)
+                    return BadRequest();
+                var chiphi = await _managerChiPhiChucVuService.GetByChiPhiID(result);
+                var capBac = await _managerChiPhiChucVuService.GetByChucVuID(result);
+                return Ok("DinhMucMoi");
+            }
+            else
                 return BadRequest();
-            var chiphi = await _managerChiPhiChucVuService.GetByChiPhiID(result);
-            var capBac = await _managerChiPhiChucVuService.GetByChucVuID(result);
-            return Ok("DinhMucMoi");
         }
         [HttpDelete("{maCapBac}&{maChiPhi}")]
         public async Task<IActionResult> Delete(string maCapBac,string maChiPhi)
         {
-            var affecedResult = await _managerChiPhiChucVuService.Delete(maCapBac, maChiPhi);
-            if (affecedResult == 0)
+            var role = post().RoleID;
+            if (role == "RL01" || role == "RL04" || role == "RL05")
+            {
+                var affecedResult = await _managerChiPhiChucVuService.Delete(maCapBac, maChiPhi);
+                if (affecedResult == 0) { 
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            else
                 return BadRequest();
-
-            return Ok();
         }
     }
 }

@@ -172,6 +172,9 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
             return nhanvien;
         }
 
-        
+        public Task<List<NhanVienViewModel>> GetAllByPhongBan()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
         Task<List<NhanVienViewModel>> GetAllByPhongBanID(string MaPhongBan);
         Task<List<NhanVienViewModel>> GetAllByChucVuID(string MaCapBac);
         Task<List<NhanVienViewModel>> GetAll();
+        Task<List<NhanVienViewModel>>GetAllByPhongBan();
         Task<PageResult<NhanVienViewModel>> GetAllPaging(GetNhanVienPagingRequest request);
         Task Create(List<NhanVienPhongBan> nhanvien);
         //Task<string> CreatedByExcel();

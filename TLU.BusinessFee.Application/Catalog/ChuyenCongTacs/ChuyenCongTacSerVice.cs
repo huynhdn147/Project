@@ -8,7 +8,7 @@ using TLU.BusinessFee.Utilities.Exceptions;
 using System.Linq;
 using System.Data;
 using System.ComponentModel.DataAnnotations;
-
+using System;
 
 namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
 {
@@ -109,14 +109,20 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
             return ChuyenCongTacViewModel;
         }
 
-        public Task<List<ChuyenCongTacViewModel>> GetAllByTruongBoPhan()
+        public Task<List<ChuyenCongTacViewModel>> GetAllByNhanVien(string MaNhanVien)
         {
-            throw new global::System.NotImplementedException();
+            // var CTT 
+            throw new NotImplementedException();
         }
 
-        public Task<List<ChuyenCongTacViewModel>> GetAllByNhanVien()
+        public Task<List<ChuyenCongTacViewModel>> GetAllByTruongBoPhan(string MaPhongBan)
         {
-            throw new global::System.NotImplementedException();
+            //var CTT= from CCT in _context.chuyenCongTacs join NVCT in _context.nhanVienCongTacs 
+            //         on CCT.MaChuyenCongTac equals NVCT.MaChuyenCongTac
+            //         join NV in _context.NhanVienPhongs on NVCT.MaNhanVien equals NV.MaNhanVien
+            //         where MaNhanVien==NV.MaNhanVien
+            //         select CCT;
+            throw new NotImplementedException();
         }
     }
 }

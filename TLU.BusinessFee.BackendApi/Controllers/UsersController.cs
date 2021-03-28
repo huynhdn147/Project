@@ -26,7 +26,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         }
         [HttpGet]
         [Authorize]
-        public async Task<string> getUserName()
+        public async Task<UserLoginViewModel> getUserName()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             IList<Claim> claims = identity.Claims.ToList();
@@ -38,13 +38,14 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             var data = new UserLoginViewModel
             {
                 MaNhanVien = claims[0].Value,
-                RoleName = roleName.ToList()[0]
+                RoleName = roleName.ToList()[0],
+                RoleID=claims[1].Value
             };
             //var query = from NV in _context.NhanVienPhongs
             //            where NV.MaNhanVien == data.MaNhanVien
             //            select NV.TenNhanVien.ToString();
             //return query.FirstOrDefault().ToString();
-            return data.MaNhanVien.ToString();
+            return data;
         }
 
 

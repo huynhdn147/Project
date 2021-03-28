@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TLU.BusinessFee.Application.Catalog.NhanVienCongTacs;
 using TLU.BusinessFee.Application.Catalog.NhanVienCongTacs.DTOS;
+using TLU.BusinessFee.Application.System;
+using TLU.BusinessFee.Data.EF;
 
 namespace TLU.BusinessFee.BackendApi.Controllers
 {
@@ -16,18 +19,45 @@ namespace TLU.BusinessFee.BackendApi.Controllers
     public class NhanVienCongTacController : ControllerBase
     {
         private readonly IManagerNhanVienCongTacService _Service;
-        public NhanVienCongTacController(IManagerNhanVienCongTacService Service)
+        private readonly TLUBusinessFeeDbContext _context;
+        public NhanVienCongTacController(IManagerNhanVienCongTacService Service,TLUBusinessFeeDbContext context)
         {
             _Service = Service;
+            _context = context;
+        }
+        [HttpHead]
+        public UserLoginViewModel post()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IList<Claim> claims = identity.Claims.ToList();
+            var RoleId = claims[1].Value;
+            var roleName = from Rn in _context.Roles
+                           where Rn.Id == RoleId
+                           select Rn.Name;
+
+            var data = new UserLoginViewModel
+            {
+                MaNhanVien = claims[0].Value,
+                RoleName = roleName.ToList()[0],
+                RoleID = claims[1].Value
+            };
+            return data;
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateNhanVienCongTacRequest Request)
         {
+            var role = post().RoleID;
+            if(role!="RL04")
+            {
+                return BadRequest();
+            }
+            else { 
             var result = _Service.Create(Request);
             if (result.Result == null)
                 return BadRequest();
             // var chuyenCongTac = await _Service.(result);
             return Ok(result.Result);
+            }
         }
         //[HttpPost]
         //public async Task<IActionResult> Creatlist([FromBody] List<CreateNhanVienCongTacRequest> requests)
@@ -41,11 +71,19 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete( string MaChuyenCongTac, string MaNhanVien)
         {
-            var affecedResult = await _Service.Delete(MaChuyenCongTac, MaNhanVien);
-            if (affecedResult == 0)
+            var role = post().RoleID;
+            if (role != "RL04")
+            {
                 return BadRequest();
+            }
+            else
+            {
+                var affecedResult = await _Service.Delete(MaChuyenCongTac, MaNhanVien);
+                if (affecedResult == 0)
+                    return BadRequest();
 
-            return Ok();
+                return Ok();
+            }
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()

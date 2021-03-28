@@ -51,7 +51,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             
             var chucvu = await _ManagerCapBacSerVice.GetAll();
             return Ok(chucvu);
-        }
+        }//Mọi người đều xem được cấp bậc
         [HttpGet("maCapBac")]
         public async Task<IActionResult> getbyID(string MaCapBac)
         {
@@ -71,6 +71,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                 return BadRequest();
             var chucvu = await _ManagerCapBacSerVice.GetByID(result);
             return Created(nameof(getbyID), chucvu);
+            // admin có thể thêm mới, sửa, xóa
         }
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateCapBacRequest request)

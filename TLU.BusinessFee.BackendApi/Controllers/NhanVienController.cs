@@ -55,14 +55,18 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpGet]
         public async Task<IActionResult> get()
         {
-            var role = post().RoleID;
-            if (role == "RL01" || role == "RL04" || role == "RL05") {
+            var role = post();
+            if (role.RoleID == "RL01" || role.RoleID == "RL04" || role.RoleID == "RL05") {
                 var nhanvien = await _managarNhanVienService.GetAll();
                 return Ok(nhanvien);
             }
-            if (role == "RL02"||role=="RL03")
+            if (role.RoleID == "RL02"||role.RoleID=="RL03")
             {
-                var nhanvien = await _managarNhanVienService.GetAllByPhongBan();
+                var phongban = from NV in _context.NhanVienPhongs
+                               where NV.MaNhanVien==role.MaNhanVien
+                               select NV.MaPhongBan;
+                var MaPhongBan = phongban.FirstOrDefault();
+                var nhanvien = await _managarNhanVienService.GetAllByPhongBanID(MaPhongBan);
                 return Ok(nhanvien);
             }
             else

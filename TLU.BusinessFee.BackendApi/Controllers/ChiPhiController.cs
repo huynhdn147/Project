@@ -46,7 +46,6 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpGet]
         public async Task<IActionResult> getall()
         {
-            
             var chiPhis = await _managerChiPhiService.GetAll();
             return Ok(chiPhis);
         }

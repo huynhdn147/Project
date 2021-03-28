@@ -43,7 +43,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             var data = new UserLoginViewModel
             {
                 MaNhanVien = claims[0].Value,
-                RoleName = roleName.ToList()[0]
+                RoleName = roleName.ToList()[0],
+                RoleID=claims[1].Value
             };
             return data;
         }
@@ -80,8 +81,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         {
 
             var maNhanVien = post().MaNhanVien;
-            var role = post().RoleName;
-            if (role == "Trưởng bộ phận")
+            var role = post().RoleID;
+            if (role == "RL03")
             {
                 var chiPhi = await _managerDeXuatThanhToanService.GetChiTieu(MaChuyenCongTac);
                 return Ok(chiPhi);

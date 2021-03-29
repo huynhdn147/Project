@@ -13,11 +13,12 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
         Task<string> CreateDeXuat(CreateDeXuatRequest request);
         Task<int> UpdateDeXuat();
         Task<List<DeXuatThanhToanViewModel>> GetallDeXuat(string MaNhanVien);
+        Task<List<DeXuatThanhToanViewModel>> GetallDeXuatToanTruong();
         Task<List<ChiPhiThanhToanViewModel>> GetChiTieu(string MaChuyenCongTac);
         Task<string> postChiPhiThanhToan(createChiPhiThanhToanRequest request);
         Task<DonViViewModel> GetDonViByMaChiPhi(string MaChiPhi);
         Task<int> DeleteChiPhiCongTac(string MaChuyenCongTac, string MaChiPhi);
-            Task<int> DeleteDeXuat(string MaDeXuat);
+        Task<int> DeleteDeXuat(string MaDeXuat);
       //  Task<List<>
     }
 }

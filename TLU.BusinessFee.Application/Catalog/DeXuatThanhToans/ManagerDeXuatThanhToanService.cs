@@ -88,7 +88,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                         on p.MaNhanVien equals NV.MaNhanVien
                         join CCT in _context.chuyenCongTacs on p.MaChuyenCongTac equals CCT.MaChuyenCongTac
                         where p.MaNhanVien == MaNhanVien
-                        orderby p.TinhTrang 
+                        orderby p.TinhTrang
                         select new { p, NV, CCT };
 
             //var SoLuongNhanVien = from NV in _context.nhanVienCongTacs
@@ -212,6 +212,35 @@ on CTT.MaChuyenCongTac equals CPCT.MaChuyenCongTac
             var fileName = $"{Path.GetExtension(originalFileName)}";
             await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
             return fileName;
+        }
+
+        public async Task<List<DeXuatThanhToanViewModel>> GetallDeXuatToanTruong()
+        {
+            var query = from p in _context.deXuatThanhToans
+                        join NV in _context.NhanVienPhongs
+                        on p.MaNhanVien equals NV.MaNhanVien
+                        join CCT in _context.chuyenCongTacs on p.MaChuyenCongTac equals CCT.MaChuyenCongTac
+                        
+                        orderby p.TinhTrang
+                        select new { p, NV, CCT };
+
+            //var SoLuongNhanVien = from NV in _context.nhanVienCongTacs
+            //                      where NV.MaChuyenCongTac == request.MaChuyenCongTac
+            //                      select NV.MaNhanVien;
+            var DeXuat = await query.Select(x => new DeXuatThanhToanViewModel()
+            {
+                MaDeXuat = x.p.MaDeXuat,
+                TenNhanVien = x.NV.TenNhanVien,
+                TenChuyenCongTac = x.CCT.TenChuyenCongTac,
+                SoNhanVien = x.p.SoNhanVien,
+                ThoiGianDeXuat = x.p.ThoiGianDeXuat.ToString().Remove(10),
+                TongTien = x.p.TongTien,
+                TinhTrang = x.p.TinhTrang,
+                Lydo = x.p.Lydo,
+                MaChuyenCongTac = x.CCT.MaChuyenCongTac
+            }).ToListAsync();
+
+            return DeXuat;
         }
     }
 }

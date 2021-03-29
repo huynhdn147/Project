@@ -109,10 +109,26 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
             return ChuyenCongTacViewModel;
         }
 
-        public Task<List<ChuyenCongTacViewModel>> GetAllByNhanVien(string MaNhanVien)
+        public async Task<List<ChuyenCongTacViewModel>> GetAllByNhanVien(string MaNhanVien)
         {
-            // var CTT 
-            throw new NotImplementedException();
+            var query = from CCT in _context.chuyenCongTacs
+                        select CCT;
+
+            var data = await query.Select(x => new ChuyenCongTacViewModel()
+            {
+                MaChuyenCongTac = x.MaChuyenCongTac,
+                TenChuyenCongTac = x.TenChuyenCongTac,
+
+                NgayBatDau = x.NgayBatDau.Date.ToString(),
+                NgayKetThuc = x.NgayKetThuc.Date.ToString()
+                ,
+                DiaDiem = x.DiaDiem,
+                MoTa = x.MoTa,
+                TrangThai = x.TrangThai,
+
+            }).ToListAsync();
+
+            return data;
         }
 
         public Task<List<ChuyenCongTacViewModel>> GetAllByTruongBoPhan(string MaPhongBan)

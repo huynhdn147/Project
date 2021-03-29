@@ -65,9 +65,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             //};
             //if (data.RoleName != "admin")
             //    return BadRequest();
-           var role= post().RoleName;
-            if (role != "admin")
-                return BadRequest();
+           //var role= post().RoleName;
+           // if (role != "admin")
+           //     return BadRequest();
             var phongban = await _publicPhongBanService.GetAll();
             return Ok(phongban);
         }
@@ -83,6 +83,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PhongBanCrearteRequest request)
         {
+            var role = post().RoleName;
+            if (role != "admin")
+                return BadRequest();
             var result = await _managerPhongBanService.Create(request);
             if (result == null)
                 return BadRequest();
@@ -92,6 +95,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPut("{MaPhongBan}")]
         public async Task<IActionResult> Update([FromBody] PhongBanUpdateRequest request)
         {
+            var role = post().RoleName;
+            if (role != "admin")
+                return BadRequest();
             var affecedResult = await _managerPhongBanService.Update(request);
             if (affecedResult == 0)
                 return BadRequest();
@@ -101,6 +107,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpDelete("{maphongban}")]
         public async Task<IActionResult> Delete(string maphongban)
         {
+            var role = post().RoleName;
+            if (role != "admin")
+                return BadRequest();
             var affecedResult = await _managerPhongBanService.Delete(maphongban);
             if (affecedResult == 0)
                 return BadRequest();

@@ -52,8 +52,14 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         public async Task<IActionResult> getByid()
         {
             string MaNhanVien =  post().MaNhanVien.ToString();
-            var DeXuat = await _managerDeXuatThanhToanService.GetallDeXuat(MaNhanVien);
-            return Ok(DeXuat);
+            var role = post().RoleID;
+            if (role == "RL02")
+            {
+                var DeXuat = await _managerDeXuatThanhToanService.GetallDeXuat(MaNhanVien);
+                return Ok(DeXuat);
+            }
+            else
+                return BadRequest();
         }
         [HttpPost]
         //[Consumes("multipart/form-data")]
@@ -79,7 +85,6 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpGet("DuyetDeXuat/SoTienChiTieu")]
         public async Task<IActionResult> GetChiPhiThanhToan2(string MaChuyenCongTac)
         {
-
             var maNhanVien = post().MaNhanVien;
             var role = post().RoleID;
             if (role == "RL03")

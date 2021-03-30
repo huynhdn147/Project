@@ -22,14 +22,25 @@ namespace TLU.BusinessFee.Application.Catalog.ChucVus
         }
         public async Task<string> Create(CreatedCapBacRequest request)
         {
-            var chucvu = new CapBac()
+            var CapBac = from CB in _context.CapBacs
+                                select CB;
+            
+            string SoLuongCapBac =   CapBac.Count().ToString();
+            do
             {
-                MaCapBac = request.MaCapBac,
-                TenCapBac = request.TenCapBac,
-                MoTa=request.moTa
+                SoLuongCapBac = (Convert.ToInt32(SoLuongCapBac) + 1).ToString();
 
-            };
-            _context.CapBacs.Add(chucvu);
+            }
+            while (_context.CapBacs.Find("C" + SoLuongCapBac) != null) ;
+            var chucvu = new CapBac()
+                {
+                    MaCapBac = "C" + SoLuongCapBac,
+                    TenCapBac = request.TenCapBac,
+                    MoTa = request.moTa
+                };
+            
+         
+              _context.CapBacs.Add(chucvu);
             await _context.SaveChangesAsync();
             return chucvu.MaCapBac;
         }
@@ -37,7 +48,7 @@ namespace TLU.BusinessFee.Application.Catalog.ChucVus
         {
             var chucvu = await _context.CapBacs.FindAsync(request.MaCapBac);
             var chucvudf = await _context.CapBacs.FirstOrDefaultAsync(x => x.MaCapBac == request.MaCapBac);
-            if (chucvu == null) throw new TLUException("Khong co chuc vu");
+            if (chucvu == null) throw new TLUException("Khong co cap bac");
             chucvudf.MaCapBac = request.MaCapBac;
             chucvudf.TenCapBac = request.TenCapBac;
             chucvudf.MoTa = request.Mota;

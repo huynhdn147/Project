@@ -70,7 +70,7 @@ namespace TLU.BusinessFee.Application.Catalog.DuyetDeXuat
         public async Task<int> PhongKeToanTuChoiManager(TuChoiDeXuatManagerRequest request)
         {
             var DeXuat = await _context.deXuatThanhToans.FindAsync(request.MaDeXuat);
-            if (DeXuat.TinhTrang == "Truong bo phan da duyet")
+            if (DeXuat.TinhTrang == "Truong bo phan da duyet") 
             {
                 var DeXuatdf = await _context.deXuatThanhToans.FirstOrDefaultAsync(x => x.MaDeXuat == request.MaDeXuat);
                 DeXuatdf.TinhTrang = "Phong ke toan tu choi";

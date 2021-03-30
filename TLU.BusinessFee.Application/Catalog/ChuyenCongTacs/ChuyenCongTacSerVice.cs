@@ -21,10 +21,26 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
         }
         public async Task<string> Create(CreateChuyenCongTacRequest Request)
         {
-            
+            DateTime ngaytemp;
+            if(Request.NgayBatDau>Request.NgayKetThuc)
+            {
+                ngaytemp = Request.NgayBatDau;
+                Request.NgayBatDau = Request.NgayKetThuc;
+                Request.NgayKetThuc = ngaytemp;
+
+            }
+            var chuyenCongTacs = from CCT in _context.chuyenCongTacs
+                         select CCT;
+            string SoLuongChuyenCongTac = chuyenCongTacs.Count().ToString();
+            do
+            {
+                SoLuongChuyenCongTac = (Convert.ToInt32(SoLuongChuyenCongTac) + 1).ToString();
+
+            }
+            while (_context.chuyenCongTacs.Find("CT" + SoLuongChuyenCongTac) != null);
             var ChuyenCongTac = new ChuyenCongTac()
             {
-                MaChuyenCongTac=Request.MaChuyenCongTac,
+                MaChuyenCongTac= "CT" + SoLuongChuyenCongTac,
                 TenChuyenCongTac=Request.TenChuyenCongTac,
                 NgayBatDau=Request.NgayBatDau,
                 NgayKetThuc=Request.NgayKetThuc,

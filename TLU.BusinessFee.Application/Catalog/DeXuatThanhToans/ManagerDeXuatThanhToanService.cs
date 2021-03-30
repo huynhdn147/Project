@@ -37,14 +37,24 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                                   select NV.MaNhanVien;
             var SoluongHoaDon = from HD in _context.thanhToans
                                 select HD.MaHoaDon;
+            var SoDeXuat= from HD in _context.deXuatThanhToans
+                              select HD.MaDeXuat;
             var chuyenCongTac = await _context.chuyenCongTacs.FindAsync(request.MaChuyenCongTac);
             if (chuyenCongTac.TrangThai != "Chua thuc hien")
             {
                 throw new TLUException("Chuyến Công tác đã diễn ra, không thể sửa thông tin chuyến công tác");
             }
+
+            string soLuongDeXuat= SoDeXuat.Count().ToString();
+            do
+            {
+                soLuongDeXuat = (Convert.ToInt32(soLuongDeXuat) + 1).ToString();
+
+            }
+            while (_context.deXuatThanhToans.Find("DX" + soLuongDeXuat) != null);
             var DeXuat = new DeXuatThanhToan()
             {
-                MaDeXuat = request.MaDeXuat,
+                MaDeXuat = "DX" + soLuongDeXuat,
                 MaChuyenCongTac = request.MaChuyenCongTac,
                 SoNhanVien = SoLuongNhanVien.Count(),
                 TinhTrang = "Chua xet duyet",
@@ -56,9 +66,16 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var ChuyenCongTacdf = await _context.chuyenCongTacs.FirstOrDefaultAsync
                 (x => x.MaChuyenCongTac == request.MaChuyenCongTac);
             ChuyenCongTacdf.TrangThai = "Da thuc hien";
+            string soLuongHoaDon = SoluongHoaDon.Count().ToString();
+            do
+            {
+                soLuongHoaDon = (Convert.ToInt32(soLuongHoaDon) + 1).ToString();
+
+            }
+            while (_context.deXuatThanhToans.Find("HD" + soLuongHoaDon) != null);
             var ThanhToan = new ThanhToan()
             {
-                MaHoaDon = "HDTT" + SoluongHoaDon.Count().ToString(),
+                MaHoaDon = "HD" + soLuongHoaDon,
                 MaDeXuat=request.MaDeXuat,
                 ThoiGianDeXuat=request.ThoiGianDeXuat,
                 TinhTrang= "Chua xet duyet",

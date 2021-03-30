@@ -75,7 +75,6 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                 var affecedResult = await _managerChiPhiChucVuService.Update(request);
                 if (affecedResult == 0)
                     return BadRequest();
-
                 return Ok();
             }
             else

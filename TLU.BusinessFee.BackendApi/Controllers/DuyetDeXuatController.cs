@@ -152,16 +152,28 @@ namespace TLU.BusinessFee.BackendApi.Controllers
 
         }
         [HttpPost("TuChoi")]
-        public async Task<IActionResult> TuChoi(TuChoiDeXuatManagerRequest request)
+        public async Task<IActionResult> TuChoi(TuChoiDeXuatManagerRequest request) 
         {
             var maNhanVien = post().MaNhanVien;
-            var role = post().RoleName;
-            if (role != "Trưởng bộ phận")
-                return BadRequest();
-            else
-            {
+            var role = post().RoleID;
+            if (role == "RL03") { 
                 var duyet = await _DuyetDeXuat.TruongBoPhanManagerTuChoi(request);
                 return Ok(duyet);
+            }
+            if(role=="RL04")
+            {
+                var duyet = await _DuyetDeXuat.PhongKeToanTuChoiManager(request);
+                return Ok(duyet);
+            }
+            if (role == "RL05")
+            {
+                var duyet = await _DuyetDeXuat.LanhDaoTuChoiManager(request);
+                return Ok(duyet);
+            }
+            else
+            {
+
+                return BadRequest();
             }
         }
         //[HttpGet("")]

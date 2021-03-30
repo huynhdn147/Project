@@ -20,11 +20,26 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
         {
             _context = context;
         }
+
         public async Task<string> Create(CreateNhanVienRequest request)
         {
+            //lay ra phong ban
+            var NhanVienTrongPhongBan = from NV in _context.NhanVienPhongs
+                                        where NV.MaPhongBan == request.MaPhongBan
+                                        select NV;
+            string SoLuongNhanVien = NhanVienTrongPhongBan.Count().ToString();
+            //dem so nhan vien trong phong ban
+            //su dung thuat toan
+            do
+            {
+                SoLuongNhanVien = (Convert.ToInt32(SoLuongNhanVien) + 1).ToString();
+
+            }
+            while (_context.CapBacs.Find( request.MaPhongBan+ SoLuongNhanVien) != null);
+            //gan vao` tng phong ban
             var nhanvien = new NhanVienPhongBan()
             {
-                MaNhanVien = request.MaNhanVien,
+                MaNhanVien = request.MaPhongBan + SoLuongNhanVien,
                 TenNhanVien = request.TenNhanVien,
                 MaCapBac = request.MaCapBac,
                 MaPhongBan = request.MaPhongBan
@@ -37,13 +52,13 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
             var hasher = new PasswordHasher<User>();
             var User = new User()
             {
-                MaNhanVien = request.MaNhanVien,
+                MaNhanVien = nhanvien.MaNhanVien,
                 PasswordHash = hasher.HashPassword(null, request.PassWord)
             };
             _context.User.Add(User);
             var UserRole = new UserRole()
             {
-                MaNhanVien = request.MaNhanVien,
+                MaNhanVien = User.MaNhanVien,
                 RoleId = request.Roleid
             };
             _context.UserRole.Add(UserRole);

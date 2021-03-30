@@ -19,9 +19,19 @@ namespace TLU.BusinessFee.Application.Catalog.ChiPhis
         }
         public async Task<string> Create(CreatedChiPhiRequest request)
         {
+            var ChiPhi = from CP in _context.ChiPhis
+                         select CP;
+
+            string SoLuongChiPhi = ChiPhi.Count().ToString();
+            do
+            {
+                SoLuongChiPhi = (Convert.ToInt32(SoLuongChiPhi) + 1).ToString();
+
+            }
+            while (_context.CapBacs.Find("CP" + SoLuongChiPhi) != null);
             var chiphi = new ChiPhi()
             {
-                MaChiPhi = request.MaChiPhi,
+                MaChiPhi = "CP" + SoLuongChiPhi,
                 TenChiPhi = request.TenChiPhi,
                 MoTa=request.MoTa
             };

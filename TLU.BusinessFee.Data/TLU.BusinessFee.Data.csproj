@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20210122092540_addUserLogin.Designer.cs" />
     <Compile Remove="Migrations\20210122092723_addUserLogin.cs" />
     <Compile Remove="Migrations\20210122092723_addUserLogin.Designer.cs" />
+    <Compile Remove="Migrations\20210330071336_add-Db.cs" />
+    <Compile Remove="Migrations\20210330071336_add-Db.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

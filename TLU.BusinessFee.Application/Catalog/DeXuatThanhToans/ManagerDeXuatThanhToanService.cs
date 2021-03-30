@@ -76,7 +76,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var ThanhToan = new ThanhToan()
             {
                 MaHoaDon = "HD" + soLuongHoaDon,
-                MaDeXuat=request.MaDeXuat,
+                MaDeXuat=DeXuat.MaDeXuat,
                 ThoiGianDeXuat=request.ThoiGianDeXuat,
                 TinhTrang= "Chua xet duyet",
                 TongChiPhi=request.TongTien

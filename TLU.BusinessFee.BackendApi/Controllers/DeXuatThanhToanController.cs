@@ -82,12 +82,11 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         {
             var maNhanVien = post().MaNhanVien;
             var role = post().RoleID;
-            if (role == "RL03")
-            {
+            
                 var chiPhi = await _managerDeXuatThanhToanService.GetChiTieu(MaChuyenCongTac);
                 return Ok(chiPhi);
-            }
-            else return BadRequest();
+            
+            
         }
         [HttpPost("ChiPhiThanhToan")]
         public async Task<IActionResult> PostChiPhiThanhToan([FromBody] createChiPhiThanhToanRequest request)

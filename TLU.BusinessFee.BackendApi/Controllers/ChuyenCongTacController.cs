@@ -47,21 +47,10 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpGet]
         public async Task<IActionResult> getall()
         {
-            var role = post().RoleID;
-            if (role == "RL01" ||role=="RL04"||role=="RL05") 
-            { 
+            
                 var chuyenCongTac = await _service.GetAll();
                 return Ok(chuyenCongTac);
-            }
             
-            if (role == "RL02")
-            {
-                var nhanvien = post().MaNhanVien;
-                var chuyenCongTac = await _service.GetAllByNhanVien(nhanvien);
-                return Ok(chuyenCongTac);
-            }
-            else
-                return BadRequest();
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateChuyenCongTacRequest request)

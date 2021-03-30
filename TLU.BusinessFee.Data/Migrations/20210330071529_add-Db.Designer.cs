@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TLU.BusinessFee.Data.EF;
 
 namespace TLU.BusinessFee.Data.Migrations
 {
     [DbContext(typeof(TLUBusinessFeeDbContext))]
-    partial class TLUBusinessFeeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210330071529_add-Db")]
+    partial class addDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

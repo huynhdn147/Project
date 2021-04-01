@@ -26,7 +26,7 @@ namespace TLU.BusinessFee.Application.Catalog.DuyetDeXuat
                 DeXuatdf.TinhTrang = "Ban lanh dao da xet duyet";
                 return await _context.SaveChangesAsync();
             }
-            if(DeXuat.TinhTrang== "Truong bo phan da duyet" || DeXuat.TinhTrang== "Chua xet duye")
+            if(DeXuat.TinhTrang== "Truong bo phan da duyet" || DeXuat.TinhTrang== "Chua xet duyet")
             {
                 throw new TLUException("De xuat chua duoc xet duyet");
             }
@@ -97,7 +97,7 @@ namespace TLU.BusinessFee.Application.Catalog.DuyetDeXuat
         public async Task<int> TruongBoPhanManagerTuChoi(TuChoiDeXuatManagerRequest request)
         {
             var DeXuat = await _context.deXuatThanhToans.FindAsync(request.MaDeXuat);
-            if (DeXuat.TinhTrang == "chua xet duyet")
+            if (DeXuat.TinhTrang == "Chua xet duyet")
             {
                 var DeXuatdf = await _context.deXuatThanhToans.FirstOrDefaultAsync(x => x.MaDeXuat == request.MaDeXuat);
                 DeXuatdf.TinhTrang = "Truong bo phan tu choi";

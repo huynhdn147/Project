@@ -40,9 +40,9 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var SoDeXuat= from HD in _context.deXuatThanhToans
                               select HD.MaDeXuat;
             var chuyenCongTac = await _context.chuyenCongTacs.FindAsync(request.MaChuyenCongTac);
-            if (chuyenCongTac.TrangThai != "Chua thuc hien")
+            if (chuyenCongTac.TrangThai == "Chua thuc hien")
             {
-                throw new TLUException("Chuyến Công tác đã diễn ra, không thể sửa thông tin chuyến công tác");
+                throw new TLUException("Chuyến Công tác chua xong  không thể de xuat thanh toan");
             }
 
             string soLuongDeXuat= SoDeXuat.Count().ToString();
@@ -60,12 +60,11 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                 TinhTrang = "Chua xet duyet",
                 MaNhanVien=request.NhanVienDeXuat,
                 TongTien=request.TongTien,
-                ThoiGianDeXuat=request.ThoiGianDeXuat
-               
+                ThoiGianDeXuat=DateTime.Now
             };
-            var ChuyenCongTacdf = await _context.chuyenCongTacs.FirstOrDefaultAsync
-                (x => x.MaChuyenCongTac == request.MaChuyenCongTac);
-            ChuyenCongTacdf.TrangThai = "Da thuc hien";
+            //var ChuyenCongTacdf = await _context.chuyenCongTacs.FirstOrDefaultAsync
+            //    (x => x.MaChuyenCongTac == request.MaChuyenCongTac);
+            //ChuyenCongTacdf.TrangThai = "Da thuc hien";
             string soLuongHoaDon = SoluongHoaDon.Count().ToString();
             do
             {
@@ -73,11 +72,11 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
 
             }
             while (_context.deXuatThanhToans.Find("HD" + soLuongHoaDon) != null);
-            var ThanhToan = new ThanhToan()
+             var ThanhToan = new ThanhToan()
             {
                 MaHoaDon = "HD" + soLuongHoaDon,
                 MaDeXuat=DeXuat.MaDeXuat,
-                ThoiGianDeXuat=request.ThoiGianDeXuat,
+                ThoiGianDeXuat=DeXuat.ThoiGianDeXuat,
                 TinhTrang= "Chua xet duyet",
                 TongChiPhi=request.TongTien
             };
@@ -92,13 +91,13 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             //        }
             //    };
             //}
-            _context.deXuatThanhToans.AddAsync(DeXuat);
-            _context.thanhToans.AddAsync(ThanhToan);
+            await _context.deXuatThanhToans.AddAsync(DeXuat);
+            await _context.thanhToans.AddAsync(ThanhToan);
             await _context.SaveChangesAsync();
             return DeXuat.MaDeXuat;
         }
 
-        public async Task<List<DeXuatThanhToanViewModel>> GetallDeXuat(string MaNhanVien)
+            public async Task<List<DeXuatThanhToanViewModel>> GetallDeXuat(string MaNhanVien)
         {
             var  query = from p in _context.deXuatThanhToans
                         join NV in _context.NhanVienPhongs
@@ -108,9 +107,6 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                         orderby p.TinhTrang
                         select new { p, NV, CCT };
 
-            //var SoLuongNhanVien = from NV in _context.nhanVienCongTacs
-            //                      where NV.MaChuyenCongTac == request.MaChuyenCongTac
-            //                      select NV.MaNhanVien;
             var DeXuat = await query.Select( x => new DeXuatThanhToanViewModel()
             {
                 MaDeXuat =  x.p.MaDeXuat,

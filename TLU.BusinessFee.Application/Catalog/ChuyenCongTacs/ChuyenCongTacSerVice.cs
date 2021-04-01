@@ -87,21 +87,43 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
 
         public async Task<List<ChuyenCongTacViewModel>> GetAll()
         {
+            
+
             var query = from CCT in _context.chuyenCongTacs
                         select CCT;
-            
-            var data = await query.Select(x => new ChuyenCongTacViewModel()
+            var checkday= await query.Select( x=> new ChuyenCongTacViewModel()
             {
                 MaChuyenCongTac = x.MaChuyenCongTac,
                 TenChuyenCongTac = x.TenChuyenCongTac,
-                
+                NgayBatDau = x.NgayBatDau.Date.ToString(),
+                NgayKetThuc = x.NgayKetThuc.Date.ToString()
+                ,
+                DiaDiem = x.DiaDiem,
+                MoTa = x.MoTa,
+                TrangThai = x.TrangThai,
+            }).ToListAsync();
+            foreach(var item in checkday)
+            {
+                var ChuyenCongTacdf = await _context.chuyenCongTacs.FirstOrDefaultAsync(x => x.MaChuyenCongTac == item.MaChuyenCongTac);
+                if (ChuyenCongTacdf.NgayKetThuc<DateTime.Now)
+                {
+                    ChuyenCongTacdf.TrangThai = "Da thuc hien";
+                    await _context.SaveChangesAsync();
+                }    
+            };
+
+            var query1 = from CCT in _context.chuyenCongTacs
+                        select CCT;
+            var data = await query1.Select(x => new ChuyenCongTacViewModel()
+            {
+                MaChuyenCongTac = x.MaChuyenCongTac,
+                TenChuyenCongTac = x.TenChuyenCongTac,
                 NgayBatDau = x.NgayBatDau.Date.ToString(),
                 NgayKetThuc = x.NgayKetThuc.Date.ToString()
                 ,
                 DiaDiem=x.DiaDiem,
                 MoTa = x.MoTa,
                 TrangThai = x.TrangThai,
-                
             }).ToListAsync();
             
             return data;

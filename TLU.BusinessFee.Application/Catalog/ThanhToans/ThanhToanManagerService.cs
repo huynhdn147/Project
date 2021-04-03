@@ -35,7 +35,7 @@ namespace TLU.BusinessFee.Application.Catalog.ThanhToans
                 TenChuyenCongTac=x.CTT.TenChuyenCongTac,
                 TenNhanVienDeXuat=x.NV.TenNhanVien,
                 SoNhanVien=x.DX.SoNhanVien,
-                ThoiGianDeXuat=x.DX.ThoiGianDeXuat,
+                ThoiGianDeXuat=x.DX.ThoiGianDeXuat.ToShortDateString(),
                 TongChiPhi=x.DX.TongTien,
                 TinhTrang=x.DX.TinhTrang,
                 MaChuyenCongTac=x.CTT.MaChuyenCongTac

@@ -95,8 +95,8 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
             {
                 MaChuyenCongTac = x.MaChuyenCongTac,
                 TenChuyenCongTac = x.TenChuyenCongTac,
-                NgayBatDau = x.NgayBatDau.Date.ToString(),
-                NgayKetThuc = x.NgayKetThuc.Date.ToString()
+                NgayBatDau = x.NgayBatDau.ToShortDateString(),
+                NgayKetThuc = x.NgayKetThuc.ToShortDateString()
                 ,
                 DiaDiem = x.DiaDiem,
                 MoTa = x.MoTa,
@@ -118,8 +118,8 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
             {
                 MaChuyenCongTac = x.MaChuyenCongTac,
                 TenChuyenCongTac = x.TenChuyenCongTac,
-                NgayBatDau = x.NgayBatDau.Date.ToString(),
-                NgayKetThuc = x.NgayKetThuc.Date.ToString()
+                NgayBatDau = x.NgayBatDau.ToShortDateString(),
+                NgayKetThuc = x.NgayKetThuc.ToShortDateString()
                 ,
                 DiaDiem=x.DiaDiem,
                 MoTa = x.MoTa,
@@ -157,8 +157,8 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
                 MaChuyenCongTac = x.MaChuyenCongTac,
                 TenChuyenCongTac = x.TenChuyenCongTac,
 
-                NgayBatDau = x.NgayBatDau.Date.ToString(),
-                NgayKetThuc = x.NgayKetThuc.Date.ToString()
+                NgayBatDau = x.NgayBatDau.ToShortDateString(),
+                NgayKetThuc = x.NgayKetThuc.ToShortDateString()
                 ,
                 DiaDiem = x.DiaDiem,
                 MoTa = x.MoTa,

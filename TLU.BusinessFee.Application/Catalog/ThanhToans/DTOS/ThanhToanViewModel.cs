@@ -10,7 +10,7 @@ namespace TLU.BusinessFee.Application.Catalog.ThanhToans.DTOS
         public string MaDeXuat { set; get; }
         public string TenChuyenCongTac { set; get; }
         public int SoNhanVien { set; get; }
-        public DateTime ThoiGianDeXuat { set; get; }
+        public string ThoiGianDeXuat { set; get; }
         public int TongChiPhi { set; get; }
         public string TinhTrang { set; get; }
         public string TenNhanVienDeXuat { set; get; }

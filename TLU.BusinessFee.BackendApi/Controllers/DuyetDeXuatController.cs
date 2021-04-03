@@ -70,7 +70,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                     ThoiGianDeXuat = x.DX.ThoiGianDeXuat.ToShortDateString(),
                     TongChiPhi = x.DX.TongTien,
                     LyDo = x.DX.Lydo,
-                    TinhTrang = x.DX.TinhTrang
+                    TinhTrang = x.DX.TinhTrang,
+                    NgayBatDau=x.CTT.NgayBatDau,
+                    NgayKetThuc=x.CTT.NgayKetThuc
 
                 }).ToList();
             return Ok(dexuatlist);

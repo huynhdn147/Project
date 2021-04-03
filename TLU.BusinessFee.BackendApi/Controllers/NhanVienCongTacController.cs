@@ -72,7 +72,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         public async Task<IActionResult> Delete( string MaChuyenCongTac, string MaNhanVien)
         {
             var role = post().RoleID;
-            if (role != "RL04")
+            if (role != "RL04"&& role!="RL01")
             {
                 return BadRequest();
             }

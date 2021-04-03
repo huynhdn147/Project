@@ -117,7 +117,9 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                 TongTien = x.p.TongTien,
                 TinhTrang = x.p.TinhTrang,
                 Lydo = x.p.Lydo,
-                MaChuyenCongTac=x.CCT.MaChuyenCongTac
+                MaChuyenCongTac=x.CCT.MaChuyenCongTac,
+                NgayBatDau=x.CCT.NgayBatDau,
+                NgayKetThuc=x.CCT.NgayKetThuc
             }).ToListAsync();
 
             return DeXuat;
@@ -206,7 +208,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
 on CTT.MaChuyenCongTac equals CPCT.MaChuyenCongTac
                                 where CPCT.MaChuyenCongTac == MaChuyenCongTac
                                 select CTT.TrangThai;
-            if (chuyenCongTac.FirstOrDefault().ToString() != "Da thuc hien")
+            if (chuyenCongTac.FirstOrDefault().ToString() == "Da thuc hien")
             {
                 var ChiPhiDeXuat = await _context.chiPhiCongTacs.FindAsync(MaChiPhi, MaChuyenCongTac);
                 // var chucvu = await _context.ChiPhiChucVus.FindAsync(MaChucVu);

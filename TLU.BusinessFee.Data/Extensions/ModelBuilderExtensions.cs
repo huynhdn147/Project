@@ -34,6 +34,7 @@ namespace TLU.BusinessFee.Data.Extensions
                 new CapBac() { MaCapBac = "C6", TenCapBac = "CAP6" }
                 );
             modelBuilder.Entity<NhanVienPhongBan>().HasData(
+                new NhanVienPhongBan() { MaNhanVien="admin",TenNhanVien="admin",MaCapBac="C1"},
                  //Phòng tai vu
                  new NhanVienPhongBan() { MaNhanVien = "TV001", TenNhanVien = "Ha Linh Giang", MaCapBac = "C1", MaPhongBan = "TV" },
                  new NhanVienPhongBan() { MaNhanVien = "TV002", TenNhanVien = "Bui Mai Ngoc", MaCapBac = "C2", MaPhongBan = "TV" },
@@ -183,6 +184,7 @@ namespace TLU.BusinessFee.Data.Extensions
 
             var hasher = new PasswordHasher<User>();
             modelBuilder.Entity<User>().HasData(
+                new User { MaNhanVien="admin", PasswordHash = hasher.HashPassword(null, "123") },
                 ////Phòng CNTT
                 new User { MaNhanVien = "IT001", PasswordHash = hasher.HashPassword(null, "123") },
                 new User { MaNhanVien = "IT002", PasswordHash = hasher.HashPassword(null, "123") },
@@ -292,6 +294,7 @@ namespace TLU.BusinessFee.Data.Extensions
 
 
             modelBuilder.Entity<UserRole>().HasData(
+                new UserRole() { RoleId="RL01",MaNhanVien="admin"},
                 new UserRole() { RoleId = "RL02", MaNhanVien = "IT001" },
                 new UserRole() { RoleId = "RL02", MaNhanVien = "IT002" },
                 new UserRole() { RoleId = "RL02", MaNhanVien = "IT003" },

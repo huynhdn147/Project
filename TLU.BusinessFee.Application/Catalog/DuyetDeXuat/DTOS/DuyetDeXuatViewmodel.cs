@@ -15,7 +15,7 @@ namespace TLU.BusinessFee.Application.Catalog.DuyetDeXuat.DTOS
         public string TinhTrang { set; get; }
         public string LyDo { set; get; }
         public string TenNhanVien { set; get; }
-        public DateTime NgayBatDau { set; get; }
-        public DateTime NgayKetThuc { set; get; }
+        public string NgayBatDau { set; get; }
+        public string NgayKetThuc { set; get; }
     }
 }

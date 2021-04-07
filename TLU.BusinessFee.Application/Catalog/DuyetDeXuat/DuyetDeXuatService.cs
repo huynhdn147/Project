@@ -38,7 +38,7 @@ namespace TLU.BusinessFee.Application.Catalog.DuyetDeXuat
         public async Task<int> LanhDaoTuChoiManager(TuChoiDeXuatManagerRequest request)
         {
             var DeXuat = await _context.deXuatThanhToans.FindAsync(request.MaDeXuat);
-            if (DeXuat.TinhTrang == "Phong ke toan xet duyet")
+            if (DeXuat.TinhTrang == "Phong ke toan da xet duyet")
             {
                 var DeXuatdf = await _context.deXuatThanhToans.FirstOrDefaultAsync(x => x.MaDeXuat == request.MaDeXuat);
                 DeXuatdf.TinhTrang = "Ban lanh dao tu choi";

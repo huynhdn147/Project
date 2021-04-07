@@ -41,7 +41,43 @@ namespace TLU.BusinessFee.Application.Catalog.ThanhToans
                 MaChuyenCongTac=x.CTT.MaChuyenCongTac
             }).ToListAsync();
 
-            return thanhtoan;
+            List<ThanhToanViewModel> thanhToanViewModels = new List<ThanhToanViewModel>();
+            foreach (var item in thanhtoan)
+            {
+                if (item.TinhTrang == "Ban lanh dao da xet duyet")
+                {
+                    thanhToanViewModels.Add(item);
+                }
+            }
+            foreach (var item in thanhtoan)
+            {
+                if (item.TinhTrang == "Phong ke toan da xet duyet")
+                {
+                    thanhToanViewModels.Add(item);
+                }
+            }
+            foreach (var item in thanhtoan)
+            {
+                if (item.TinhTrang == "Truong bo phan da duyet")
+                {
+                    thanhToanViewModels.Add(item);
+                }
+            }
+            foreach (var item in thanhtoan)
+            {
+                if (item.TinhTrang == "Da Thanh Toan")
+                {
+                    thanhToanViewModels.Add(item);
+                }
+            }
+            foreach (var item in thanhtoan)
+            {
+                if (item.TinhTrang == "Chua xet duyet")
+                {
+                    thanhToanViewModels.Add(item);
+                }
+            }
+            return thanhToanViewModels;
         }
 
         

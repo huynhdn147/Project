@@ -18,7 +18,9 @@ namespace TLU.BusinessFee.Application.Catalog.ChucVu
         }
         public async Task<List<ChucVuViewModel>> GetAll()
         {
-            var query = from p in _context.Roles select p;
+            var query = from p in _context.Roles
+                        where p.Id != "RL01"
+                        select p;
             //var query2= from US in _context.User join 
             var data = await query.Select(x => new ChucVuViewModel()
             {

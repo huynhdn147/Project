@@ -99,7 +99,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
 
             public async Task<List<DeXuatThanhToanViewModel>> GetallDeXuat(string MaNhanVien)
         {
-            var  query = from p in _context.deXuatThanhToans
+            var query = from p in _context.deXuatThanhToans
                         join NV in _context.NhanVienPhongs
                         on p.MaNhanVien equals NV.MaNhanVien
                         join CCT in _context.chuyenCongTacs on p.MaChuyenCongTac equals CCT.MaChuyenCongTac
@@ -107,22 +107,81 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                         orderby p.TinhTrang
                         select new { p, NV, CCT };
 
-            var DeXuat = await query.Select( x => new DeXuatThanhToanViewModel()
+            var DeXuat = await query.Select(x => new DeXuatThanhToanViewModel()
             {
-                MaDeXuat =  x.p.MaDeXuat,
+                MaDeXuat = x.p.MaDeXuat,
                 TenNhanVien = x.NV.TenNhanVien,
                 TenChuyenCongTac = x.CCT.TenChuyenCongTac,
-                SoNhanVien=x.p.SoNhanVien,   
-                ThoiGianDeXuat =  x.p.ThoiGianDeXuat.ToShortDateString(),
+                SoNhanVien = x.p.SoNhanVien,
+                ThoiGianDeXuat = x.p.ThoiGianDeXuat.ToShortDateString(),
                 TongTien = x.p.TongTien,
                 TinhTrang = x.p.TinhTrang,
                 Lydo = x.p.Lydo,
-                MaChuyenCongTac=x.CCT.MaChuyenCongTac,
-                NgayBatDau=x.CCT.NgayBatDau.ToShortDateString(),
-                NgayKetThuc=x.CCT.NgayKetThuc.ToShortDateString()
+                MaChuyenCongTac = x.CCT.MaChuyenCongTac,
+                NgayBatDau = x.CCT.NgayBatDau.ToShortDateString(),
+                NgayKetThuc = x.CCT.NgayKetThuc.ToShortDateString()
             }).ToListAsync();
+            List<DeXuatThanhToanViewModel> duyetDeXuats = new List<DeXuatThanhToanViewModel>();
+            foreach (var item in DeXuat)
+            {
+                if (item.TinhTrang == "Chua xet duyet")
+                {
+                    duyetDeXuats.Add(item);
+                }
+            }
 
-            return DeXuat;
+            foreach (var item in DeXuat)
+            {
+                if (item.TinhTrang == "Truong bo phan da duyet")
+                {
+                    duyetDeXuats.Add(item);
+                }
+            }
+
+            foreach (var item in DeXuat)
+            {
+                if (item.TinhTrang == "Phong ke toan da xet duyet")
+                {
+                    duyetDeXuats.Add(item);
+                }
+            }
+            foreach (var item in DeXuat)
+            {
+                if (item.TinhTrang == "Ban lanh dao da xet duyet")
+                {
+                    duyetDeXuats.Add(item);
+                }
+            }
+            foreach (var item in DeXuat)
+            {
+                if (item.TinhTrang == "Da Thanh Toan")
+                {
+                    duyetDeXuats.Add(item);
+                }
+            }
+            foreach (var item in DeXuat)
+            {
+                if (item.TinhTrang == "Truong bo phan tu choi")
+                {
+                    duyetDeXuats.Add(item);
+                }
+            }
+            foreach (var item in DeXuat)
+            {
+                if (item.TinhTrang == "Phong ke toan tu choi")
+                {
+                    duyetDeXuats.Add(item);
+                }
+            }
+            foreach (var item in DeXuat)
+            {
+                if (item.TinhTrang == "Ban lanh dao tu choi")
+                {
+                    duyetDeXuats.Add(item);
+                }
+            }
+
+            return duyetDeXuats;
         }
 
         public async Task<List<ChiPhiThanhToanViewModel>> GetChiTieu(string MaChuyenCongTac)

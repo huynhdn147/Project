@@ -41,12 +41,11 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
             {
                 MaNhanVien = request.MaPhongBan + SoLuongNhanVien,
                 TenNhanVien = request.TenNhanVien,
+
                 MaCapBac = request.MaCapBac,
                 MaPhongBan = request.MaPhongBan
-
-
             };
-            _context.NhanVienPhongs.Add(nhanvien);
+            
 
             //await _context.SaveChangesAsync();
             var hasher = new PasswordHasher<User>();
@@ -55,12 +54,19 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
                 MaNhanVien = nhanvien.MaNhanVien,
                 PasswordHash = hasher.HashPassword(null, request.PassWord)
             };
-            _context.User.Add(User);
+            
             var UserRole = new UserRole()
             {
                 MaNhanVien = User.MaNhanVien,
                 RoleId = request.Roleid
             };
+            if(UserRole.RoleId=="RL05")
+            {
+                nhanvien.MaPhongBan = "LD";
+                nhanvien.MaNhanVien = nhanvien.MaPhongBan + SoLuongNhanVien;
+            }    
+            _context.User.Add(User);
+            _context.NhanVienPhongs.Add(nhanvien);
             _context.UserRole.Add(UserRole);
             await _context.SaveChangesAsync();
             return nhanvien.MaNhanVien;

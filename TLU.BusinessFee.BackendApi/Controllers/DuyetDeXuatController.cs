@@ -74,8 +74,67 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                     NgayBatDau=x.CTT.NgayBatDau.ToShortDateString(),
                     NgayKetThuc=x.CTT.NgayKetThuc.ToShortDateString()
 
-                }).ToList();
-            return Ok(dexuatlist);
+                }).ToList(); List<DuyetDeXuatViewmodel> duyetDeXuats = new List<DuyetDeXuatViewmodel>();
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Chua xet duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Truong bo phan da duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Phong ke toan da xet duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Ban lanh dao da xet duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Da Thanh Toan")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Truong bo phan tu choi")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Phong ke toan tu choi")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Ban lanh dao tu choi")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+
+                return Ok(duyetDeXuats);
             }
             if(role == "RL04")
             {
@@ -98,8 +157,67 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                     TinhTrang = x.DX.TinhTrang,
                     NgayBatDau = x.CTT.NgayBatDau.ToShortDateString(),
                     NgayKetThuc = x.CTT.NgayKetThuc.ToShortDateString()
-                }).ToList();
-                return Ok(dexuatlist);
+                }).ToList(); List<DuyetDeXuatViewmodel> duyetDeXuats = new List<DuyetDeXuatViewmodel>();
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Chua xet duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Truong bo phan da duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Phong ke toan da xet duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Ban lanh dao da xet duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Da Thanh Toan")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Truong bo phan tu choi")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Phong ke toan tu choi")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Ban lanh dao tu choi")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+
+                return Ok(duyetDeXuats);
             }
             if (role == "RL05")
             {
@@ -122,8 +240,67 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                     TinhTrang = x.DX.TinhTrang,
                     NgayBatDau = x.CTT.NgayBatDau.ToShortDateString(),
                     NgayKetThuc = x.CTT.NgayKetThuc.ToShortDateString()
-                }).ToList();
-                return Ok(dexuatlist);
+                }).ToList(); List<DuyetDeXuatViewmodel> duyetDeXuats = new List<DuyetDeXuatViewmodel>();
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Chua xet duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Truong bo phan da duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Phong ke toan da xet duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Ban lanh dao da xet duyet")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Da Thanh Toan")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Truong bo phan tu choi")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Phong ke toan tu choi")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+                foreach (var item in dexuatlist)
+                {
+                    if (item.TinhTrang == "Ban lanh dao tu choi")
+                    {
+                        duyetDeXuats.Add(item);
+                    }
+                }
+
+                return Ok(duyetDeXuats);
             }
             else
             {

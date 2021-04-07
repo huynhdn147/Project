@@ -133,7 +133,6 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                         duyetDeXuats.Add(item);
                     }
                 }
-
                 return Ok(duyetDeXuats);
             }
             if(role == "RL04")
@@ -157,7 +156,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                     TinhTrang = x.DX.TinhTrang,
                     NgayBatDau = x.CTT.NgayBatDau.ToShortDateString(),
                     NgayKetThuc = x.CTT.NgayKetThuc.ToShortDateString()
-                }).ToList(); List<DuyetDeXuatViewmodel> duyetDeXuats = new List<DuyetDeXuatViewmodel>();
+                }).ToList(); 
+                List<DuyetDeXuatViewmodel> duyetDeXuats = new List<DuyetDeXuatViewmodel>();
                 foreach (var item in dexuatlist)
                 {
                     if (item.TinhTrang == "Chua xet duyet")
@@ -240,7 +240,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
                     TinhTrang = x.DX.TinhTrang,
                     NgayBatDau = x.CTT.NgayBatDau.ToShortDateString(),
                     NgayKetThuc = x.CTT.NgayKetThuc.ToShortDateString()
-                }).ToList(); List<DuyetDeXuatViewmodel> duyetDeXuats = new List<DuyetDeXuatViewmodel>();
+                }).ToList(); 
+                List<DuyetDeXuatViewmodel> duyetDeXuats = new List<DuyetDeXuatViewmodel>();
                 foreach (var item in dexuatlist)
                 {
                     if (item.TinhTrang == "Chua xet duyet")

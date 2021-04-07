@@ -43,8 +43,9 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             var data = new UserLoginViewModel
             {
                 MaNhanVien = claims[0].Value,
-                RoleName = roleName.ToList()[0]
-            };
+                RoleName = roleName.ToList()[0],
+                RoleID= claims[1].Value
+        };
             return data;
         }
         [HttpGet]
@@ -83,8 +84,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PhongBanCrearteRequest request)
         {
-            var role = post().RoleName;
-            if (role != "admin")
+            var role = post().RoleID;
+            if (role != "RL01" && role !="RL05")
                 return BadRequest();
             var result = await _managerPhongBanService.Create(request);
             if (result == null)
@@ -95,8 +96,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpPut("{MaPhongBan}")]
         public async Task<IActionResult> Update([FromBody] PhongBanUpdateRequest request)
         {
-            var role = post().RoleName;
-            if (role != "admin")
+            var role = post().RoleID;
+            if (role != "RL01" && role != "RL05")
                 return BadRequest();
             var affecedResult = await _managerPhongBanService.Update(request);
             if (affecedResult == 0)
@@ -107,8 +108,8 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         [HttpDelete("{maphongban}")]
         public async Task<IActionResult> Delete(string maphongban)
         {
-            var role = post().RoleName;
-            if (role != "admin")
+            var role = post().RoleID;
+            if (role != "RL01" && role != "RL05")
                 return BadRequest();
             var affecedResult = await _managerPhongBanService.Delete(maphongban);
             if (affecedResult == 0)

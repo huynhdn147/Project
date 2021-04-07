@@ -90,7 +90,7 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
             
 
             var query = from CCT in _context.chuyenCongTacs
-                        orderby CCT.TrangThai descending
+                        orderby CCT.TrangThai ascending
                         select CCT;
                         
             var checkday= await query.Select( x=> new ChuyenCongTacViewModel()
@@ -115,7 +115,8 @@ namespace TLU.BusinessFee.Application.Catalog.ChuyenCongTacs
             };
 
             var query1 = from CCT in _context.chuyenCongTacs
-                        select CCT;
+                         orderby CCT.TrangThai ascending
+                         select CCT;
             var data = await query1.Select(x => new ChuyenCongTacViewModel()
             {
                 MaChuyenCongTac = x.MaChuyenCongTac,

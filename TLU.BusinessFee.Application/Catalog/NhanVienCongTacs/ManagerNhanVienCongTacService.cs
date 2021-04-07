@@ -164,7 +164,8 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs
                             CTT.TenChuyenCongTac,
                             NVV.TenNhanVien,
                             NVV.MaCapBac,
-                            NVV.MaNhanVien
+                            NVV.MaNhanVien,
+                            CTT.TrangThai
                         };
             var data = await query.Select(x => new NhanVienCongTacViewName()
             {
@@ -172,7 +173,8 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs
                 TenNhanVien = x.TenNhanVien,
                 MaChuyenCongTac=x.MaChuyenCongTac
                 ,MaNhanVien=x.MaNhanVien,
-                MaCapBac=x.MaCapBac
+                MaCapBac=x.MaCapBac,
+                TrangThai=x.TrangThai
             }
             ).ToListAsync();
             return data;

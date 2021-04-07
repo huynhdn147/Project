@@ -11,5 +11,6 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs.DTOS
         public string MaChuyenCongTac { set; get; }
         public string MaNhanVien { set; get; }
         public string MaCapBac { set; get; }
+        public string TrangThai { set; get; }
     }
 }

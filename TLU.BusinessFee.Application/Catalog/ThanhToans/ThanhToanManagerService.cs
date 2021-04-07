@@ -97,7 +97,7 @@ namespace TLU.BusinessFee.Application.Catalog.ThanhToans
             else
             {
                 ThanhToan.TinhTrang = "Da Thanh Toan";
-                dexuatDF.TinhTrang = "Da ThanhToan";
+                dexuatDF.TinhTrang = "Da Thanh Toan";
                 await _context.SaveChangesAsync();
                 return ThanhToan.MaDeXuat;
             }

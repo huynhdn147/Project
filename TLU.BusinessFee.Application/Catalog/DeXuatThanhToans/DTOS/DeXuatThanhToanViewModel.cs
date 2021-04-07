@@ -19,8 +19,8 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans.DTOS
         public string TenChuyenCongTac { set; get; }
         public string MaChuyenCongTac { set; get; }
         public string TenNhanVien { set; get; }
-       public DateTime NgayBatDau { set; get; }
-        public DateTime NgayKetThuc { set; get; }
+       public string NgayBatDau { set; get; }
+        public string NgayKetThuc { set; get; }
         // public virtual ChuyenCongTac ChuyenCongTac { set; get; }
         
     }

@@ -118,8 +118,8 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
                 TinhTrang = x.p.TinhTrang,
                 Lydo = x.p.Lydo,
                 MaChuyenCongTac=x.CCT.MaChuyenCongTac,
-                NgayBatDau=x.CCT.NgayBatDau,
-                NgayKetThuc=x.CCT.NgayKetThuc
+                NgayBatDau=x.CCT.NgayBatDau.ToShortDateString(),
+                NgayKetThuc=x.CCT.NgayKetThuc.ToShortDateString()
             }).ToListAsync();
 
             return DeXuat;
@@ -151,7 +151,11 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             //                    join
             //                DX in _context.deXuatThanhToans on CTT.MaChuyenCongTac equals
             //                DX.MaChuyenCongTac
-            //                    select CTT;
+            //                where CTT.MaChuyenCongTac==request.MaChuyenCongTac
+            //               select CTT.TrangThai;
+            var chuyenCongTac = await _context.chuyenCongTacs.FindAsync(request.MaChuyenCongTac);
+            if (chuyenCongTac.TrangThai == "Chua thuc hien")
+                return null;
             var chiPhiThanhToan = new ChiPhiCongTac()
             {
                 MaChiPhi = request.MaChiPhi,

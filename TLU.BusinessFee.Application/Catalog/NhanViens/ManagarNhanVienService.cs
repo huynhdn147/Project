@@ -86,7 +86,9 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
                         join us in _context.User on p.MaNhanVien equals us.MaNhanVien
                         join roleus in _context.UserRole on us.MaNhanVien equals roleus.MaNhanVien
                         join role in _context.Roles on roleus.RoleId equals role.Id
-                        select new { p, cp, cpp,role };
+                        
+                        select new { p, cp, cpp,role};
+
             //var query2= from US in _context.User join 
             var data = await query.Select(x => new NhanVienViewModel()
             {

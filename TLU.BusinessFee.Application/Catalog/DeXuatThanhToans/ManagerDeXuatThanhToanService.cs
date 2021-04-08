@@ -40,6 +40,15 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var SoDeXuat= from HD in _context.deXuatThanhToans
                               select HD.MaDeXuat;
             var chuyenCongTac = await _context.chuyenCongTacs.FindAsync(request.MaChuyenCongTac);
+            var checkCCT = from DX in _context.deXuatThanhToans
+                           select DX;
+            foreach(var item in checkCCT)
+            {
+                if(item.MaChuyenCongTac==request.MaChuyenCongTac)
+                {
+                    return null;
+                }
+            }
             if (chuyenCongTac.TrangThai == "Chua thuc hien")
             {
                 throw new TLUException("Chuyến Công tác chua xong  không thể de xuat thanh toan");
@@ -213,6 +222,13 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             //                where CTT.MaChuyenCongTac==request.MaChuyenCongTac
             //               select CTT.TrangThai;
             var chuyenCongTac = await _context.chuyenCongTacs.FindAsync(request.MaChuyenCongTac);
+            var dexuat = from dx in _context.deXuatThanhToans
+                         where dx.MaChuyenCongTac == request.MaChuyenCongTac
+                         select dx;
+            if(dexuat!=null)
+            {
+                return null;
+            }    
             if (chuyenCongTac.TrangThai == "Chua thuc hien")
                 return null;
             var chiPhiThanhToan = new ChiPhiCongTac()

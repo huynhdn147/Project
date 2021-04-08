@@ -159,6 +159,7 @@ namespace TLU.BusinessFee.Application.Catalog.NhanVienCongTacs
                         join NV in _context.nhanVienCongTacs
                         on CTT.MaChuyenCongTac equals NV.MaChuyenCongTac
                         join NVV in _context.NhanVienPhongs on NV.MaNhanVien equals NVV.MaNhanVien
+                        orderby CTT.MaChuyenCongTac ascending
                         select new {
                             CTT.MaChuyenCongTac,
                             CTT.TenChuyenCongTac,

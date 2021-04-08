@@ -1,0 +1,3 @@
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\bin\Debug\netcoreapp3.1\publish\TLU.BusinessFee.Utilities.dll
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\bin\Debug\netcoreapp3.1\publish\TLU.BusinessFee.Utilities.deps.json
+D:\C#DEV\Project\TLU.BusinessFee.Utilities\bin\Debug\netcoreapp3.1\publish\TLU.BusinessFee.Utilities.pdb

@@ -225,7 +225,7 @@ namespace TLU.BusinessFee.Application.Catalog.DeXuatThanhToans
             var dexuat = from dx in _context.deXuatThanhToans
                          where dx.MaChuyenCongTac == request.MaChuyenCongTac
                          select dx;
-            if(dexuat!=null)
+            if(dexuat.Count()!=0)
             {
                 return null;
             }    

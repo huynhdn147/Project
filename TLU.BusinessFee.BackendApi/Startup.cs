@@ -156,7 +156,7 @@ namespace TLU.BusinessFee.BackendApi
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
-            app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));
+            app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             //app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod().WithOrigins("http://localhost:3000"));
             app.UseSwagger();
             app.UseSwaggerUI(c => {

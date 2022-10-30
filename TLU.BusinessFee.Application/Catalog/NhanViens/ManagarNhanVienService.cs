@@ -172,9 +172,21 @@ namespace TLU.BusinessFee.Application.Catalog.NhanViens
         public async Task<int> Update(UpdateNhanVienRequest request)
         {
             var nhanvien = await _context.NhanVienPhongs.FindAsync(request.MaNhanVien);
-            var nhanviendf = await _context.NhanVienPhongs.FirstOrDefaultAsync(x => x.MaNhanVien == request.MaNhanVien);
+            var nhanviendf = await _context.NhanVienPhongs.FirstOrDefaultAsync
+                (x => x.MaNhanVien == request.MaNhanVien);
             if (nhanvien == null) throw new TLUException("khong tim thay nhan vien");
-
+            if(request.TenNhanVien=="")
+            {
+                request.TenNhanVien = nhanviendf.TenNhanVien;
+            }
+            if (request.MaPhongBan == "")
+            {
+                request.MaPhongBan = nhanviendf.MaPhongBan;
+            }
+            if (request.MaCapBac == "")
+            {
+                request.MaCapBac = nhanviendf.MaCapBac;
+            }
             nhanviendf.MaNhanVien = request.MaNhanVien;
             nhanviendf.TenNhanVien = request.TenNhanVien;
             nhanviendf.MaPhongBan = request.MaPhongBan;

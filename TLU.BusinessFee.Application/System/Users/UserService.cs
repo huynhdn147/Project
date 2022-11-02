@@ -70,20 +70,26 @@ namespace TLU.BusinessFee.Application.System.Users
 
         public async Task<bool> Register(RegisterRequest request)
         {
-            var nhanvien= await _context.NhanVienPhongs.FindAsync(request.MaNhanVien);
-            if(nhanvien==null)
-            {
-                return false;
+            try { 
+                var nhanvien= await _context.NhanVienPhongs.FindAsync(request.MaNhanVien);
+                if(nhanvien!=null)
+                {
+                    return false;
+                }
+                var hasher = new PasswordHasher<User>();
+                var User = new User()
+                {
+                    MaNhanVien = request.MaNhanVien,
+                    PasswordHash= hasher.HashPassword(null, request.PassWord)
+                };
+                _context.User.Add(User);
+                await _context.SaveChangesAsync();
+                return true;
             }
-            var hasher = new PasswordHasher<User>();
-            var User = new User()
+            catch(Exception e)
             {
-                MaNhanVien = request.MaNhanVien,
-                PasswordHash= hasher.HashPassword(null, request.PassWord)
-            };
-            _context.User.Add(User);
-            await _context.SaveChangesAsync();
-            return true;
+                return (false);
+            }
 
         }
     }

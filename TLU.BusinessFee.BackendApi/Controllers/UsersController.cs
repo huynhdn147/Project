@@ -78,7 +78,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
             var result = await _userService.Register(request);
             if (result == false)
             {
-                return BadRequest("saii");
+                return BadRequest("sai");
             }
             return Ok();
         }

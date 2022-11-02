@@ -20,7 +20,8 @@ namespace TLU.BusinessFee.BackendApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseSetting("https_port", "5001")
+                    .UseStartup<Startup>();
                 });
     }
 }

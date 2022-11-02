@@ -64,7 +64,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         public async Task<IActionResult> Create([FromBody] CreatedCapBacRequest request)
         {
             var role = post().RoleID;
-            if (role != "RL01")
+            if (role != "RL01" && role != "RL05")
                 return BadRequest();
             var result = await _ManagerCapBacSerVice.Create(request);
             if (result == null)
@@ -77,7 +77,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateCapBacRequest request)
         {
             var role = post().RoleID;
-            if (role != "RL01")
+            if (role != "RL01" && role != "RL05")
                 return BadRequest();
             var affecedResult = await _ManagerCapBacSerVice.Update(request);
             if (affecedResult == 0)
@@ -89,7 +89,7 @@ namespace TLU.BusinessFee.BackendApi.Controllers
         public async Task<IActionResult> Delete(string maCapBac)
         {
             var role = post().RoleID;
-            if (role != "RL01")
+            if (role != "RL01" && role != "RL05")
                 return BadRequest();
             var affecedResult = await _ManagerCapBacSerVice.Delete(maCapBac);
             if (affecedResult == 0)
